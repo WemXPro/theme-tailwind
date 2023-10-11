@@ -189,9 +189,9 @@
                         </div>
                     </a>
                 @endforeach
-{{--                <div class="mt-2 mb-2">--}}
-{{--                    {{ auth()->user()->notifications()->latest()->paginate(5)->links(Theme::pagination()) }}--}}
-{{--                </div>--}}
+                {{--                <div class="mt-2 mb-2">--}}
+                {{--                    {{ auth()->user()->notifications()->latest()->paginate(5)->links(Theme::pagination()) }}--}}
+                {{--                </div>--}}
             </div>
             <a href="{{ route('notifications.mark-as-read') }}"
                class="block py-2 text-base font-normal text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:underline">
@@ -368,7 +368,11 @@
                                 <a href="{{ $menu['href'] }}"
                                    class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                 <span class="mr-2 text-xl text-gray-400">
-                                    {!! $menu['icon'] !!}
+                                    <?php
+                                        $icons = explode('></i>', $menu['icon']);
+                                        $bxIcon = (count($icons) === 1) ? $icons[0] . '></i>' : collect($icons)->first(fn($i) => strpos($i, 'bx') !== false) . '></i>';
+                                    ?>
+                                    {!! $bxIcon !!}
                                 </span>
                                     {{ $menu['name'] }}
                                 </a>
@@ -376,15 +380,6 @@
                         @endforeach
                     @endif
                 @endforeach
-{{--                <li>--}}
-{{--                    <a href="{{ route('subscription.index') }}"--}}
-{{--                       class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">--}}
-{{--                    <span class="mr-2 text-xl text-primary-500">--}}
-{{--                        <i class='bx bxs-hot'></i>--}}
-{{--                    </span>--}}
-{{--                        {!! __('client.subscriptions') !!}--}}
-{{--                    </a>--}}
-{{--                </li>--}}
             </ul>
             <ul class="py-1 font-light text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
                 @admin
