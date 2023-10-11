@@ -59,7 +59,7 @@
                             <span class="mr-2" style="font-size: 20px;">
                                 {!! $page->icon !!}
                             </span>
-                            {{ $page->name }}
+                            {{ __($page->name) }}
                         </a>
                     </li>
                     @endif
