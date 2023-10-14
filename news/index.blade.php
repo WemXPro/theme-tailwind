@@ -19,6 +19,7 @@
             </div>
             <div class="">
                 @foreach($articles as $article)
+                    @php($article->translate())
                     @if($article->status !== 'published')
                         @continue;
                     @endif
