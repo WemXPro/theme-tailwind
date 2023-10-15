@@ -125,16 +125,16 @@
                         <div class="flex pr-3 -space-x-4 sm:pr-5">
                             <img class="w-10 h-10 border-2 border-white rounded-full"
                                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                                 alt="bonnie avatar">
+                                 alt="{!! __('bonnie avatar') !!}">
                             <img class="w-10 h-10 border-2 border-white rounded-full"
                                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                                 alt="jese avatar">
+                                 alt="{!! __('jese avatar') !!}">
                             <img class="w-10 h-10 border-2 border-white rounded-full"
                                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png"
-                                 alt="roberta avatar">
+                                 alt="{!! __('roberta avatar') !!}">
                             <img class="w-10 h-10 border-2 border-white rounded-full"
                                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png"
-                                 alt="thomas avatar">
+                                 alt="{!! __('thomas avatar') !!}">
                         </div>
                         <div class="pl-3 text-white sm:pl-5 dark:text-white">
                             <span

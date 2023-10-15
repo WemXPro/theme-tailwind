@@ -243,7 +243,7 @@
                             </div>
                             <div
                                 class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 px-4 pt-3 pb-4"
-                                aria-label="Table navigation">
+                                aria-label="{{ __('client.table_navigation') }}">
                                 {{ auth()->user()->orders()->where('status', Cookie::get('filter_orders', 'active'))->orderBy('status', 'asc')->orderBy('created_at', 'desc')->paginate(10)->links(Theme::pagination()) }}
                             </div>
                         </div>

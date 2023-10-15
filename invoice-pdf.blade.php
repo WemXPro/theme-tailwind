@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Invoice Template</title>
+  <title>{{ __('client.invoice_template') }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -11,9 +11,9 @@
 <div class="web-container">
 
 <div class="page-container">
-  Page
+  {{ __('client.page') }}
   <span class="page"></span>
-  of
+  {{ __('client.of') }}
   <span class="pages"></span>
 </div>
 
@@ -59,10 +59,10 @@
   </tr>
   <tr>
     <td>
-      Invoice Date: <strong>{{ $payment->created_at->format(settings('date_format', 'd M Y')) }}</strong>
+      {{ __('client.invoice_date') }}: <strong>{{ $payment->created_at->format(settings('date_format', 'd M Y')) }}</strong>
     </td>
     <td>
-        
+
     </td>
   </tr>
   <tr>
@@ -70,7 +70,7 @@
        {{ $payment->user->email }}
     </td>
     <td>
-        Invoice No: <strong>{{ $payment->shortId() }}</strong>
+        {{ __('client.invoice_no') }}: <strong>{{ $payment->shortId() }}</strong>
     </td>
   </tr>
 </table>
@@ -90,7 +90,7 @@
         <td>1</td>
         <td>
             @if($payment->package_id !== NULL)
-                <img style="display: inline-block; vertical-align: middle; width: 24px; border-radius: 5px; margin-right: 5px" src="{{ $payment->package->icon() }}" alt="Package Icon">
+                <img style="display: inline-block; vertical-align: middle; width: 24px; border-radius: 5px; margin-right: 5px" src="{{ $payment->package->icon() }}" alt="{{ __('client.package_icon') }}">
             @endif
             <span style="display: inline-block; vertical-align: middle;">{{ $payment->description }}</span>
         </td>
@@ -104,19 +104,19 @@
 <table class="line-items-container has-bottom-border">
   <thead>
     <tr>
-      <th>Payment Info</th>
-      <th>Total Due</th>
+      <th>{{ __('client.payment_info') }}</th>
+      <th>{{ __('client.total_due') }}</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="payment-info">
         <div>
-          @isset($payment->gateway['name']) Payment Gateway: <strong>{{ $payment->gateway['name'] }}</strong> @endisset
+          @isset($payment->gateway['name']) {{ __('client.payment_gateway') }}: <strong>{{ $payment->gateway['name'] }}</strong> @endisset
         </div>
         <div>
         @if($payment->transaction_id !== NULL)
-            Transaction ID: <strong>{{ $payment->transaction_id }}</strong>
+            {{ __('client.transaction_id') }}: <strong>{{ $payment->transaction_id }}</strong>
         @endif
         </div>
       </td>
@@ -131,7 +131,7 @@
     <span>@settings('app_name')</span>
   </div>
   <div class="footer-thanks">
-    <span>Thank you!</span>
+    <span>{{ __('client.thank_you') }}</span>
   </div>
 </div>
 

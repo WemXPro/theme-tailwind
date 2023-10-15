@@ -6,7 +6,7 @@
                 <a href="" class="flex mr-6 xl:mr-8">
                     @if (Settings::has('logo'))
                         <img src="@settings('logo')" class="mr-3 h-8 rounded"
-                            alt="@settings('app_name', 'WemX') Logo" />
+                            alt="@settings('app_name', 'WemX')" />
                     @endif
                     <span
                         class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">@settings('app_name',

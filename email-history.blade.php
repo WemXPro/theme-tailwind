@@ -111,7 +111,7 @@
                                                             <i class='bx bxs-file-archive' ></i>
                                                         @elseif(Str::endsWith($attachment['name'], ['.png', '.jpg', '.jpeg', '.gif', '.svg']))
                                                             <i class='bx bxs-file-image' ></i>
-                                                        @else 
+                                                        @else
                                                             <i class='bx bxs-file'></i>
                                                         @endif
                                                     </div>
@@ -127,7 +127,7 @@
                         </table>
                     </div>
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 px-4 pt-3 pb-4"
-                        aria-label="Table navigation">
+                        aria-label="{{ __('admin.table_navigation') }}">
                         {{ $emails->links(Theme::pagination()) }}
                     </div>
                 </div>

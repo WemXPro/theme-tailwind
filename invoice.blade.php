@@ -117,7 +117,7 @@
 
                         @foreach (App\Models\Gateways\Gateway::getActive() as $gateway)
                             @if($gateway->name == 'Balance')
-                                <option value="{{ $gateway->id }}" @if(Auth::user()->balance >= $payment->amount) selected @endif>Pay with Balance ({{ currency('symbol') }}{{ number_format(Auth::user()->balance, 2) }})</option>
+                                <option value="{{ $gateway->id }}" @if(Auth::user()->balance >= $payment->amount) selected @endif>{{ __('client.pay_with_balance') }} ({{ currency('symbol') }}{{ number_format(Auth::user()->balance, 2) }})</option>
                                 @continue
                             @endif
 
@@ -126,7 +126,7 @@
 
                     </select>
                     <div class="flex">
-                        <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Pay</button>
+                        <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">{{ __('client.pay') }}</button>
                         <button type="button" onclick="copy('share', '{{ route('invoice', ['payment' => $payment->id]) }}')" id="share" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">{!! __('client.share') !!}</button>
                         <a href="{{ route('invoice.download', $payment->id) }}" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">{!! __('client.sownload') !!}</a>
                     </div>
@@ -135,7 +135,7 @@
                     {!! __('client.share_invoice_desc') !!}
                 </div>
             </form>
-        @else 
+        @else
             <a href="{{ route('invoice.download', $payment->id) }}" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">{!! __('client.sownload') !!}</a>
         @endif
       </div>

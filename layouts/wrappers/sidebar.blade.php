@@ -22,7 +22,7 @@
                 <a href="" class="flex mr-6 xl:mr-8">
                     @if (Settings::has('logo'))
                         <img src="@settings('logo')" class="mr-3 h-8 rounded"
-                             alt="@settings('app.name', 'WemX') Logo"/>
+                             alt="@settings('app.name', 'WemX')"/>
                     @endif
                     <span
                         class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">@settings('app.name',
@@ -37,7 +37,7 @@
 
     <aside id="sidebar"
            class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-16 font-normal duration-75 lg:flex transition-width"
-           aria-label="Sidebar">
+           aria-label="{{ __('client.sidebar') }}">
         <div
             class="relative flex flex-col flex-1 min-h-0 pt-0 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
@@ -135,7 +135,7 @@
                 </a>
                 <div id="tooltip-settings" role="tooltip"
                      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    Settings page
+                    {{ __('client.settings_page') }}
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <button type="button" data-dropdown-toggle="language-dropdown"

@@ -6,7 +6,7 @@
     <div class="flex flex-col justify-center items-center px-6 pt-8 mx-auto md:h-screen pt:mt-0 dark:bg-gray-900">
         <a href="../../" class="flex justify-center items-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white">
             @if (Settings::has('logo'))
-                <img src="@settings('logo')" class="mr-4 h-12 rounded" alt="@settings('app_name', 'WemX') Logo" />
+                <img src="@settings('logo')" class="mr-4 h-12 rounded" alt="@settings('app_name', 'WemX')" />
             @endif
             <span>@settings('app_name', 'WemX')</span>
         </a>
@@ -53,7 +53,7 @@
                         <div class="flex items-center justify-end">
                             <a href="{{ route('2fa.recover') }}"
                                class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">
-    
+
                                  {!! __('auth.lost_access_to_device') !!}
                             </a>
                         </div>

@@ -89,7 +89,7 @@
                 </div>
                 <nav
                     class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
-                    aria-label="Table navigation">
+                    aria-label="{{ __('client.table_navigation') }}">
                     <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                         {!! __('client.showing', ['count' => '1-10', 'all' => $subscriptions_paddle->count()]) !!}
                     </span>

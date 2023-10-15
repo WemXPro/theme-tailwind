@@ -101,7 +101,7 @@
                 </div>
                 <div
                     class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 pt-3 pb-4"
-                    aria-label="Table navigation">
+                    aria-label="{{ __('client.table_navigation') }}">
                     {{ auth()->user()->payments()->where('status' , request()->input('where', 'paid'))->where('show_as_unpaid_invoice', request()->input('where', 'paid') == 'paid' ? false : true)->paginate(15)->links(Theme::pagination()) }}
                 </div>
                 @if(auth()->user()->payments->where('status' , request()->input('where', 'paid'))->where('show_as_unpaid_invoice', request()->input('where', 'paid') == 'paid' ? false : true)->count() == 0)

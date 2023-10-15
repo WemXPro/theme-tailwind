@@ -89,7 +89,7 @@
                 <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Jese Leos">
             </a>
             <div>
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Follow</button>
+                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{{ __('client.follow') }}</button>
             </div>
         </div>
         <p class="text-base font-semibold leading-none text-gray-900 dark:text-white">
@@ -98,18 +98,18 @@
         <p class="mb-3 text-sm font-normal">
             <a href="#" class="hover:underline">@jeseleos</a>
         </p>
-        <p class="mb-4 text-sm">Open-source contributor. Building <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">flowbite.com</a>.</p>
+        <p class="mb-4 text-sm">{!! __('client.opensource_contributor_building_flowbitecom') !!}</p>
         <ul class="flex text-sm">
             <li class="mr-2">
                 <a href="#" class="hover:underline">
                     <span class="font-semibold text-gray-900 dark:text-white">799</span>
-                    <span>Following</span>
+                    <span>{{ __('client.following') }}</span>
                 </a>
             </li>
             <li>
                 <a href="#" class="hover:underline">
                     <span class="font-semibold text-gray-900 dark:text-white">3,758</span>
-                    <span>Followers</span>
+                    <span>{{ __('client.followers') }}</span>
                 </a>
             </li>
         </ul>
@@ -132,7 +132,7 @@
             <div class="mb-6 md:mb-0">
                 <a href="/" class="flex items-center">
                     @if (Settings::has('logo'))
-                        <img src="@settings('logo')" class="mr-3 h-8 rounded" alt="@settings('app_name', 'WemX') Logo" />
+                        <img src="@settings('logo')" class="mr-3 h-8 rounded" alt="@settings('app_name', 'WemX')" />
                     @endif <span
                         class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">@settings('app_name',
                         'WemX')</span>
@@ -183,7 +183,7 @@
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div class="sm:flex sm:items-center sm:justify-between">
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                Powered by 
+                {{ __('client.powered_by') }}
                 <a href="https://wemx.net" target="_blank" class="hover:underline text-primary-600 dark:text-primary-500">@settings('app_name', 'WemX')™</a>.
             </span>
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">

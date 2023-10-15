@@ -36,8 +36,7 @@
                             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                                 {!! __('client.drag_and_drop') !!}
                             </p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.
-                                800x400px)</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                         </div>
                         <input id="dropzone-file" type="file" name="avatar" accept="image/*" required class="hidden">
                     </label>
@@ -264,7 +263,7 @@
                             <input type="text" value="{{ auth()->user()->username }}" name="username" required=""
                                    id="first-name"
                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                   placeholder="Bonnie">
+                                   placeholder="">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="last-name"
@@ -302,7 +301,7 @@
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Select an option
+                                {{ __('client.select_an_option') }}
                             </label>
                             <select id="countries" name="country"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -330,7 +329,7 @@
                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 {!! __('admin.city') !!}
                             </label>
-                            <input type="text" placeholder="city" name="city"
+                            <input type="text" placeholder="{{ __('client.city') }}" name="city"
                                    value="{{ auth()->user()->address->city }}" id="city"
                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         </div>
@@ -338,7 +337,7 @@
                             <label for="zip_code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 {!! __('auth.zip_code') !!}
                             </label>
-                            <input type="text" placeholder="zip code" name="zip_code"
+                            <input type="text" placeholder="{{ __('client.zip_code') }}" name="zip_code"
                                    value="{{ auth()->user()->address->zip_code }}" id="zip_code"
                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         </div>
@@ -347,7 +346,7 @@
                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 {!! __('client.state_region_provice') !!}
                             </label>
-                            <input type="text" placeholder="region" name="region"
+                            <input type="text" placeholder="{{ __('client.region') }}" name="region"
                                    value="{{ auth()->user()->address->region }}" id="region"
                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         </div>
@@ -468,7 +467,7 @@
                             <div class="inline-flex items-center">
                                 @if ($request = auth()->user()->deletion_requests()->first())
                                     <a href="{{ route('user.cancel-removal') }}" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">{!! __('client.cancel') !!}</a>
-                                @else 
+                                @else
                                     <button type="button" data-modal-target="deleteAccountModal" data-modal-toggle="deleteAccountModal" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">{!! __('client.delete_account') !!}</button>
                                 @endif
                             </div>

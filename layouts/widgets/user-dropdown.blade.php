@@ -117,7 +117,7 @@
     <span class="hidden mx-2 w-px h-5 bg-gray-200 dark:bg-gray-600 lg:inline"></span>
 
     {{-- dark / light mode switch --}}
-    <button data-tooltip-target="tooltip-dark" type="button" onclick="toggleDarkmode()" aria-label="Toggle Darkmode"
+    <button data-tooltip-target="tooltip-dark" type="button" onclick="toggleDarkmode()" aria-label="{{ __('client.toggle_darkmode') }}"
             class="inline-flex items-center p-2 mr-1 text-sm font-medium text-gray-500 rounded-lg dark:text-gray-400 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
