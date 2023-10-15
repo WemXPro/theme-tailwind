@@ -70,9 +70,9 @@
   <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
   </svg>
-  <span class="sr-only">Info</span>
+  <span class="sr-only">{!! __('client.info') !!}</span>
   <div>
-    You are currently logged in as {{   User::find(session('impersonate'))->username }}, please press <a href="{{ route('admin.user.impersonate.exit', session('impersonate')) }}" class="font-semibold underline hover:no-underline">exit</a> to leave this mode
+    {!! __('client.you_are_currently_logged_in_as_please_press_exit', ['username' => User::find(session('impersonate'))->username, 'route' => route('admin.user.impersonate.exit', session('impersonate'))]) !!}
   </div>
 </div>
 @endif
@@ -108,7 +108,7 @@
                 </a>
                 <button type="button"
                     class="text-gray-800 bg-transparent border border-gray-700 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-800 dark:text-gray-300 dark:hover:text-white"
-                    data-dismiss-target="#alert-additional-content-5" aria-label="Close">
+                    data-dismiss-target="#alert-additional-content-5" aria-label="{!! __('client.close') !!}">
                     {!! __('client.dismiss') !!}
                 </button>
             </div>

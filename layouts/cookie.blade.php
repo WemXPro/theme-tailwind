@@ -3,7 +3,7 @@
     <div class="overflow-y-auto relative p-4 w-full max-w-2xl h-[40rem] bg-white rounded-lg shadow md:p-6 dark:bg-gray-800">
         <a href="#" class="flex justify-center items-center mb-8 text-xl font-semibold text-gray-900 dark:text-white">
             <img src="@settings('logo')" class="mr-2 h-7 rounded" alt="logo">
-            @settings('app_name', 'WemX')    
+            @settings('app_name', 'WemX')
         </a>
         <div class="space-y-4 font-light text-gray-500 divide-y divide-gray-200 dark:text-gray-400 dark:divide-gray-700">
             <div>
@@ -26,16 +26,16 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="py-3 px-6">
-                                    Name
+                                    {{ __('client.name') }}
                                 </th>
                                 <th scope="col" class="py-3 px-6">
-                                    Provider
+                                    {{ __('client.provider') }}
                                 </th>
                                 <th scope="col" class="py-3 px-6">
-                                    Expiration
+                                    {{ __('client.expiration') }}
                                 </th>
                                 <th scope="col" class="py-3 px-6">
-                                    Purpose
+                                    {{ __('client.purpose') }}
                                 </th>
                             </tr>
                         </thead>
@@ -45,13 +45,13 @@
                                    _cfduid
                                 </th>
                                 <td class="py-4 px-6">
-                                    CloudFlare Inc
+                                    {{ __('client.cloudflare_inc') }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    1 Year
+                                    {{ __('client.year_1') }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    Static file delivery
+                                    {{ __('client.static_file_delivery') }}
                                 </td>
                             </tr>
                             <!-- Laravel Session Cookie -->
@@ -63,13 +63,13 @@
                                     @settings('app_name', 'WemX')
                                 </td>
                                 <td class="py-4 px-6">
-                                    Session
+                                    {{ __('client.session') }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    Identifies a session instance for a user
+                                    {{ __('client.identifies_a_session_instance_for_a_user') }}
                                 </td>
                             </tr>
-                            
+
                             <!-- Laravel XSRF-TOKEN Cookie (If not already included) -->
                             <tr class="bg-gray-100 dark:bg-gray-800">
                                 <th scope="row" class="py-4 px-6 font-light text-gray-500 whitespace-nowrap dark:text-gray-400">
@@ -79,10 +79,10 @@
                                     @settings('app_name', 'WemX')
                                 </td>
                                 <td class="py-4 px-6">
-                                    Session
+                                    {{ __('client.session') }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    Prevent cross-site request forgery (CSRF) attacks
+                                    {{ __('client.prevent_crosssite_request_forgery_csrf_attacks') }}
                                 </td>
                             </tr>
 
@@ -95,10 +95,10 @@
                                     @settings('app_name', 'WemX')
                                 </td>
                                 <td class="py-4 px-6">
-                                    Session
+                                    {{ __('client.session') }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    API authentication
+                                    {{ __('client.api_authentication') }}
                                 </td>
                             </tr>
                         </tbody>
@@ -119,7 +119,7 @@
                 <label for="functional-cookies-toggle" class="inline-flex relative items-center cursor-pointer">
                     <input type="checkbox" value="" checked id="functional-cookies-toggle" class="sr-only peer">
                     <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                    <span class="sr-only">Toggle me</span>
+                    <span class="sr-only">{{ __('client.toggle_me') }}</span>
                 </label>
             </div>
             <div id="cookies-info-4" class="hidden overflow-x-auto relative mt-4 bg-gray-100 sm:rounded-lg">
@@ -127,16 +127,16 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="py-3 px-6">
-                                Name
+                                {{ __('client.name') }}
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Provider
+                                {{ __('client.provider') }}
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Expiration
+                                {{ __('client.expiration') }}
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Purpose
+                                {{ __('client.purpose') }}
                             </th>
                         </tr>
                     </thead>
@@ -149,10 +149,10 @@
                                 @settings('app_name', 'WemX')
                             </td>
                             <td class="py-4 px-6">
-                                Session
+                                {{ __('client.session') }}
                             </td>
                             <td class="py-4 px-6">
-                                Set preffered order status
+                                {{ __('client.set_preffered_order_status') }}
                             </td>
                         </tr>
                         <tr class="bg-gray-100 dark:bg-gray-800">
@@ -163,24 +163,24 @@
                                 @settings('app_name', 'WemX')
                             </td>
                             <td class="py-4 px-6">
-                                Session
+                                {{ __('client.session') }}
                             </td>
                             <td class="py-4 px-6">
-                                Collect Article Feedback
+                                {{ __('client.collect_article_feedback') }}
                             </td>
                         </tr>
                         <tr class="bg-gray-100 dark:bg-gray-800">
                             <th scope="row" class="py-4 px-6 font-light text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                affiliate
+                                {{ __('client.affiliate') }}
                             </th>
                             <td class="py-4 px-6">
                                 @settings('app_name', 'WemX')
                             </td>
                             <td class="py-4 px-6">
-                                Session
+                                {{ __('client.session') }}
                             </td>
                             <td class="py-4 px-6">
-                                Track users invited by affiliates
+                                {{ __('client.track_users_invited_by_affiliates') }}
                             </td>
                         </tr>
                         <tr class="bg-gray-100 dark:bg-gray-800">
@@ -191,10 +191,10 @@
                                 @settings('app_name', 'WemX')
                             </td>
                             <td class="py-4 px-6">
-                                Session
+                                {{ __('client.session') }}
                             </td>
                             <td class="py-4 px-6">
-                                Keep track of affiliate invites
+                                {{ __('client.keep_track_of_affiliate_invites') }}
                             </td>
                         </tr>
                     </tbody>

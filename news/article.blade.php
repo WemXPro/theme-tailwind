@@ -21,7 +21,7 @@
                         <address class="flex items-center mb-6 not-italic">
                             <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                 <img class="mr-4 w-16 h-16 rounded-full" src="{{ $article->user->avatar() }}"
-                                     alt="author">
+                                     alt="{{ __('client.author') }}">
                                 <div>
                                     <a href="#" rel="author"
                                        class="text-xl font-bold text-gray-900 dark:text-white">{{ $article->user->username }}</a>
@@ -29,8 +29,7 @@
                                             {{ __('client.administrator') }}
                                         @endif </p>
                                     <p class="text-base text-gray-500 dark:text-gray-400">
-                                        <time pubdate datetime="2022-02-08"
-                                              title="February 8th, 2022">{{ $article->created_at->format('M d, Y') }}</time>
+                                        <time pubdate>{{ $article->created_at->translatedFormat('M d, Y') }}</time>
                                     </p>
                                 </div>
                             </div>
@@ -177,8 +176,7 @@
                                 👎
                             </button>
                         @else
-                            <p class="font-light text-gray-500 dark:text-gray-400">{{ __('client.thank_you_your_feedback') }}
-                                ❤️</p>
+                            <p class="font-light text-gray-500 dark:text-gray-400">{{ __('client.thank_you_your_feedback') }}❤️</p>
                         @endif
                     </div>
                 </div>
@@ -207,7 +205,7 @@
                                         <label for="comment" class="sr-only">{{ __('client.your_comment') }}</label>
                                         <textarea name="comment" id="comment" rows="4"
                                                   class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                                                  placeholder="Write a comment..." required></textarea>
+                                                  placeholder="{{ __('client.write_a_comment') }}" required></textarea>
                                     </div>
                                 </div>
                                 <button type="submit"

@@ -81,7 +81,7 @@
                                                     <a href="#" class="hover:underline">
                                                         <span>{{ __('client.member_since') }}</span>
                                                         <span
-                                                            class="font-semibold text-gray-900 dark:text-white">{{ $article->user->created_at->format('d M, Y') }}</span>
+                                                            class="font-semibold text-gray-900 dark:text-white">{{ $article->user->created_at->translatedFormat('d M, Y') }}</span>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -163,7 +163,7 @@
                                                 <a href="#" class="hover:underline">
                                                     <span>{{ __('client.member_since') }}</span>
                                                     <span
-                                                        class="font-semibold text-gray-900 dark:text-white">{{ $article->user->created_at->format('d M, Y') }}</span>
+                                                        class="font-semibold text-gray-900 dark:text-white">{{ $article->user->created_at->translatedFormat('d M, Y') }}</span>
                                                 </a>
                                             </li>
                                         </ul>

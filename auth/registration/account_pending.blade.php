@@ -4,7 +4,7 @@
     <div class="w-full">
         <div class="flex items-center justify-center mb-8 space-x-4 lg:hidden">
             <a href="#" class="flex items-center text-2xl font-semibold">
-                <img class="w-8 h-8 mr-2" src="@settings('logo', 'https://imgur.com/oJDxg2r.png')"  alt="logo"/>
+                <img class="w-8 h-8 mr-2" src="@settings('logo', 'https://imgur.com/oJDxg2r.png')"  alt="{{__('logo')}}"/>
                 <span class="text-gray-900 dark:text-white">@settings('app_name', 'WemX')</span>
             </a>
         </div>
