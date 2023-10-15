@@ -374,7 +374,7 @@
                                     ?>
                                     {!! $bxIcon !!}
                                 </span>
-                                    {{ $menu['name'] }}
+                                    {!! __($menu['name'] ) !!}
                                 </a>
                             </li>
                         @endforeach
