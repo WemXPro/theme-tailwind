@@ -20,10 +20,20 @@
 
 @include(Theme::path('layouts.widgets.require_address'))
 
-@if(Settings::get('default::layout', 'stacked') == 'stacked')
-    @include(Theme::path('layouts.wrappers.stacked'))
-@elseif(Settings::get('default::layout', 'stacked') == 'sidebar')
-    @include(Theme::path('layouts.wrappers.sidebar'))
-@endif
+<body class="bg-white dark:bg-gray-900" style="min-height: 100vh;display: flex;flex-direction: column;">
+
+    @include(Theme::path('layouts.header'))
+
+    <div class="container mx-auto mt-10 mb-10 mx-auto max-w-screen-xl px-4 md:px-6">
+        @include(Theme::path('layouts.alerts'))
+        <div class="app">
+            @stack('widgets')
+            @yield('container')
+        </div>
+    </div>
+
+    @include(Theme::path('layouts.footer'))
+    
+</body>
 
 </html>
