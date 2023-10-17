@@ -195,7 +195,7 @@
                     id="zip_code"
                     required
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Zip/Post Code" name="zip_code" value="{{ session('zip_code', (auth()->check()) ? auth()->user()->address->zip_code : null) }}"
+                    placeholder="Zip/Post Code" name="zip_code" value="{{ session('zip_code', auth()->user()->address->zip_code ?? NULL) }}"
                 />
             </div>
             <p id="coupon-description" class="mt-2 text-sm text-gray-500 dark:text-gray-400"></p>
@@ -206,7 +206,7 @@
             name="country" id="country" tabindex="-1" aria-hidden="true" required>
             @foreach(config('utils.countries') as $key => $country)
             <option value="{{ $key }}"
-                    @if(request()->header('cf-ipcountry', (auth()->check()) ? auth()->user()->address->zip_code : null) == $key) selected @endif>{{ $country }}</option>
+                    @if(request()->header('cf-ipcountry', auth()->user()->address->zip_code ?? NULL) == $key) selected @endif>{{ $country }}</option>
             @endforeach
         </select>
     </div>
