@@ -3,7 +3,7 @@
     <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-900">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6">
             <div class="flex justify-start items-center">
-                <a href="" class="flex mr-6 xl:mr-8">
+                <a href="/" class="flex mr-6 xl:mr-8">
                     @if (Settings::has('logo'))
                         <img src="@settings('logo')" class="mr-3 h-8 rounded"
                             alt="@settings('app_name', 'WemX')" />
