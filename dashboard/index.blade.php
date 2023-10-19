@@ -233,7 +233,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex items-center space-x-3 mt-4">
-                                                    @include(Theme::path('components.orders.buttons'), $order)
+                                                    {{-- @include(Theme::path('components.orders.buttons'), $order) --}}
+                                                    <x-orders.buttons :order="$order"/>
                                                 </div>
                                             </td>
                                         </tr>

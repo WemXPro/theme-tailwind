@@ -23,10 +23,6 @@
                             {{ $order->period() }}
                         </div>
                     </div>
-                    {{-- <div class="relative p-3 bg-gray-100 rounded-lg dark:bg-gray-700">
-                <h6 class="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">Purchase date</h6>
-                <div class="flex items-center text-gray-500 dark:text-gray-400">{{ $order->created_at->translatedFormat('d M Y') }}</div>
-            </div> --}}
                     <div class="relative p-3 bg-gray-100 rounded-lg dark:bg-gray-700">
                         <h6 class="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">{!! __('client.status') !!}</h6>
                         <span class="@if($order->status == 'active') bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 @elseif($order->status == 'suspended') bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 @elseif($order->status == 'cancelled') bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 @elseif($order->status == 'terminated') bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 @endif">{!! __('admin.' . $order->status) !!}</span>
