@@ -170,7 +170,7 @@
                                             aria-labelledby="table-column-header-0">
                                             <td class="p-4 border-b dark:border-gray-700" colspan="9">
                                                 <div>
-                                                    @includeIf(Theme::serviceView($order->service, 'props.alerts'), $order)
+                                                    @include(Theme::path('components.orders.alerts'), $order)
 
                                                     <h6 class="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                                                         {!! __('client.details') !!}
@@ -233,7 +233,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex items-center space-x-3 mt-4">
-                                                    @includeIf(Theme::serviceView($order->service, 'props.buttons'), $order)
+                                                    {{-- @include(Theme::path('components.orders.buttons'), $order) --}}
+                                                    <x-orders.buttons :order="$order"/>
                                                 </div>
                                             </td>
                                         </tr>
