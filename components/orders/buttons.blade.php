@@ -13,13 +13,17 @@
             d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
             clip-rule="evenodd" />
     </svg>
-    Manage
+    {!! __('client.manage') !!}
 </a>
 
 @foreach($order->package->service()->getServiceButtons()->all() as $key => $button)
 @if(empty($button))
     @continue;
+@elseif($button['type'] == 'function')
+    <x-orders.function-btn :button="$button" :order="$order"/>
+    @continue;
 @endif
+
 <a href="{{ $button['href'] ?? '#' }}" target="{{ $button['target'] ?? '' }}"
 class="text-white bg-{{$button['color']}}-700 hover:bg-{{$button['color']}}-800 focus:ring-4 focus:ring-{{$button['color']}}-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-{{$button['color']}}-600 dark:hover:bg-{{$button['color']}}-700 focus:outline-none dark:focus:ring-{{$button['color']}}-800">
  <span class="font-xl mr-1">{!! $button['icon'] ?? '' !!}</span>
