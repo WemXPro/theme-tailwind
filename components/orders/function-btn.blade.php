@@ -2,9 +2,12 @@
 
 @php
     if (function_exists($button['function'])) {
-        $arg = $button['arg'];
-        eval("\$arg = $arg;");
-        $response = call_user_func($button['function'], $arg);
+        if (!empty($button['arg'])){
+            $response = call_user_func($button['function'], $order->{$button['arg']});
+        } else {
+            $response = call_user_func($button['function']);
+        }
+
         $button['name'] = $button['name'] == 'response' ? $response : $button['name'];
     } else {
         $button['name'] = 'Function not found';

@@ -8,7 +8,7 @@ data-modal-target="renewService-{{ $order->id }}"
 data-modal-toggle="renewService-{{ $order->id }}"
 class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-3 py-2 text-sm font-medium dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
 <i class='bx bx-recycle font-xl mr-1'></i>
-Renew
+{!! __('client.renew') !!}
 </button>
 
 <!-- Main modal -->
@@ -22,7 +22,7 @@ Renew
             <div
                 class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Renew Plan
+                    {!! __('client.ptero_renew_plan') !!}
                 </h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -38,14 +38,11 @@ Renew
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <div class="mb-4 text-sm text-gray-800 dark:text-gray-300">
-                    Your service is expires on the {{ $order->due_date->translatedFormat('d M Y') }}, {{ $order->due_date->diffForHumans() }}.
-
-                    <br><br>
-                    Below you can renew your service for another {{ $order->period() }}. After hitting "Renew", we will generate an invoice for you to pay.
+                    {!!  __('client.ptero_renew_desc', ['due_date' => $order->due_date->translatedFormat('d M Y'), 'due_date_diff' => $order->due_date->diffForHumans(), 'period' => $order->period()])  !!}
                 </div>
                 <form action="{{ route('service', ['order' => $order->id, 'page' => 'renew']) }}" method="POST">
                     @csrf
-                    <label for="default" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Renew for</label>
+                    <label for="default" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! __('client.renew_for') !!}</label>
                     <select id="default" name="frequency" class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                       @foreach (range(1, 12) as $value)
                         <option value="{{ $value }}" @if($value == 1) selected @endif>{{ $value }} {{ ucfirst($order->period()) }} - {{ currency('symbol') }}{{ number_format($value * $order->price['renewal_price'], 2)}}</option>
@@ -57,10 +54,10 @@ Renew
                 class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                 <button data-modal-hide="renewService-{{ $order->id }}"
                     type="button"
-                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">{!! __('client.cancel') !!}</button>
                     <button data-modal-hide="renewService-{{ $order->id }}"
                         type="submit"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create Invoice</button>
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{!! __('client.create_invoice') !!}</button>
             </div>
         </form>
         </div>
