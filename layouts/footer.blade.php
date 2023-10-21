@@ -236,3 +236,14 @@
         }
     }
 </script>
+
+<script>
+    async function copyToClipboard(button) {
+        try {
+            await navigator.clipboard.writeText(button.textContent);
+            console.log('Text copied to clipboard');
+        } catch (err) {
+            console.error('Error in copying text: ', err);
+        }
+    }
+</script>

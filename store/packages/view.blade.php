@@ -122,7 +122,7 @@
 
     @includeIf(Theme::serviceView($package->service, 'props.checkout-options'))
 
-    @if($package->service()->hasCheckoutConfig())
+    @if($package->service()->hasCheckoutConfig($package))
     <div class="relative mt-8 p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5 mb-6">
         <div class="custom-note">
             <div class="flex justify-between mb-3 rounded-t sm:mb-3">
@@ -134,7 +134,7 @@
                 </div>
                 <div></div>
             </div>
-            @foreach($package->service()->getCheckoutConfig()->all() ?? [] as $name => $field)
+            @foreach($package->service()->getCheckoutConfig($package)->all() ?? [] as $name => $field)
             <div class="form-group mt-4 @isset($field['col']) {{$field['col']}} @else col-6 @endisset" style="display: flex;flex-direction: column;">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $field['name'] !!}</label>
                 @if($field['type'] == 'select')
