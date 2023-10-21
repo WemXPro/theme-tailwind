@@ -5,7 +5,7 @@
 @section('content')
 
         <div id="service">
-            <div class="p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel"
+            <div class="p-4 mb-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel"
                 aria-labelledby="profile-tab">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $order->package['name'] }}
                 </h5>
@@ -48,6 +48,9 @@
                     @include(Theme::path('components.orders.buttons'), $order)
                 </div>
             </div>
+
+            @includeIf(Theme::serviceView($order->service, 'service'))
+
         </div>
     {{-- @endforeach --}}
 @endsection

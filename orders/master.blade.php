@@ -7,6 +7,15 @@
 @section('container')
     <div class="flex flex-wrap ">
         <div class="lg:w-1/4 pr-4 pl-4 md:w-1/3 pr-4 pl-4 sm:w-1/2 pr-4 pl-4 w-full">
+            @if($order->domain)
+            <div class="p-6 bg-white rounded shadow dark:bg-gray-800 dark:border-gray-700 mb-4">
+                <h5 class="mb-4 text-lg font-bold tracking-tight text-gray-900 dark:text-white text-center">{{ $order->domain }}</h5>
+                <div>
+                    <a href="http://{{ $order->domain }}" target="_blank" class="text-gray-900 mb-3 flex justify-center bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Visit Website</a>
+                    <a href="https://www.whois.com/whois/{{ $order->domain }}" target="_blank" class="text-white flex justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">WHOIS Info</a>
+                </div>
+            </div>
+            @endif
             <div class="px-3 rounded py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
                 <ul class="space-y-2 font-medium">
                     <li>
@@ -43,11 +52,25 @@
                                 {{ $order->payments->where('user_id', auth()->user()->id)->count() }}</span>
                         </a>
                     </li>
+                    @foreach($order->package->service()->getServiceSidebarButtons($order)->all() as $key => $button)
+                    @if(empty($button))
+                        @continue;
+                    @endif
+                    <li>
+                        <a href="{{ $button['href'] ?? '#' }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-600 hover:border-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-300">
+                            <span class="flex-shrink-0 flex w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" style="font-size: 23px;"">
+                                {!! $button['icon'] !!}
+                            </span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">{!! $button['name'] !!}</span>
+                        </a>
+                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
         <div class="lg:w-3/4 pr-4 pl-4 md:w-2/3 pr-4 pl-4 sm:w-1/2 pr-4 pl-4 w-full">
             @include(Theme::path('components.orders.alerts'), $order)
+            @includeIf(Theme::serviceView($order->service, 'stats'))
             @yield('content')
         </div>
     </div>
