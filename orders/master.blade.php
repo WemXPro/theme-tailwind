@@ -57,8 +57,8 @@
                         @continue;
                     @endif
                     <li>
-                        <a href="{{ $button['href'] ?? '#' }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-600 hover:border-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-300">
-                            <span class="flex-shrink-0 flex w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" style="font-size: 23px;"">
+                        <a href="{{ $button['href'] ?? '#' }}" target="{{ $button['target'] ?? '' }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ is_active($button['href'], ['order' => $order, 'page' => 'invoices'], 'bg-gray-100 dark:bg-gray-700') }}">
+                            <span class="flex-shrink-0 flex w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" style="font-size: 23px;">
                                 {!! $button['icon'] !!}
                             </span>
                             <span class="flex-1 ml-3 whitespace-nowrap">{!! $button['name'] !!}</span>
