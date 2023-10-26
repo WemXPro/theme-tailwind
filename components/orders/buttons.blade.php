@@ -7,7 +7,7 @@
     @if(empty($button))
         @continue;
     @endif
-    <a href="{{ $button['href'] ?? '#' }}" target="{{ $button['target'] ?? '' }}"
+    <a href="{{ $button['href'] ?? '#' }}" target="{{ $button['target'] ?? '' }}" @isset($button['onclick']) onclick="{{$button['onclick']}}" @endisset
     class="text-white bg-{{$button['color']}}-700 hover:bg-{{$button['color']}}-800 focus:ring-4 focus:ring-{{$button['color']}}-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-{{$button['color']}}-600 dark:hover:bg-{{$button['color']}}-700 focus:outline-none dark:focus:ring-{{$button['color']}}-800">
     <span class="font-xl mr-1">{!! $button['icon'] ?? '' !!}</span>
     {!! $button['name'] !!}
