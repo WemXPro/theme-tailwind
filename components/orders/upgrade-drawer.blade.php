@@ -35,14 +35,17 @@ Upgrade
         <div class="flex items-center space-x-4 mb-2">
             <img class="mb-4 w-10 h-10 rounded sm:w-10 sm:h-10" src="{{ $package->icon() }}" alt="package icon">
             <div class="w-full"> 
+                @if($order->package->id == $package->id)
+                <span class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 mb-1 sm:mb-1">
+                    Current Package
+                </span>
+                @endif
                 <h2 class="flex items-center mb-2 text-md leading-none text-gray-700 sm:text-md dark:text-gray-200 flex justify-between">
                     {{ $package->name }}
                     <span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 uppercase ml-2.5">{{ currency('symbol') }}{{ $package->prices()->first()->renewal_price }}/{{ $package->prices()->first()->period() }}</span>
                 </h2>
                 @if($order->package->id == $package->id)
-                <span class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 mb-4 sm:mb-5">
-                    Current Package
-                </span>
+                <a href="#" class="text-blue-600 ml-2" onclick="selectUpgradePackage('{{$package->id}}', '{{$package->name}}')" id="{{$package->id}}-upgrade-select">Change Price Cycle</a>
                 @else 
                     <a href="#" class="text-blue-600" onclick="selectUpgradePackage('{{$package->id}}', '{{$package->name}}')" id="{{$package->id}}-upgrade-select">select</a>
                 @endif 
@@ -63,9 +66,15 @@ Upgrade
             <span>{{ currency('symbol') }}<span id="cancellation_fee">0.00</span></span>
         </p>
 
-        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">Due today</span>
+        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">Due today <i class='bx bxs-help-circle' data-popover-target="popover-default"></i></span>
             <span>{{ currency('symbol') }}<span id="due_today">0.00</span></span>
         </p>
+        <div data-popover id="popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+            <div class="px-3 py-2">
+                <p>This service expires in {{ now()->diffInDays($order->due_date) }} days. You will be upgraded immediately to <span id="selected_package2">{{ $order->package->name }}</span> and charged for the difference for the remaining days</p>
+            </div>
+            <div data-popper-arrow></div>
+        </div>
         <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
     </div>
 
@@ -102,13 +111,13 @@ Upgrade
      </div>
    </form>
 </div>
-
 <script>
 function selectUpgradePackage(package, package_name) {
     document.getElementById(package + '-upgrade-select').innerHTML = 'selected';
 
     document.getElementById('selected_package').innerHTML = package_name;
-    
+    document.getElementById('selected_package2').innerHTML = package_name;
+
     package_field = document.getElementById('package_id');
     if(package_field.value !== '') {
         document.getElementById(package_field.value + '-upgrade-select').innerHTML = 'select';
@@ -129,8 +138,12 @@ function selectUpgradePackage(package, package_name) {
             // 4. Process the JSON Response
             data.forEach(item => {
                 // 5. Update the Select Options
+                if(item.id == '{{ $order->price['id'] }}') {
+                    return;
+                }
                 var option = new Option('{{currency("symbol")}}' + item.renewal_price.toFixed(2) + ' / ' + item.cycle, item.id);
                 option.dataset.cycle = item.cycle;
+                option.dataset.period = item.period;
                 option.dataset.renewalPrice = item.renewal_price.toFixed(2);
                 option.dataset.cancellationFee = item.cancellation_fee.toFixed(2);
                 select.add(option);
@@ -152,12 +165,23 @@ function updatePriceHTML(select) {
     document.getElementById('recurring').textContent = selectedOption.dataset.renewalPrice + ' / ' + selectedOption.dataset.cycle;
     document.getElementById('cancellation_fee').textContent = selectedOption.dataset.cancellationFee;
 
-    if(selectedOption.dataset.renewalPrice > {{ $order->price['renewal_price'] }}) {
+    var upgradePrice = (selectedOption.dataset.renewalPrice / selectedOption.dataset.period - {{ $order->price['renewal_price'] }} / {{ $order->price['period'] }}) * {{ now()->diffInDays($order->due_date) }};
+    console.log(upgradePrice.toFixed(2));
+
+    if(upgradePrice > 0) {
         // calculate the upgrade price
-        upgradePrice = selectedOption.dataset.renewalPrice - {{ $order->price['renewal_price'] }};
+        // upgradePrice = selectedOption.dataset.renewalPrice - {{ $order->price['renewal_price'] }};
         document.getElementById('due_today').innerHTML = upgradePrice.toFixed(2);
     } else {
         document.getElementById('due_today').innerHTML = '0.00';
     }
+}
+
+function calculateUpgradePrice(newPrice, newPeriodInDays)
+{
+    // calculate remaining value
+    var remaining_value = {{ number_format(($order->price['renewal_price'] / $order->price['period']) * now()->diffInDays($order->due_date), 2) }};
+    var new_value = (newPrice / newPeriodInDays) * {{ now()->diffInDays($order->due_date) }};
+    console.log(new_value);
 }
 </script>
