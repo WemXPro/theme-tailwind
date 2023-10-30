@@ -75,7 +75,7 @@
                 </svg>
                 <span class="sr-only">Close menu</span>
             </button>
-            <p class="mb-6 text-sm text-gray-500 dark:text-gray-400">Change your Hestia password.</p>
+            <p class="mb-6 text-sm text-gray-500 dark:text-gray-400">Change your Pterodactyl password.</p>
                 <form action="{{ route('service', ['order' => $order->id, 'page' => 'change-password']) }}" method="POST">
                     @csrf
                 <div class="mb-6">
