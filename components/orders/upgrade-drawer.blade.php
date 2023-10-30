@@ -23,12 +23,14 @@ class="focus:outline-none text-white bg-primary-700 hover:bg-primary-800 focus:r
       <span class="sr-only">{{ __('client.close_menu') }}</span>
    </button>
    <p class="mb-6 text-sm text-gray-500 dark:text-gray-400">{!! __('client.upgrade_current_package_to_category', ['package' => $order->package->name]) !!} <a target="_blank" href="{{ route('store.index', $order->package->category->path) }}" class="text-blue-600 underline font-medium dark:text-blue-500 hover:no-underline">{{ $order->package->category->name }}</a></p>
-   {{-- <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-900 dark:text-blue-400" role="alert">
+   @if($order->hasActiveSubscription())
+   <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-900 dark:text-blue-400" role="alert">
         <span class="sr-only">Info</span>
         <div>
-        <span class="font-medium">Upgrading the package will automatically cancel your currently active subscription
+        <span class="font-medium">{{ __('client.cancel_subscription_to_continue') }}
         </div>
-    </div> --}}
+    </div>
+    @endif
    <form action="{{ route('service', ['order' => $order->id, 'page' => 'upgrade']) }}" method="POST">
     @csrf
     <div style="height: 300px; overflow: scroll;">
