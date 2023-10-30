@@ -184,7 +184,7 @@
         <div class="sm:flex sm:items-center sm:justify-between">
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
                 {{ __('client.powered_by') }}
-                <a href="https://wemx.net" target="_blank" class="hover:underline text-primary-600 dark:text-primary-500">@settings('app_name', 'WemX')™</a>.
+                <a href="https://wemx.net" target="_blank" class="hover:underline text-primary-600 dark:text-primary-500">WemX™</a>.
             </span>
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
                 © {{ date('Y') }}

@@ -3,10 +3,11 @@
     'data' => $order->data,
 ])
 
+@if(request('page') == 'manage')
 <button  type="button" data-drawer-target="upgradeService-{{ $order->id }}" data-drawer-show="upgradeService-{{ $order->id }}" data-drawer-placement="right" aria-controls="upgradeService-{{ $order->id }}"
 class="focus:outline-none text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg px-3 py-2 text-sm font-medium dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
 <i class='bx bxs-box font-xl mr-1'></i>
-Upgrade
+{{ __('client.upgrade') }}
 </button>
 
 <!-- Main modal -->
@@ -14,14 +15,14 @@ Upgrade
 <div id="upgradeService-{{ $order->id }}" class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-80 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-upgrade-label">
     <h5 id="drawer-upgrade-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-4 h-4 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-  </svg>Upgrade {{ $order->name }}</h5>
+  </svg>{{ __('client.upgrade') }} {{ $order->name }}</h5>
    <button type="button" data-drawer-hide="upgradeService-{{ $order->id }}" aria-controls="upgradeService-{{ $order->id }}" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
       </svg>
-      <span class="sr-only">Close menu</span>
+      <span class="sr-only">{{ __('client.close_menu') }}</span>
    </button>
-   <p class="mb-6 text-sm text-gray-500 dark:text-gray-400">Upgrade your current package {{ $order->package->name }} to a new package from <a href="{{ route('store.index', $order->package->category->path) }}" class="text-blue-600 underline font-medium dark:text-blue-500 hover:no-underline">{{ $order->package->category->name }}</a></p>
+   <p class="mb-6 text-sm text-gray-500 dark:text-gray-400">{!! __('client.upgrade_current_package_to_category', ['package' => $order->package->name]) !!} <a target="_blank" href="{{ route('store.index', $order->package->category->path) }}" class="text-blue-600 underline font-medium dark:text-blue-500 hover:no-underline">{{ $order->package->category->name }}</a></p>
    {{-- <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-900 dark:text-blue-400" role="alert">
         <span class="sr-only">Info</span>
         <div>
@@ -37,7 +38,7 @@ Upgrade
             <div class="w-full"> 
                 @if($order->package->id == $package->id)
                 <span class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 mb-1 sm:mb-1">
-                    Current Package
+                    {{ __('client.current_package') }}
                 </span>
                 @endif
                 <h2 class="flex items-center mb-2 text-md leading-none text-gray-700 sm:text-md dark:text-gray-200 flex justify-between">
@@ -45,33 +46,33 @@ Upgrade
                     <span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 uppercase ml-2.5">{{ currency('symbol') }}{{ $package->prices()->first()->renewal_price }}/{{ $package->prices()->first()->period() }}</span>
                 </h2>
                 @if($order->package->id == $package->id)
-                <a href="#" class="text-blue-600 ml-2" onclick="selectUpgradePackage('{{$package->id}}', '{{$package->name}}')" id="{{$package->id}}-upgrade-select">Change Price Cycle</a>
+                <a href="#" class="text-blue-600 ml-2" onclick="selectUpgradePackage('{{$package->id}}', '{{$package->name}}')" id="{{$package->id}}-upgrade-select">{{ __('client.change_price_cycle') }}</a>
                 @else 
-                    <a href="#" class="text-blue-600" onclick="selectUpgradePackage('{{$package->id}}', '{{$package->name}}')" id="{{$package->id}}-upgrade-select">select</a>
+                    <a href="#" class="text-blue-600" onclick="selectUpgradePackage('{{$package->id}}', '{{$package->name}}')" id="{{$package->id}}-upgrade-select">{{ __('client.select') }}</a>
                 @endif 
             </div>
         </div>
         @endforeach
     </div>
     <div class="list">
-        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">Selected</span>
+        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">{{ __('client.selected') }}</span>
             <span id="selected_package">{{ $order->package->name }}</span>
         </p>
 
-        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">Cycle</span>
+        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">{{ __('client.cycle') }}</span>
             <span>{{ currency('symbol') }}<span id="recurring">0.00</span></span>
         </p>
 
-        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">Cancellation fee</span>
+        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">{{ __('client.cancellation_fee') }}</span>
             <span>{{ currency('symbol') }}<span id="cancellation_fee">0.00</span></span>
         </p>
 
-        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">Due today <i class='bx bxs-help-circle' data-popover-target="popover-default"></i></span>
+        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">{{ __('client.due_today') }} <i class='bx bxs-help-circle' data-popover-target="popover-default"></i></span>
             <span>{{ currency('symbol') }}<span id="due_today">0.00</span></span>
         </p>
         <div data-popover id="popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
             <div class="px-3 py-2">
-                <p>This service expires in {{ now()->diffInDays($order->due_date) }} days. You will be upgraded immediately to <span id="selected_package2">{{ $order->package->name }}</span> and charged for the difference for the remaining days</p>
+                <p>{!! __('client.upgrade_price_info', ['days' => now()->diffInDays($order->due_date), 'package' => $order->package->name]) !!}</p>
             </div>
             <div data-popper-arrow></div>
         </div>
@@ -81,14 +82,14 @@ Upgrade
     <input type="text" id="package_id" name="package_id" class="hidden" required>
 
     <div id="price-div" class="hidden">
-        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price Cycle</label>
+        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('client.price_cycle') }}</label>
         <select
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 mb-4"
         name="price_id" tabindex="-1" aria-hidden="true" required>
     
         </select>
     </div>
-    <label for="gateway" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gateway</label>
+    <label for="gateway" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('client.gateway') }}</label>
     <select
     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 mb-4"
     name="gateway" tabindex="-1" aria-hidden="true" required>
@@ -105,7 +106,7 @@ Upgrade
     </select>
 
     <div class="text-center">
-        <button type="submit" style="width: 100%" class="inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Upgrade Now <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+        <button type="submit" style="width: 100%" class="inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{{ __('client.upgrade_now') }} <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
     </svg></button>
      </div>
@@ -113,14 +114,14 @@ Upgrade
 </div>
 <script>
 function selectUpgradePackage(package, package_name) {
-    document.getElementById(package + '-upgrade-select').innerHTML = 'selected';
+    document.getElementById(package + '-upgrade-select').innerHTML = '{{ __('client.selected') }}';
 
     document.getElementById('selected_package').innerHTML = package_name;
     document.getElementById('selected_package2').innerHTML = package_name;
 
     package_field = document.getElementById('package_id');
     if(package_field.value !== '') {
-        document.getElementById(package_field.value + '-upgrade-select').innerHTML = 'select';
+        document.getElementById(package_field.value + '-upgrade-select').innerHTML = '{{ __('client.select') }}';
     }
 
     package_field.value = package;
@@ -177,11 +178,5 @@ function updatePriceHTML(select) {
     }
 }
 
-function calculateUpgradePrice(newPrice, newPeriodInDays)
-{
-    // calculate remaining value
-    var remaining_value = {{ number_format(($order->price['renewal_price'] / $order->price['period']) * now()->diffInDays($order->due_date), 2) }};
-    var new_value = (newPrice / newPeriodInDays) * {{ now()->diffInDays($order->due_date) }};
-    console.log(new_value);
-}
 </script>
+@endif
