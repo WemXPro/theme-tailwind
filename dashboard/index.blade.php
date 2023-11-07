@@ -227,6 +227,7 @@
                                                         </span>
 
                                                     </div>
+                                                    @if($order->isRecurring())
                                                     <div class="relative p-3 bg-gray-100 rounded-lg dark:bg-gray-700">
                                                         <h6 class="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                                                             {!! __('client.due_date') !!}
@@ -248,6 +249,7 @@
                                                         <div class="flex items-center text-gray-500 dark:text-gray-400">
                                                             {{ $order->due_date->translatedFormat('d M Y') }}</div>
                                                     </div>
+                                                    @endif
                                                 </div>
                                                 <div class="flex items-center space-x-3 mt-4">
                                                     {{-- @include(Theme::path('components.orders.buttons'), $order) --}}

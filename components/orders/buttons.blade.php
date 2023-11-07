@@ -34,5 +34,7 @@
 @include(Theme::path('components.orders.upgrade-drawer'), $order)
 @endif
 
-@include(Theme::path('components.orders.renew-modal'), $order)
-@include(Theme::path('components.orders.cancel-modal'), $order)
+@if($order->isRecurring())
+    @include(Theme::path('components.orders.renew-modal'), $order)
+    @include(Theme::path('components.orders.cancel-modal'), $order)
+@endif

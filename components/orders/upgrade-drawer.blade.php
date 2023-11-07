@@ -144,6 +144,9 @@ function selectUpgradePackage(package, package_name) {
                 if(item.id == '{{ $order->price['id'] }}') {
                     return;
                 }
+                // if(item.type !== '{{ isset($order->price["type"]) ? $order->price["type"] : "recurring" }}') {
+                //     return;
+                // }
                 var option = new Option('{{currency("symbol")}}' + item.renewal_price.toFixed(2) + ' / ' + item.cycle, item.id);
                 option.dataset.cycle = item.cycle;
                 option.dataset.period = item.period;

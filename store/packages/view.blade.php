@@ -79,13 +79,13 @@
                             class="w-full text-lg font-semibold">{{ currency('symbol') }}{{ number_format($price->renewal_price, 2)}}
                             /
                             {{ $price->periodToHuman() }}</div>
-                        <div class="w-full">{!! __('client.price_block_desc', [
+                        <div class="w-full">{!! ($price->type == 'recurring') ? __('client.price_block_desc', [
                                                 'period' => mb_strtolower($price->period()),
                                                 'total_price' => $price->totalPrice(),
                                                 'renewal_price' => $price->renewal_price,
                                                 'per_period' => mb_strtolower($price->period()),
                                                 'symbol' => currency('symbol')
-                                             ]) !!}
+                                             ]) : __('client.price_onetime_block_desc', ['symbol' => currency('symbol'), 'price' => number_format($price->price, 2)]) !!}
                             @isset($price->data['badge'])
                                 <span
                                     class="bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 inline-block">{{ $price->data['badge'] }}</span>
@@ -207,7 +207,7 @@
             name="gateway" id="gateway" tabindex="-1" aria-hidden="true" required>
 
             @foreach (App\Models\Gateways\Gateway::getActive('subscription') as $gateway)
-                <option @if($gateway->default) selected @endif value="{{ $gateway->id }}">{{ $gateway->name }}
+                <option @if($gateway->default) selected @endif data-gateway-type="subscription" value="{{ $gateway->id }}">{{ $gateway->name }}
                     ({!! __('client.subscription') !!})
                 </option>
             @endforeach
@@ -215,7 +215,7 @@
             @foreach (App\Models\Gateways\Gateway::getActive() as $gateway)
                 @auth
                     @if($gateway->driver == 'Balance')
-                        <option @if($gateway->default) selected @endif value="{{ $gateway->id }}"
+                        <option @if($gateway->default) selected @endif value="{{ $gateway->id }}" data-gateway-type="once"
                         @if(Auth::user()->balance >= $package->prices->first()->totalPrice())  @endif>
                             Pay with Balance ({{ currency('symbol') }}{{ number_format(Auth::user()->balance, 2) }})
                         </option>
@@ -405,6 +405,12 @@
             function updateCheckoutPrice() {
                 var price = activePrice();
 
+                if(price.type == 'single') {
+                    hideSubscriptionGateways();
+                } else {
+                    showSubscriptionGateways();
+                }
+
                 document.getElementById('recurring').innerHTML = price.renewal_price.toFixed(2);
                 document.getElementById('period').innerHTML = periodToHuman(price);
 
@@ -518,11 +524,45 @@
                 updateCheckoutPrice();
             }
 
+            function hideSubscriptionGateways() {
+                // Get all select elements on the page
+                var options = document.querySelectorAll('option');
+
+                // Loop through the NodeList of select elements
+                options.forEach(function(option) {
+                    // Check if the data-x attribute's value matches the given value
+                    if (option.getAttribute('data-gateway-type') == 'subscription') {
+                        // Remove the select element from the document
+                        // option.style.display = 'none'
+                        option.setAttribute('disabled', '');
+                    }
+                });
+            }
+
+            
+            function showSubscriptionGateways() {
+                // Get all select elements on the page
+                var options = document.querySelectorAll('option');
+
+                // Loop through the NodeList of select elements
+                options.forEach(function(option) {
+                    // Check if the data-x attribute's value matches the given value
+                    if (option.getAttribute('data-gateway-type') == 'subscription') {
+                        // Remove the select element from the document
+                        option.removeAttribute('disabled', '');
+                    }
+                });
+            }
+
             function alertCoupon(desc) {
                 document.getElementById('coupon-description').innerHTML = desc;
             }
 
             function period(price) {
+                if(price.type == 'single') {
+                    return '{!! __('admin.once') !!}';
+                }
+
                 if (price.period == 1) {
                     return '{!! __('admin.day') !!}';
                 } else if (price.period == 7) {
@@ -545,6 +585,10 @@
             }
 
             function periodToHuman(price) {
+                if(price.type == 'single') {
+                    return '{!! __('admin.once') !!}';
+                }
+
                 if (price.period == 1) {
                     return '{!! __('admin.daily') !!}';
                 } else if (price.period == 7) {
