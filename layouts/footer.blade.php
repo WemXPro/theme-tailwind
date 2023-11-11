@@ -240,7 +240,17 @@
 <script>
     async function copyToClipboard(button) {
         try {
-            await navigator.clipboard.writeText(button.textContent);
+            let textToCopy = button.textContent.trim();
+            let tempInput = document.createElement("input");
+            document.body.appendChild(tempInput);
+            tempInput.value = textToCopy;
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            button.innerText = '{!! __('client.copied') !!}';
+            setTimeout(function(){
+                button.innerText = textToCopy;
+            }, 3000);
             console.log('Text copied to clipboard');
         } catch (err) {
             console.error('Error in copying text: ', err);
