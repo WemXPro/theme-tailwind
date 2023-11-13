@@ -3,6 +3,7 @@
 @section('title', __('client.services'))
 
 @section('content')
+        @includeIf(Theme::serviceView($order->service, 'stats'))
 
         <div id="service">
             <div class="p-4 mb-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel"

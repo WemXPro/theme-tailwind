@@ -19,7 +19,7 @@
                 <section class="dark:bg-gray-900 py-3 sm:py-5">
                     <div class="mx-auto max-w-screen-2xl">
                         <!-- Start coding here -->
-                        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-visible">
                             <div
                                 class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4 border-b dark:border-gray-700">
                                 <div class="w-full flex items-center space-x-3">
@@ -109,8 +109,8 @@
                                         <th scope="col" class="px-4 py-3">
                                             <span class="sr-only">{!! __('client.expand_collapse_row') !!}</span>
                                         </th>
-                                        <th scope="col"
-                                            class="px-4 py-3 min-w-[14rem]">{!! __('client.product') !!}</th>
+                                        <th scope="col" class="px-4 py-3 min-w-[14rem]">{!! __('client.product') !!}</th>
+                                        <th scope="col" class="px-4 py-3 min-w-[14rem]">{!! __('client.members') !!}</th>
                                         <th scope="col" class="px-4 py-3 min-w-[10rem]">
                                             {!! __('client.service') !!}
                                             <svg class="h-4 w-4 ml-1 inline-block" fill="currentColor"
@@ -168,6 +168,29 @@
                                                             {{ $order->domain }}
                                                         @endisset</small></span>
                                             </th>
+                                            <td class="px-4 py-3">
+                                            <div class="flex -space-x-4 rtl:space-x-reverse">
+                                                @if($order->user->avatar)
+                                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ $order->user->avatar() }}" alt="">  
+                                                @else 
+                                                    <div class="relative inline-flex border border-gray-500 items-center justify-center mt-0.5 w-9 h-9 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                                        <span class="font-medium text-gray-600 dark:text-gray-300">{{ substr($order->user->username, 0, 2) }}</span>
+                                                    </div>                                          
+                                                @endif
+                                                @foreach($order->members()->paginate(2) as $member)
+                                                    @if($member->user->avatar ?? false)
+                                                        <img class="w-10 h-10 @if($loop->last) z-10 @endif  border-2 border-white rounded-full dark:border-gray-800" src="{{ $member->user->avatar() }}" alt="">  
+                                                    @else 
+                                                        <div class="relative inline-flex border border-gray-500 items-center justify-center mt-0.5 w-9 h-9 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                                            <span class="font-medium text-gray-600 dark:text-gray-300">{{ substr($member->email, 0, 2) }}</span>
+                                                        </div>                                          
+                                                    @endif
+                                                @endforeach
+                                                @if($order->members()->count() > 2)
+                                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800 z-30" href="{{ route('service', ['order' => $member->order->id, 'page' => 'members']) }}">+{{ $order->members()->count() - 2 }}</a>
+                                                @endif
+                                            </div>
+                                            </td>
                                             <td class="px-4 py-3">{{ $order->service }}</td>
                                             <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $order->package['category']['name'] }}</td>
@@ -257,6 +280,151 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                    @endforeach
+                                    
+                                    @foreach (auth()->user()->suborders()->where('status', 'active')->get() as $member)
+                                    @php
+                                        $order = $member->order;
+                                    @endphp
+                                        <tr class="border-b dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition"
+                                            id="table-column-header-0"
+                                            data-accordion-target="#table-column-body-{{ $order->id }}"
+                                            aria-expanded="false" aria-controls="table-column-body-{{ $order->id }}">
+                                            <td class="p-3 w-4">
+                                                <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor"
+                                                     viewbox="0 0 20 20" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                          clip-rule="evenodd"/>
+                                                </svg>
+                                            </td>
+
+                                            <th scope="row"
+                                                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center">
+                                                <img class="w-9 h-9 rounded mr-2"
+                                                     src="{{ asset('storage/products/' . $order->package['icon']) }}"
+                                                     alt="">
+                                                <span class="flex flex-col">{{ $order->name }} <small
+                                                        class="text-gray-500 dark:text-gray-400">@isset($order->domain)
+                                                            {{ $order->domain }}
+                                                        @endisset</small></span>
+                                            </th>
+                                            <td class="px-4 py-3">
+                                            <div class="flex -space-x-4 rtl:space-x-reverse">
+                                                @if($order->user->avatar)
+                                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ $order->user->avatar() }}" alt="">  
+                                                @else 
+                                                    <div class="relative inline-flex border border-gray-500 items-center justify-center mt-0.5 w-9 h-9 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                                        <span class="font-medium text-gray-600 dark:text-gray-300">{{ substr($order->user->username, 0, 2) }}</span>
+                                                    </div>                                          
+                                                @endif
+                                                @foreach($order->members()->paginate(2) as $member)
+                                                    @if($member->user->avatar ?? false)
+                                                        <img class="w-10 h-10 @if($loop->last) z-10 @endif  border-2 border-white rounded-full dark:border-gray-800" src="{{ $member->user->avatar() }}" alt="">  
+                                                    @else 
+                                                        <div class="relative inline-flex border border-gray-500 items-center justify-center mt-0.5 w-9 h-9 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                                            <span class="font-medium text-gray-600 dark:text-gray-300">{{ substr($member->email, 0, 2) }}</span>
+                                                        </div>                                          
+                                                    @endif
+                                                @endforeach
+                                                @if($order->members()->count() > 2)
+                                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800 z-30" href="{{ route('service', ['order' => $member->order->id, 'page' => 'members']) }}">+{{ $order->members()->count() - 2 }}</a>
+                                                @endif
+                                            </div>
+                                            </td>
+                                            <td class="px-4 py-3">{{ $order->service }}</td>
+                                            <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $order->package['category']['name'] }}</td>
+                                            <td class="px-4 py-3 whitespace-nowrap">
+                                                <span
+                                                    class="@if($order->status == 'active') bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300
+                                                    @elseif($order->status == 'suspended')
+                                                    bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300
+                                                    @elseif($order->status == 'cancelled') bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300
+                                                    @elseif($order->status == 'terminated') bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 @endif">
+                                                    {!! __('client.'.  $order->status) !!}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr class="hidden flex-1 overflow-x-auto w-full"
+                                            id="table-column-body-{{ $order->id }}"
+                                            aria-labelledby="table-column-header-0">
+                                            <td class="p-4 border-b dark:border-gray-700" colspan="9">
+                                                <div>
+                                                    @include(Theme::path('components.orders.alerts'), $order)
+
+                                                    <h6 class="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
+                                                        {!! __('client.details') !!}
+                                                    </h6>
+                                                </div>
+                                                <div class="grid grid-cols-3 gap-4 mt-4">
+                                                    <div
+                                                        class="relative p-3 bg-gray-100 rounded-lg dark:bg-gray-700 flex flex-col items-start justify-between">
+                                                        <h6 class="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
+                                                            {!! __('client.package') !!}
+                                                        </h6>
+                                                        <div class="flex items-center text-gray-500 dark:text-gray-400">
+                                                            {{ $order->package['name'] }}</div>
+                                                    </div>
+                                                    <div
+                                                        class="relative p-3 bg-gray-100 rounded-lg dark:bg-gray-700 flex flex-col justify-between">
+                                                        <h6 class="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
+                                                            {!! __('client.billing_cycle') !!}
+                                                        </h6>
+                                                        <div class="flex items-center text-gray-500 dark:text-gray-400">
+                                                        <span class="text-dark font-bold mr-1 dark:text-gray-200">
+                                                            {{ currency('symbol') }}{{ $order->price['renewal_price'] }}</span>
+                                                            /
+                                                            {{ $order->periodToHuman() }}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="relative p-3 bg-gray-100 rounded-lg dark:bg-gray-700">
+                                                        <h6 class="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
+                                                            {!! __('client.status') !!}
+                                                        </h6>
+                                                        <span class="@if($order->status == 'active') bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300
+                                                            @elseif($order->status == 'suspended') bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300
+                                                            @elseif($order->status == 'cancelled') bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300
+                                                            @elseif($order->status == 'terminated') bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 @endif">
+                                                            {!! __('client.'.  $order->status) !!}
+                                                        </span>
+
+                                                    </div>
+                                                    @if($order->isRecurring())
+                                                    <div class="relative p-3 bg-gray-100 rounded-lg dark:bg-gray-700">
+                                                        <h6 class="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
+                                                            {!! __('client.due_date') !!}
+                                                        </h6>
+                                                        <div class="flex items-center text-gray-500 dark:text-gray-400">
+                                                            {{ $order->due_date->translatedFormat('d M Y') }}</div>
+                                                    </div>
+                                                    <div class="relative p-3 bg-gray-100 rounded-lg dark:bg-gray-700">
+                                                        <h6 class="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
+                                                            {!! __('client.last_renewal_date') !!}
+                                                        </h6>
+                                                        <div class="flex items-center text-gray-500 dark:text-gray-400">
+                                                            {{ $order->last_renewed_at->translatedFormat('d M Y') }}</div>
+                                                    </div>
+                                                    <div class="relative p-3 bg-gray-100 rounded-lg dark:bg-gray-700">
+                                                        <h6 class="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
+                                                            {!! __('client.next_invoice') !!}
+                                                        </h6>
+                                                        <div class="flex items-center text-gray-500 dark:text-gray-400">
+                                                            {{ $order->due_date->translatedFormat('d M Y') }}</div>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                                <div class="flex items-center space-x-3 mt-4">
+                                                    {{-- @include(Theme::path('components.orders.buttons'), $order) --}}
+                                                    <x-orders.buttons :order="$order"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @php 
+                                        unset($order);
+                                    @endphp
                                     @endforeach
                                     </tbody>
                                 </table>
