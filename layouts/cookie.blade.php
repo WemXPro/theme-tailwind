@@ -1,3 +1,4 @@
+@if(settings('cookie_popup_enabled', true))
 {{-- Cookies --}}
 <div id="cookies-modal" tabindex="-1" aria-hidden="false" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full p-4">
     <div class="overflow-y-auto relative p-4 w-full max-w-2xl h-[40rem] bg-white rounded-lg shadow md:p-6 dark:bg-gray-800">
@@ -254,3 +255,4 @@ window.addEventListener('load', function() {
     checkCookieConsent();
 });
 </script>
+@endif

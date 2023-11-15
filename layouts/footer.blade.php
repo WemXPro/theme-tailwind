@@ -154,7 +154,7 @@
                 <div>
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">{!! __('client.help_center') !!}</h2>
                     <ul class="text-gray-600 dark:text-gray-400">
-                        @if(!settings('contact_us_enabled', true))
+                        @if(settings('contact_us_enabled', true))
                         <li class="mb-4">
                             <a href="{{ route('contact') }}" class="hover:underline">{!! __('client.contact_us') !!}</a>
                         </li>
