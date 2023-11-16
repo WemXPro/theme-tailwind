@@ -120,7 +120,7 @@
         </div>
     @endif
 
-    {{--    @includeIf(Theme::serviceView($package->service, 'props.checkout-options'))--}}
+
 
     @if($package->service()->hasCheckoutConfig($package))
         <div class="relative mt-8 p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5 mb-6">
@@ -184,6 +184,8 @@
                 </div>
             </div>
         </div>
+    @else
+            @includeIf(Theme::serviceView($package->service, 'props.checkout-options'))
     @endif
 
     <div class="relative mt-8 p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
