@@ -120,59 +120,70 @@
         </div>
     @endif
 
-    @includeIf(Theme::serviceView($package->service, 'props.checkout-options'))
+    {{--    @includeIf(Theme::serviceView($package->service, 'props.checkout-options'))--}}
 
     @if($package->service()->hasCheckoutConfig($package))
-    <div class="relative mt-8 p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5 mb-6">
-        <div class="custom-note">
-            <div class="flex justify-between mb-3 rounded-t sm:mb-3">
-                <div class="text-lg text-gray-900 md:text-xl dark:text-white">
-                    <h3 class="font-semibold">Custom Options</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                        Customize your service options for your package
-                    </p>
+        <div class="relative mt-8 p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5 mb-6">
+            <div class="custom-note">
+                <div class="flex justify-between mb-3 rounded-t sm:mb-3">
+                    <div class="text-lg text-gray-900 md:text-xl dark:text-white">
+                        <h3 class="font-semibold">{!! __('client.custom_options') !!}</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            {!! __('client.custom_options_desc') !!}
+                        </p>
+                    </div>
+                    <div></div>
                 </div>
-                <div></div>
-            </div>
-            @foreach($package->service()->getCheckoutConfig($package)->all() ?? [] as $name => $field)
-            <div class="form-group mt-4 @isset($field['col']) {{$field['col']}} @else col-6 @endisset" style="display: flex;flex-direction: column;">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $field['name'] !!}</label>
-                @if($field['type'] == 'select')
-                <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" tabindex="-1" aria-hidden="true"
-                name="{{ $field['key'] }}"
-                id="{{ $field['key'] }}"
-                @if(isset($field['multiple']) AND $field['multiple']) multiple @endif
-                >
-                    @foreach($field['options'] ?? [] as $key => $option)
-                    <option value="{{ $key }}"
-                    @if(in_array($key, (array) $package->data(Str::remove("[]", $field['key']), $field['default_value'] ?? ''))) selected @endif
-                    >{{ $option }}</option>
+                <div class="flex flex-wrap">
+                    @foreach($package->service()->getCheckoutConfig($package)->all() ?? [] as $name => $field)
+                        <div class="@isset($field['col']) {{$field['col']}} @else w-1/2 p-2 @endisset"
+                             style="display: flex;flex-direction: column;">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                {!! $field['name'] !!} {!!  isset($field['required']) && $field['required'] ? '<span class="text-red-500">*</span>' : '' !!}
+                            </label>
+                            @if($field['type'] == 'select')
+                                <select
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    tabindex="-1" aria-hidden="true"
+                                    name="{{ $field['key'] }}"
+                                    id="{{ $field['key'] }}"
+                                    @if(isset($field['multiple']) AND $field['multiple']) multiple @endif
+                                >
+                                    @foreach($field['options'] ?? [] as $key => $option)
+                                        <option value="{{ $key }}"
+                                                @if(in_array($key, (array) $package->data(Str::remove("[]", $field['key']), $field['default_value'] ?? ''))) selected @endif
+                                        >{{ $option }}</option>
+                                    @endforeach
+                                </select>
+                            @elseif($field['type'] == 'bool')
+                                <label class="relative inline-flex items-center cursor-pointer mt-2">
+                                    <input type="checkbox" name="{{ $field['key'] }}" value="1" class="sr-only peer"
+                                           @if($package->data($field['key'], $field['default_value'] ?? '')) checked @endif>
+                                    <div
+                                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                    <span
+                                        class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">{!! $field['name'] !!}</span>
+                                </label>
+                            @else
+                                <input
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    type="{{ $field['type'] }}"
+                                    name="{{ $field['key'] }}"
+                                    id="{{ $field['key'] }}"
+                                    @isset($field['min']) min="{{$field['min']}}" @endisset
+                                    @isset($field['max']) max="{{$field['max']}}" @endisset
+                                    value="{{ $package->data($field['key'], $field['default_value'] ?? '') }}"
+                                    placeholder="@isset($field['placeholder']){{$field['placeholder']}} @else{{ $field['name'] }} @endisset"
+                                    @if(in_array('required', $field['rules'])) required="" @endif>
+                            @endif
+                            <small class="mt-2 text-sm text-gray-500 dark:text-gray-400 text-muted">
+                                {!! $field['description'] !!}
+                            </small>
+                        </div>
                     @endforeach
-                </select>
-                @elseif($field['type'] == 'bool')
-                <label class="relative inline-flex items-center cursor-pointer mt-2">
-                    <input type="checkbox" name="{{ $field['key'] }}" value="1" class="sr-only peer" @if($package->data($field['key'], $field['default_value'] ?? '')) checked @endif>
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                    <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">{!! $field['name'] !!}</span>
-                </label>
-                @else
-                <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                type="{{ $field['type'] }}"
-                name="{{ $field['key'] }}"
-                id="{{ $field['key'] }}"
-                @isset($field['min']) min="{{$field['min']}}" @endisset
-                @isset($field['max']) max="{{$field['max']}}" @endisset
-                value="{{ $package->data($field['key'], $field['default_value'] ?? '') }}"
-                placeholder="@isset($field['placeholder']){{$field['placeholder']}} @else{{ $field['name'] }} @endisset"
-                @if(in_array('required', $field['rules'])) required="" @endif>
-                @endif
-                <small class="mt-2 text-sm text-gray-500 dark:text-gray-400 text-muted">
-                    {!! $field['description'] !!}
-                </small>
+                </div>
             </div>
-            @endforeach
         </div>
-    </div>
     @endif
 
     <div class="relative mt-8 p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -207,7 +218,8 @@
             name="gateway" id="gateway" tabindex="-1" aria-hidden="true" required>
 
             @foreach (App\Models\Gateways\Gateway::getActive('subscription') as $gateway)
-                <option @if($gateway->default) selected @endif data-gateway-type="subscription" value="{{ $gateway->id }}">{{ $gateway->name }}
+                <option @if($gateway->default) selected @endif data-gateway-type="subscription"
+                        value="{{ $gateway->id }}">{{ $gateway->name }}
                     ({!! __('client.subscription') !!})
                 </option>
             @endforeach
@@ -215,7 +227,8 @@
             @foreach (App\Models\Gateways\Gateway::getActive() as $gateway)
                 @auth
                     @if($gateway->driver == 'Balance')
-                        <option @if($gateway->default) selected @endif value="{{ $gateway->id }}" data-gateway-type="once"
+                        <option @if($gateway->default) selected @endif value="{{ $gateway->id }}"
+                                data-gateway-type="once"
                         @if(Auth::user()->balance >= $package->prices->first()->totalPrice())  @endif>
                             Pay with Balance ({{ currency('symbol') }}{{ number_format(Auth::user()->balance, 2) }})
                         </option>
@@ -229,42 +242,43 @@
     </div>
 
     @if(settings('taxes'))
-    <div class="relative mt-8 p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5" id="tax-card">
-        <div class="flex justify-between mb-3 rounded-t sm:mb-3">
-            <div class="text-lg text-gray-900 md:text-xl dark:text-white">
-                <h3 class="font-semibold">Personal details</h3>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Please enter your personal details</p>
-            </div>
-            <div></div>
-        </div>
-
-        <div class="mb-6">
-            <div class="relative flex">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <i class='bx bxs-building-house text-gray-500 dark:text-gray-400'></i>
+        <div class="relative mt-8 p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5" id="tax-card">
+            <div class="flex justify-between mb-3 rounded-t sm:mb-3">
+                <div class="text-lg text-gray-900 md:text-xl dark:text-white">
+                    <h3 class="font-semibold">{!! __('client.personal_details') !!}</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">{!! __('client.personal_details_desc') !!}</p>
                 </div>
-                <input
-                    type="text"
-                    id="zip_code"
-                    required
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Zip/Post Code" name="zip_code" value="{{ session('zip_code', auth()->user()->address->zip_code ?? NULL) }}"
-                />
+                <div></div>
             </div>
-            <p id="coupon-description" class="mt-2 text-sm text-gray-500 dark:text-gray-400"></p>
-        </div>
 
-        <select
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm mb-6 rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            name="country" id="country" tabindex="-1" aria-hidden="true" required>
-            @foreach(config('utils.countries') as $key => $country)
-            <option value="{{ $key }}"
-                    @if(request()->header('cf-ipcountry', auth()->user()->address->zip_code ?? NULL) == $key) selected @endif>{{ $country }}</option>
-            @endforeach
-        </select>
-    </div>
+            <div class="mb-6">
+                <div class="relative flex">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <i class='bx bxs-building-house text-gray-500 dark:text-gray-400'></i>
+                    </div>
+                    <input
+                        type="text"
+                        id="zip_code"
+                        required
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Zip/Post Code" name="zip_code"
+                        value="{{ session('zip_code', auth()->user()->address->zip_code ?? NULL) }}"
+                    />
+                </div>
+                <p id="coupon-description" class="mt-2 text-sm text-gray-500 dark:text-gray-400"></p>
+            </div>
+
+            <select
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm mb-6 rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                name="country" id="country" tabindex="-1" aria-hidden="true" required>
+                @foreach(config('utils.countries') as $key => $country)
+                    <option value="{{ $key }}"
+                            @if(request()->header('cf-ipcountry', auth()->user()->address->zip_code ?? NULL) == $key) selected @endif>{{ $country }}</option>
+                @endforeach
+            </select>
+        </div>
     @endif
-    
+
 
     @if($package->allow_notes)
         <div class="relative mt-8 p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5 mb-6">
@@ -287,7 +301,7 @@
                 ></textarea>
             </div>
         </div>
-    @endif
+        @endif
 
 
         </div>
@@ -322,9 +336,13 @@
                 <div class="@if(!settings('taxes')) hidden @endif" id="tax-div">
                     <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
                     <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4">
-                        <span>VAT @if(settings('tax_add_to_price')) Incl. @else Excl. @endif</span> <span>{{ currency('symbol') }}<span
+                        <span>VAT @if(settings('tax_add_to_price'))
+                                Incl.
+                            @else
+                                Excl.
+                            @endif</span> <span>{{ currency('symbol') }}<span
                                 id="taxes">0.00</span></span>
-                    </p>                    
+                    </p>
                 </div>
 
                 <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
@@ -337,20 +355,24 @@
                 </h5>
 
                 @if($page = Page::wherePath('terms-and-conditions')->first())
-                <div class="flex items-start mb-4">
-                    <div class="flex items-center h-5">
-                        <input
-                            required=""
-                            id="terms"
-                            aria-describedby="terms"
-                            type="checkbox"
-                            class="w-4 h-4 bg-gray-50 rounded border-gray-300 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                        />
+                    <div class="flex items-start mb-4">
+                        <div class="flex items-center h-5">
+                            <input
+                                required=""
+                                id="terms"
+                                aria-describedby="terms"
+                                type="checkbox"
+                                class="w-4 h-4 bg-gray-50 rounded border-gray-300 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                            />
+                        </div>
+                        <div class="ml-3 text-sm">
+                            <label for="terms"
+                                   class="font-medium text-gray-900 dark:text-white">{!! __('client.i_accept_the') !!}<a
+                                    class="ml-1 text-blue-700 dark:text-blue-500 hover:underline"
+                                    href="{{ route('page', $page->path) }}"
+                                    target="_blank">{!! __('client.terms_and_conditions') !!}</a></label>
+                        </div>
                     </div>
-                    <div class="ml-3 text-sm">
-                        <label for="terms" class="font-medium text-gray-900 dark:text-white">{!! __('client.i_accept_the') !!}<a class="ml-1 text-blue-700 dark:text-blue-500 hover:underline" href="{{ route('page', $page->path) }}" target="_blank">{!! __('client.terms_and_conditions') !!}</a></label>
-                    </div>
-                </div> 
                 @endif
 
                 <button type="submit" id="checkout"
@@ -405,7 +427,7 @@
             function updateCheckoutPrice() {
                 var price = activePrice();
 
-                if(price.type == 'single') {
+                if (price.type == 'single') {
                     hideSubscriptionGateways();
                 } else {
                     showSubscriptionGateways();
@@ -437,8 +459,8 @@
                 @if(settings('tax_add_to_price'))
                     totalPrice = totalPrice + calculateTax(totalPrice);
                 @endif
-        
-                return totalPrice.toFixed(2);
+
+                    return totalPrice.toFixed(2);
             }
 
             function getTotalDiscount(totalPrice) {
@@ -461,15 +483,14 @@
                 return totalDiscount.toFixed(2);
             }
 
-            function calculateTax(totalPrice)
-            {
+            function calculateTax(totalPrice) {
                 @if(!settings('taxes'))
                     return 0;
                 @endif
 
-                gateway = document.getElementById('gateway').value;
+                    gateway = document.getElementById('gateway').value;
                 let disabledGateways = @settings('tax_disabled_gateways', '[]');
-                if(disabledGateways.includes(gateway)) {
+                if (disabledGateways.includes(gateway)) {
                     document.getElementById("tax-card").style.display = 'none';
                     document.getElementById("taxes").innerHTML = '0.00 (Calculated next step)';
                     return 0;
@@ -484,7 +505,7 @@
                     rate = rates[country].standard_rate / 100;
                     @if(settings('tax_add_to_price'))
                         totalTax = totalPrice * rate;
-                    @else 
+                    @else
                         totalTax = totalPrice - (totalPrice / (1 + rate));
                     @endif
                 }
@@ -529,7 +550,7 @@
                 var options = document.querySelectorAll('option');
 
                 // Loop through the NodeList of select elements
-                options.forEach(function(option) {
+                options.forEach(function (option) {
                     // Check if the data-x attribute's value matches the given value
                     if (option.getAttribute('data-gateway-type') == 'subscription') {
                         // Remove the select element from the document
@@ -539,13 +560,13 @@
                 });
             }
 
-            
+
             function showSubscriptionGateways() {
                 // Get all select elements on the page
                 var options = document.querySelectorAll('option');
 
                 // Loop through the NodeList of select elements
-                options.forEach(function(option) {
+                options.forEach(function (option) {
                     // Check if the data-x attribute's value matches the given value
                     if (option.getAttribute('data-gateway-type') == 'subscription') {
                         // Remove the select element from the document
@@ -559,7 +580,7 @@
             }
 
             function period(price) {
-                if(price.type == 'single') {
+                if (price.type == 'single') {
                     return '{!! __('admin.once') !!}';
                 }
 
@@ -585,7 +606,7 @@
             }
 
             function periodToHuman(price) {
-                if(price.type == 'single') {
+                if (price.type == 'single') {
                     return '{!! __('admin.once') !!}';
                 }
 
