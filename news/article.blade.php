@@ -1,6 +1,6 @@
-@extends(Theme::wrapper())
+@extends(Theme::wrapper(), ['meta_description' => $article->short_desc])
 
-@section('title', 'News')
+@section('title', $article->title)
 
 @section('header')
     <link rel="stylesheet" href="{{ Theme::get('Default')->assets }}assets/css/typography.min.css">

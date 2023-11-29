@@ -6,10 +6,6 @@
     <link rel="stylesheet" href="{{ Theme::get('Default')->assets }}assets/css/typography.min.css">
 @endsection
 
-@section('header')
-    <link rel="stylesheet" href="{{ Theme::get('Default')->assets }}assets/css/typography.min.css">
-@endsection
-
 @section('container')
     <section class="bg-white dark:bg-gray-900">
         <div class="grid gap-8 px-4 mx-auto max-w-screen-lg lg:gap-16 lg:px-6 ">
@@ -21,10 +17,10 @@
                 @foreach($articles as $article)
                     @php($article->translate())
                     @if($article->status !== 'published')
-                        @continue;
+                        @continue
                     @endif
                     @if(!in_array('pinned', $article->labels))
-                        @continue;
+                        @continue
                     @endif
                     <article class="mb-6">
                         <div class="flex justify-between items-center mb-5 text-gray-500">
@@ -43,7 +39,7 @@
                         <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="{{ route('news.article', $article->path) }}">{{ $article->title }}</a>
                         </h2>
-                        <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{!! Str::words($article->content, 50, '...') !!}</p>
+                        <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{!! Str::words($article->short_desc, 50, '...') !!}</p>
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-4 mt-4"
                                  data-popover-target="popover-user-profile-{{ $article->user->id }}">
@@ -106,10 +102,10 @@
                 @endforeach
                 @foreach($articles as $article)
                     @if($article->status !== 'published')
-                        @continue;
+                        @continue
                     @endif
                     @if(in_array('pinned', $article->labels))
-                        @continue;
+                        @continue
                     @endif
                     <article class="mb-6">
                         <div class="flex justify-between items-center mb-5 text-gray-500">
@@ -128,7 +124,7 @@
                         <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             <a href="{{ route('news.article', $article->path) }}">{{ $article->title }}</a>
                         </h2>
-                        <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{!! Str::words($article->content, 50, '...') !!}</p>
+                        <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{!! Str::words($article->short_desc, 50, '...') !!}</p>
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-4 mt-4"
                                  data-popover-target="popover-user-profile-{{ $article->user->id }}">

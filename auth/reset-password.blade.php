@@ -1,5 +1,7 @@
 @extends(Theme::path('auth.wrapper'))
 
+@section('title', __('auth.reset_password'))
+
 @section('container')
     <section class="bg-white dark:bg-gray-900">
         <div class="grid lg:h-screen lg:grid-cols-2">

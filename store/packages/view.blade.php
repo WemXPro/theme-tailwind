@@ -1,8 +1,6 @@
 @extends(Theme::wrapper())
 
-@section('title')
-    {!! __('client.services') !!}
-@endsection
+@section('title', $package->name)
 
 @section('container')
 
@@ -275,7 +273,7 @@
                 name="country" id="country" tabindex="-1" aria-hidden="true" required>
                 @foreach(config('utils.countries') as $key => $country)
                     <option value="{{ $key }}"
-                            @if(request()->header('cf-ipcountry', auth()->user()->address->zip_code ?? NULL) == $key) selected @endif>{{ $country }}</option>
+                            @if(request()->header('cf-ipcountry', auth()->user()->address->country ?? NULL) == $key) selected @endif>{{ $country }}</option>
                 @endforeach
             </select>
         </div>

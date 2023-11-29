@@ -1,5 +1,7 @@
 @extends(Theme::path('auth.wrapper'))
 
+@section('title', __('auth.sign_up'))
+
 @section('container')
     @if (!isset($_GET['step']) or $_GET['step'] == 'account')
         @include(Theme::path('auth.registration.account'))
