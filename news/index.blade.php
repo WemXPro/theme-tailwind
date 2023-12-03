@@ -14,6 +14,10 @@
                 <p class="font-light text-gray-500 dark:text-gray-400 sm:text-xl">{{ __('client.latest_news_desc') }}</p>
             </div>
             <div class="">
+                @if($articles->count() == 0)
+                    @include(Theme::path('empty-state'), [ 'title' => __('client.no_new_articles'),
+                    'description' => __('client.no_new_articles_desc')])
+                @endif
                 @foreach($articles as $article)
                     @php($article->translate())
                     @if($article->status !== 'published')
@@ -181,6 +185,9 @@
                     </article>
                     <hr class="mb-6 border-gray-200 dark:border-gray-700">
                 @endforeach
+                <div class="mt-2 flex items-center justify-end">
+                    {{ $articles->links(Theme::pagination()) }}
+                </div>
             </div>
         </div>
     </section>
