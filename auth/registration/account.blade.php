@@ -98,7 +98,7 @@
                            required="">
                 </div>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-3 mb-4">
 
                 @if($page = Page::wherePath('terms-and-conditions')->first())
                 <div class="flex items-start mb-6">
