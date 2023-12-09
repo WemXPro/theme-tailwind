@@ -145,6 +145,7 @@
                                     tabindex="-1" aria-hidden="true"
                                     name="{{ $field['key'] }}"
                                     id="{{ $field['key'] }}"
+                                    @if(isset($field['disabled']) AND $field['disabled']) disabled @endif
                                     @if(isset($field['multiple']) AND $field['multiple']) multiple @endif
                                 >
                                     @foreach($field['options'] ?? [] as $key => $option)
@@ -159,7 +160,8 @@
                                         <input type="hidden" name="{{ $field['key'] }}" value="0">
                                     @endif
                                     <input type="checkbox" name="{{ $field['key'] }}" value="{{$field['default_value'] ?? '0'}}" class="sr-only peer"
-                                           @if($package->data($field['key'], $field['default_value'] ?? '0')) checked @endif>
+                                           @if($package->data($field['key'], $field['default_value'] ?? '0')) checked @endif
+                                           @if(isset($field['disabled']) AND $field['disabled']) disabled @endif>
                                     <div
                                         class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                                     <span
@@ -175,7 +177,8 @@
                                     @isset($field['max']) max="{{$field['max']}}" @endisset
                                     value="{{ $package->data($field['key'], $field['default_value'] ?? '') }}"
                                     placeholder="@isset($field['placeholder']){{$field['placeholder']}} @else{{ $field['name'] }} @endisset"
-                                    @if(in_array('required', $field['rules'])) required="" @endif>
+                                    @if(in_array('required', $field['rules'])) required="" @endif
+                                    @if(isset($field['disabled']) AND $field['disabled']) disabled @endif>
                             @endif
                             <small class="mt-2 text-sm text-gray-500 dark:text-gray-400 text-muted">
                                 {!! $field['description'] !!}
