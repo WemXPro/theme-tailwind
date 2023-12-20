@@ -1,6 +1,6 @@
 @extends(Theme::wrapper())
 
-@section('title', 'Contact Us')
+@section('title', 'Setup 2FA')
 
 @section('container')
 <section class="bg-white dark:bg-gray-900 flex" style="height: 100%;">
@@ -31,8 +31,14 @@
 
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-            <div class="rounded flex justify-center mb-6">
+            <div class="rounded flex justify-center mb-6" data-tooltip-target="tooltip-secret_key">
                 {!! $QRcode !!}
+            </div>
+
+
+            <div id="tooltip-secret_key" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                {{ $secretKey }}
+                <div class="tooltip-arrow" data-popper-arrow></div>
             </div>
 
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{!! __('auth.scan_qr_code') !!} </p>
@@ -61,7 +67,10 @@
                       <input type="text" name="OPT" id="input-group-1" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123456">
                     </div>
                 </div>
-
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 flex">
+                    <svg class="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                    {!! __('auth.view_2fa_secretcode') !!}
+                </p>
             <div class="flex justify-end">
                 <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     {!! __('auth.continue') !!}

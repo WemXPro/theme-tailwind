@@ -1,6 +1,6 @@
 @extends(Theme::wrapper())
 
-@section('title', 'Contact Us')
+@section('title', 'Recover 2FA')
 
 @section('container')
 <section class="bg-white dark:bg-gray-900 flex" style="height: 100%;">
