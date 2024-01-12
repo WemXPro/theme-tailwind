@@ -155,7 +155,7 @@
                                     @if($field['required'])
                                         <input type="hidden" name="{{ $field['key'] }}" value="0">
                                     @endif
-                                    <input type="checkbox" name="{{ $field['key'] }}" value="{{getValueByKey($field['key'], $package->data, $field['default_value'] ?? '0')}}" class="sr-only peer"
+                                    <input type="checkbox" name="{{ $field['key'] }}" value="1" class="sr-only peer"
                                            @if(getValueByKey($field['key'], $package->data, $field['default_value'] ?? '0')) checked
                                            @endif
                                            @if(isset($field['disabled']) AND $field['disabled']) disabled @endif>
