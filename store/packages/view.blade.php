@@ -334,12 +334,12 @@
                 <div class="@if(!settings('taxes')) hidden @endif" id="tax-div">
                     <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
                     <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4">
-                        <span>VAT @if(settings('tax_add_to_price'))
-                                Incl.
+                        <span>{!! __('client.vat') !!} @if(settings('tax_add_to_price'))
+                                {!! __('client.incl') !!}
                             @else
-                                Excl.
+                                {!! __('client.excl') !!}
                             @endif</span> <span>{{ currency('symbol') }}<span
-                                id="taxes">0.00</span></span>
+                                    id="taxes">0.00</span></span>
                     </p>
                 </div>
 
