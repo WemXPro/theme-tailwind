@@ -19,7 +19,7 @@
     <meta name="robots" content="@settings('seo::robots', 'index, follow')">
 
     <!-- Open Graph Tags: Enhances visibility and engagement on social media platforms -->
-    <meta property="og:title" content="@yield('title') - @settings('seo::title', 'WemX')">
+    <meta property="og:title" content="{{ trim($__env->yieldContent('title')) }} - @settings('seo::title', 'WemX')">
     <meta property="og:description" content="{{ $meta_description ?? settings('seo::description', 'Manage your orders with an easy-to-use Dashboard') }}">
     <meta property="og:image" content="@settings('seo::image', '/static/wemx.png')">
 

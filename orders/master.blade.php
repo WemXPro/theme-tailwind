@@ -75,6 +75,7 @@
                     @endforeach
                 </ul>
             </div>
+                @includeIf(Theme::serviceView($order->package->service, 'order_sidebar'))
         </div>
         <div class="lg:w-3/4 pr-4 pl-4 md:w-2/3 pr-4 pl-4 sm:w-1/2 pr-4 pl-4 w-full">
             @include(Theme::path('components.orders.alerts'), $order)

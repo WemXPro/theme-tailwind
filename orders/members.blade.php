@@ -88,7 +88,7 @@
                                 <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z"/>
                             </svg>
                             {{ $member->email }}</h5>
-                            
+
                                 <button type="button" data-drawer-hide="drawer-update-member-{{$member->id}}" aria-controls="drawer-update-member-{{$member->id}}" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -114,15 +114,15 @@
                                     <option value="0" @if(!$member->is_admin) selected @endif>Member (Selected Permissions)</option>
                                     </select>
                                 </div>
-                            
+
                                 <div class="mb-6 @if($member->is_admin) hidden @endif" id="permissions-{{$member->id}}">
                                     <label for="permissions" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Permissions</label>
-                            
+
                                     <div style="height: 400px; overflow: scroll; padding: 5px;">
                                         @foreach($order->getService()->permissions()->all() as $key => $permission)
                                         <div class="flex mb-3">
                                             <div class="flex items-center h-5">
-                                                <input id="permission-{{$key}}" @if(array_key_exists($key, $member->permissions)) checked="" @endif name="permissions[{{$key}}]" aria-describedby="permission-{{$key}}-text" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <input id="permission-{{$key}}" @if(array_key_exists($key, $member->permissions)) checked="" @endif name="permissions[{{$key}}]" aria-describedby="permission-{{$key}}-text" type="checkbox" value="@if(isset($permission['contains']) and $permission['contains']) contains @endif" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                             </div>
                                             <div class="ml-2 text-sm">
                                                 <label for="permission-{{$key}}" class="font-medium text-gray-900 dark:text-gray-300">{{ str_replace("_", " ", $key) }}</label>
@@ -131,7 +131,7 @@
                                         </div>
                                         @endforeach
                                     </div>
-                            
+
                                 </div>
                                 <button type="submit" class="text-white justify-center flex items-center bg-primary-700 hover:bg-primary-800 w-full focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">{{__('client.update')}}</button>
                                 </form>
@@ -193,7 +193,7 @@
             @foreach($order->getService()->permissions()->all() as $key => $permission)
             <div class="flex mb-3">
                 <div class="flex items-center h-5">
-                    <input id="permission-{{$key}}" name="permissions[{{$key}}]" aria-describedby="permission-{{$key}}-text" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <input id="permission-{{$key}}" name="permissions[{{$key}}]" aria-describedby="permission-{{$key}}-text" type="checkbox" value="@if(isset($permission['contains']) and $permission['contains']) contains @endif" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 </div>
                 <div class="ml-2 text-sm">
                     <label for="permission-{{$key}}" class="font-medium text-gray-900 dark:text-gray-300">{{ str_replace("_", " ", $key) }}</label>
