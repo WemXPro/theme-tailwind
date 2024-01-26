@@ -93,10 +93,12 @@
                   <div class="text-sm font-medium text-gray-500 uppercase dark:text-gray-400">{!! __('client.subtotal') !!}</div>
                   <div class="text-base font-medium text-gray-900 dark:text-white">{{ currency('symbol') }}{{ $payment->amount }}</div>
               </div>
+              {{-- @if(settings('taxes'))
               <div class="flex justify-between">
                   <div class="text-sm font-medium text-gray-500 uppercase dark:text-gray-400">{!! __('client.tax_rate') !!}</div>
                   <div class="text-base font-medium text-gray-900 dark:text-white">0%</div>
               </div>
+              @endif --}}
               <div class="flex justify-between">
                   <div class="text-sm font-medium text-gray-500 uppercase dark:text-gray-400">{!! __('client.discounts') !!}</div>
                   <div class="text-base font-medium text-gray-900 dark:text-white">{{ currency('symbol') }}0</div>
