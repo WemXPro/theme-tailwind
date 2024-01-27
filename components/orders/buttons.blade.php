@@ -30,8 +30,8 @@
 @endif
 
 
-@if($order->getService()->canUpgrade())
-@include(Theme::path('components.orders.upgrade-drawer'), $order)
+@if($order->getService()->canUpgrade() AND $order->package->settings('allow_upgrading', true))
+    @include(Theme::path('components.orders.upgrade-drawer'), $order)
 @endif
 
 @if($order->isRecurring())

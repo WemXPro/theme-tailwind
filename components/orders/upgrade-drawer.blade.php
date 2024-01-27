@@ -35,6 +35,9 @@ class="focus:outline-none text-white bg-primary-700 hover:bg-primary-800 focus:r
     @csrf
     <div style="height: 300px; overflow: scroll;">
         @foreach(Package::where('category_id', $order->package->category->id)->get() as $package)
+        @if($package->status !== 'active' OR !$package->settings('allow_upgrading', true))
+            @continue
+        @endif
         <div class="flex items-center space-x-4 mb-2">
             <img class="mb-4 w-10 h-10 rounded sm:w-10 sm:h-10" src="{{ $package->icon() }}" alt="package icon">
             <div class="w-full"> 
@@ -65,8 +68,8 @@ class="focus:outline-none text-white bg-primary-700 hover:bg-primary-800 focus:r
             <span>{{ currency('symbol') }}<span id="recurring">0.00</span></span>
         </p>
 
-        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">{{ __('client.cancellation_fee') }}</span>
-            <span>{{ currency('symbol') }}<span id="cancellation_fee">0.00</span></span>
+        <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">{{ __('admin.upgrade_fee') }}</span>
+            <span>{{ currency('symbol') }}<span id="upgrade_fee">0.00</span></span>
         </p>
 
         <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4"><span id="period">{{ __('client.due_today') }} <i class='bx bxs-help-circle' data-popover-target="popover-default"></i></span>
@@ -151,7 +154,7 @@ function selectUpgradePackage(package, package_name) {
                 option.dataset.cycle = item.cycle;
                 option.dataset.period = item.period;
                 option.dataset.renewalPrice = item.renewal_price.toFixed(2);
-                option.dataset.cancellationFee = item.cancellation_fee.toFixed(2);
+                option.dataset.upgradeFee = item.upgrade_fee.toFixed(2);
                 select.add(option);
             });
 
@@ -169,10 +172,10 @@ function selectUpgradePackage(package, package_name) {
 function updatePriceHTML(select) {
     var selectedOption = select.options[select.selectedIndex];
     document.getElementById('recurring').textContent = selectedOption.dataset.renewalPrice + ' / ' + selectedOption.dataset.cycle;
-    document.getElementById('cancellation_fee').textContent = selectedOption.dataset.cancellationFee;
+    document.getElementById('upgrade_fee').textContent = selectedOption.dataset.upgradeFee;
 
     var upgradePrice = (selectedOption.dataset.renewalPrice / selectedOption.dataset.period - {{ $order->price['renewal_price'] }} / {{ $order->price['period'] }}) * {{ now()->diffInDays($order->due_date) }};
-    console.log(upgradePrice.toFixed(2));
+    upgradePrice = upgradePrice + parseFloat(selectedOption.dataset.upgradeFee);
 
     if(upgradePrice > 0) {
         // calculate the upgrade price
