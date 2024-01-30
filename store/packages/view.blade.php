@@ -160,7 +160,7 @@
                     <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$1000</span> --}}
                     <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">Max ({{ $option->data['max'] ?? 0 }})</span>
                 </div>
-                
+
                 @endif
             @endforeach
         </div>
@@ -192,8 +192,8 @@
                                     @if(isset($field['disabled']) AND $field['disabled']) disabled @endif
                                     @if(isset($field['multiple']) AND $field['multiple']) multiple @endif >
                                     @foreach($field['options'] ?? [] as $key => $option)
-                                        <option value="{{ $key }}"
-                                                @if(in_array($key, (array) getValueByKey($field['key'], $package->data, $field['default_value'] ?? ''))) selected @endif >{{ $option }}
+                                        <option value="{{ $key }}" @if(is_array($option) AND isset($option['disabled']) AND $option['disabled']) disabled @endif
+                                                @if(in_array($key, (array) getValueByKey($field['key'], $package->data, $field['default_value'] ?? ''))) selected @endif >{{ is_string($option) ? $option : $option['name'] }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -545,7 +545,7 @@
 
                 @foreach($package->configOptions as $option)
                     @if($option->type == 'select')
-                        
+
                     @elseif($option->type == 'number')
                         price += {{ $option->data['monthly_price_unit'] }} / 30 * document.getElementById('option-{{ $option->id }}').value * activePrice().period;
                     @elseif($option->type == 'range')
