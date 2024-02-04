@@ -28,6 +28,19 @@
 
     <link rel="stylesheet" href="{{ Theme::get('Default')->assets }}assets/css/custom.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    @if(settings('google::analytics_code'))
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings('google::analytics_code') }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '{{ settings("google::analytics_code") }}');
+    </script>
+    @endif
+
     @include(Theme::path('layouts.tailwind'))
     @yield('header')
 </head>
