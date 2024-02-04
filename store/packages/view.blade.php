@@ -381,7 +381,7 @@
             <p class="text-sm text-gray-500 dark:text-gray-400 mt-3"
                id="disclosure">@if($package->prices->first()->cancellation_fee > 0)
                     {!! __('client.selected_price_includes_cancellation_fee') !!}
-                    ${{ number_format($package->prices->first()->cancellation_fee, 2)}}
+                    {{ currency('symbol') }}{{ number_format($package->prices->first()->cancellation_fee, 2)}}
                 @endif</p>
         </div>
         </div>
