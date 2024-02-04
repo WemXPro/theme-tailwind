@@ -372,7 +372,7 @@
                     </div>
                 @endif
 
-                <button type="submit" id="checkout" onclick="this.form.submit(); this.disabled = true; this.innerHTML = '<i class=\'bx bx-loader-circle\'></i>';"
+                <button type="submit" id="checkout"
                         class="text-white min-w-full bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-6 py-3.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                     {!! __('client.complete_checkout') !!}
                 </button>
