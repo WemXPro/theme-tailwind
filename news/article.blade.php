@@ -12,22 +12,22 @@
 
 @section('container')
     @php($article->translate())
-    <main class="pb-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
-        <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
-            <article
-                class="mx-auto w-full max-w-5xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-                <header class="mb-4 lg:mb-6 not-format">
-                    @if($article->show_author)
-                        <address class="flex items-center mb-6 not-italic">
-                            <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                                <img class="mr-4 w-16 h-16 rounded-full" src="{{ $article->user->avatar() }}"
-                                     alt="{{ __('client.author') }}">
+    <main class="bg-white pb-16 antialiased dark:bg-gray-900 lg:pb-24">
+        <div class="mx-auto flex max-w-screen-xl justify-between px-4">
+            <article class="format format-sm sm:format-base lg:format-lg format-blue dark:format-invert mx-auto w-full max-w-5xl">
+                <header class="not-format mb-4 lg:mb-6">
+                    @if ($article->show_author)
+                        <address class="mb-6 flex items-center not-italic">
+                            <div class="mr-3 inline-flex items-center text-sm text-gray-900 dark:text-white">
+                                <img class="mr-4 h-16 w-16 rounded-full" src="{{ $article->user->avatar() }}" alt="{{ __('client.author') }}">
                                 <div>
                                     <a href="#" rel="author"
-                                       class="text-xl font-bold text-gray-900 dark:text-white">{{ $article->user->username }}</a>
-                                    <p class="text-base text-gray-500 dark:text-gray-400">@if($article->user->is_admin())
+                                        class="text-xl font-bold text-gray-900 dark:text-white">{{ $article->user->username }}</a>
+                                    <p class="text-base text-gray-500 dark:text-gray-400">
+                                        @if ($article->user->is_admin())
                                             {{ __('client.administrator') }}
-                                        @endif </p>
+                                        @endif
+                                    </p>
                                     <p class="text-base text-gray-500 dark:text-gray-400">
                                         <time pubdate>{{ $article->created_at->translatedFormat('M d, Y') }}</time>
                                     </p>
@@ -35,22 +35,21 @@
                             </div>
                         </address>
                     @endif
-                    <div class="flex mb-4">
-                        @foreach($article->labels as $label)
+                    <div class="mb-4 flex">
+                        @foreach ($article->labels as $label)
                             <span
-                                class="bg-{{ config("article.labels.$label.theme") }}-100 text-{{ config("article.labels.$label.theme") }}-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-{{ config("article.labels.$label.theme") }}-900 dark:text-{{ config("article.labels.$label.theme") }}-300">
-                        <span class="mr-1 mt-1 text-sm">{!! config("article.labels.$label.icon") !!}</span>
-                        {{ config("article.labels.$label.name") }}
-                    </span>
+                                class="bg-{{ config("article.labels.$label.theme") }}-100 text-{{ config("article.labels.$label.theme") }}-800 dark:bg-{{ config("article.labels.$label.theme") }}-900 dark:text-{{ config("article.labels.$label.theme") }}-300 mr-2 rounded px-2.5 py-0.5 text-sm font-medium">
+                                <span class="mr-1 mt-1 text-sm">{!! config("article.labels.$label.icon") !!}</span>
+                                {{ config("article.labels.$label.name") }}
+                            </span>
                         @endforeach
                     </div>
-                    <div class="flex justify-between items-end	">
-                        <h1 class="text-3xl font-extrabold leading-tight text-gray-900 lg:text-4xl dark:text-white">{{ $article->title }}</h1>
+                    <div class="flex items-end justify-between">
+                        <h1 class="text-3xl font-extrabold leading-tight text-gray-900 dark:text-white lg:text-4xl">{{ $article->title }}</h1>
                         <div class="flex items-center justify-between">
-                            <button type="button" class="py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-                                    onclick="window.location.replace('{{ route('news.react', ['article' => $article->id, 'emoji' => 'fire']) }}')">
-                                <svg aria-hidden="true" class="h-6 mb-1" viewBox="0 0 24 27" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
+                            <button type="button" class="rounded-lg px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                onclick="window.location.replace('{{ route('news.react', ['article' => $article->id, 'emoji' => 'fire']) }}')">
+                                <svg aria-hidden="true" class="mb-1 h-6" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M24 14.1907C24 12.7352 23.7409 11.3397 23.2659 10.0486C22.9412 13.8526 20.9132 15.8065 18.7941 14.8966C16.8092 14.0439 18.1468 10.7199 18.2456 9.13377C18.4122 6.44506 18.2372 3.36742 13.3532 0.808594C15.3826 4.69095 13.5882 7.10295 11.7064 7.24977C9.61835 7.41283 7.70612 5.45542 8.412 2.27895C6.12635 3.96318 6.06 6.79801 6.76518 8.63189C7.50071 10.5434 6.73553 12.1317 4.94188 12.3081C2.93718 12.5058 1.82329 10.1615 2.85035 6.42601C1.07294 8.51895 0 11.2295 0 14.1907C0 20.8182 5.37247 26.1907 12 26.1907C18.6275 26.1907 24 20.8182 24 14.1907Z"
                                         fill="#F4900C"></path>
@@ -59,17 +58,17 @@
                                         fill="#FFCC4D"></path>
                                 </svg>
                                 <span
-                                    class="@if(auth()->check() AND $article->reactions()->where('user_id', auth()->user()->id)->where('emoji', 'fire')->exists()) text-primary-500 dark:text-primary-400 @else text-gray-500 dark:text-gray-400 @endif text-sm font-medium">{{ $article->reactions()->where('emoji', 'fire')->count() }}</span>
+                                    class="@if (auth()->check() and
+                                            $article->reactions()->where('user_id', auth()->user()->id)->where('emoji', 'fire')->exists()) text-primary-500 dark:text-primary-400 @else text-gray-500 dark:text-gray-400 @endif text-sm font-medium">
+                                    {{ $article->reactions()->where('emoji', 'fire')->count() }}
+                                </span>
                             </button>
-                            <button type="button" class="py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-                                    onclick="window.location.replace('{{ route('news.react', ['article' => $article->id, 'emoji' => 'medal']) }}')">
-                                <svg aria-hidden="true" class="h-6 mb-1" viewBox="0 0 25 25" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M12.333 5.83236L7.66634 0.499023H0.333008L9.66634 11.8324L17.347 8.66569L12.333 5.83236Z"
+                            <button type="button" class="rounded-lg px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                onclick="window.location.replace('{{ route('news.react', ['article' => $article->id, 'emoji' => 'medal']) }}')">
+                                <svg aria-hidden="true" class="mb-1 h-6" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.333 5.83236L7.66634 0.499023H0.333008L9.66634 11.8324L17.347 8.66569L12.333 5.83236Z"
                                         fill="#55ACEE"></path>
-                                    <path
-                                        d="M16.9997 0.499023L12.333 5.83236L15.9263 10.707L16.7443 9.71436L24.333 0.499023H16.9997Z"
+                                    <path d="M16.9997 0.499023L12.333 5.83236L15.9263 10.707L16.7443 9.71436L24.333 0.499023H16.9997Z"
                                         fill="#3B88C3"></path>
                                     <path
                                         d="M15.8401 11.184C15.8934 11.0393 15.9274 10.8853 15.9274 10.722C15.9274 9.98601 15.3301 9.38867 14.5941 9.38867H10.1494C9.41274 9.38867 8.81608 9.98601 8.81608 10.722C8.81608 10.8853 8.84941 11.0393 8.90341 11.184C6.73141 12.4013 5.26074 14.722 5.26074 17.3887C5.26074 21.316 8.44408 24.5 12.3721 24.5C16.2994 24.5 19.4834 21.316 19.4834 17.3887C19.4827 14.722 18.0127 12.4013 15.8401 11.184Z"
@@ -82,12 +81,14 @@
                                         fill="#FFAC33"></path>
                                 </svg>
                                 <span
-                                    class="@if(auth()->check() AND $article->reactions()->where('user_id', auth()->user()->id)->where('emoji', 'medal')->exists()) text-primary-500 dark:text-primary-400 @else text-gray-500 dark:text-gray-400 @endif text-sm font-medium">{{ $article->reactions()->where('emoji', 'medal')->count() }}</span>
+                                    class="@if (auth()->check() and
+                                            $article->reactions()->where('user_id', auth()->user()->id)->where('emoji', 'medal')->exists()) text-primary-500 dark:text-primary-400 @else text-gray-500 dark:text-gray-400 @endif text-sm font-medium">
+                                    {{ $article->reactions()->where('emoji', 'medal')->count() }}
+                                </span>
                             </button>
-                            <button type="button" class="py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-                                    onclick="window.location.replace('{{ route('news.react', ['article' => $article->id, 'emoji' => 'moneybag']) }}')">
-                                <svg aria-hidden="true" class="h-6 mb-1" viewBox="0 0 25 27" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
+                            <button type="button" class="rounded-lg px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                onclick="window.location.replace('{{ route('news.react', ['article' => $article->id, 'emoji' => 'moneybag']) }}')">
+                                <svg aria-hidden="true" class="mb-1 h-6" viewBox="0 0 25 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M23.0905 17.9535C22.642 12.99 20.167 10.5 20.167 10.5L15.667 4.5H9.66699L5.16699 10.5C5.16699 10.5 4.10274 11.5747 3.24174 13.7062C1.74999 14.2013 0.666992 15.5918 0.666992 17.25C0.666992 18.336 1.13574 19.3065 1.87374 19.9913C1.59174 20.5177 1.41699 21.1103 1.41699 21.75C1.41699 23.2185 2.26899 24.477 3.49824 25.092C4.46049 26.5335 5.74599 27 6.66699 27H18.667C19.7012 27 21.1967 26.4157 22.1755 24.5175C23.6237 23.9992 24.667 22.6275 24.667 21C24.667 19.7415 24.0415 18.6345 23.0905 17.9535ZM12.667 4.5C13.0795 4.5 13.4605 4.3815 13.792 4.188C14.1242 4.3815 14.5052 4.5 14.917 4.5C16.1597 4.5 17.917 2.742 17.917 1.5C17.917 1.5 17.917 0 16.417 0C15.826 0 15.667 0.75 14.917 0.75C14.167 0.75 14.167 0 12.667 0C11.167 0 11.167 0.75 10.417 0.75C9.66699 0.75 9.50874 0 8.91699 0C7.41699 0 7.41699 1.5 7.41699 1.5C7.41699 2.742 9.17499 4.5 10.417 4.5C10.8287 4.5 11.2097 4.3815 11.542 4.188C11.8742 4.3815 12.2552 4.5 12.667 4.5Z"
                                         fill="#FDD888"></path>
@@ -99,12 +100,14 @@
                                         fill="#67757F"></path>
                                 </svg>
                                 <span
-                                    class="@if(auth()->check() AND $article->reactions()->where('user_id', auth()->user()->id)->where('emoji', 'moneybag')->exists()) text-primary-500 dark:text-primary-400 @else text-gray-500 dark:text-gray-400 @endif text-sm font-medium">{{ $article->reactions()->where('emoji', 'moneybag')->count() }}</span>
+                                    class="@if (auth()->check() and
+                                            $article->reactions()->where('user_id', auth()->user()->id)->where('emoji', 'moneybag')->exists()) text-primary-500 dark:text-primary-400 @else text-gray-500 dark:text-gray-400 @endif text-sm font-medium">
+                                    {{ $article->reactions()->where('emoji', 'moneybag')->count() }}
+                                </span>
                             </button>
-                            <button type="button" class="py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-                                    onclick="window.location.replace('{{ route('news.react', ['article' => $article->id, 'emoji' => 'party']) }}')">
-                                <svg aria-hidden="true" class="h-6 mb-1" viewBox="0 0 24 25" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
+                            <button type="button" class="rounded-lg px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                onclick="window.location.replace('{{ route('news.react', ['article' => $article->id, 'emoji' => 'party']) }}')">
+                                <svg aria-hidden="true" class="mb-1 h-6" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M7.75255 5.29787C7.67789 5.37254 7.62122 5.46254 7.57388 5.56121L7.56855 5.55587L0.0910439 22.4003L0.0983774 22.4076C-0.0402924 22.6763 0.191713 23.223 0.667057 23.699C1.1424 24.1743 1.68908 24.4063 1.95775 24.2676L1.96442 24.2743L18.8088 16.7961L18.8035 16.7901C18.9015 16.7435 18.9915 16.6868 19.0668 16.6108C20.1082 15.5694 18.4195 12.1927 15.2961 9.06862C12.1713 5.94455 8.79458 4.25651 7.75255 5.29787Z"
                                         fill="#DD2E44"></path>
@@ -153,7 +156,10 @@
                                 </svg>
 
                                 <span
-                                    class="@if(auth()->check() AND $article->reactions()->where('user_id', auth()->user()->id)->where('emoji', 'party')->exists()) text-primary-500 dark:text-primary-400 @else text-gray-500 dark:text-gray-400 @endif text-sm font-medium">{{ $article->reactions()->where('emoji', 'party')->count() }}</span>
+                                    class="@if (auth()->check() and
+                                            $article->reactions()->where('user_id', auth()->user()->id)->where('emoji', 'party')->exists()) text-primary-500 dark:text-primary-400 @else text-gray-500 dark:text-gray-400 @endif text-sm font-medium">
+                                    {{ $article->reactions()->where('emoji', 'party')->count() }}
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -161,18 +167,17 @@
                 {!! $article->content !!}
 
                 <div class="flex justify-start">
-                    <i class='bx bxs-help-circle bx-sm mr-3 text-primary-600 dark:text-primary-500 shrink-0'></i>
+                    <i class='bx bxs-help-circle bx-sm text-primary-600 dark:text-primary-500 mr-3 shrink-0'></i>
                     <div>
-                        <h3 class="mb-1 text-lg font-semibold leading-tight text-gray-900 dark:text-white">{{ __('client.was_this_article_helpful') }}</h3>
-                        @if(!Cookie::has($article->id . 'feedback'))
-                            <button type="button"
-                                    class="py-2 px-3 pb-4 rounded-lg text-4xl hover:bg-gray-100 dark:hover:bg-gray-800"
-                                    onclick="window.location.replace('{{ route('news.helpful', ['article' => $article->id, 'rating' => 'like']) }}')">
+                        <h3 class="mb-1 text-lg font-semibold leading-tight text-gray-900 dark:text-white">
+                            {{ __('client.was_this_article_helpful') }}</h3>
+                        @if (!Cookie::has($article->id . 'feedback'))
+                            <button type="button" class="rounded-lg px-3 py-2 pb-4 text-4xl hover:bg-gray-100 dark:hover:bg-gray-800"
+                                onclick="window.location.replace('{{ route('news.helpful', ['article' => $article->id, 'rating' => 'like']) }}')">
                                 👍
                             </button>
-                            <button type="button"
-                                    class="py-2 px-3 pb-4 rounded-lg text-4xl hover:bg-gray-100 dark:hover:bg-gray-800"
-                                    onclick="window.location.replace('{{ route('news.helpful', ['article' => $article->id, 'rating' => 'dislike']) }}')">
+                            <button type="button" class="rounded-lg px-3 py-2 pb-4 text-4xl hover:bg-gray-100 dark:hover:bg-gray-800"
+                                onclick="window.location.replace('{{ route('news.helpful', ['article' => $article->id, 'rating' => 'dislike']) }}')">
                                 👎
                             </button>
                         @else
@@ -183,95 +188,96 @@
             </article>
         </div>
 
-        @if($article->allow_comments)
-            <section class="bg-white dark:bg-gray-900 py-8 lg:py-8 antialiased">
-                <div class="max-w-5xl mx-auto px-4">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">{{ __('client.discussion') }}
-                            ({{ $article->comments()->count() }})</h2>
+        @if ($article->allow_comments)
+            <section class="bg-white py-8 antialiased dark:bg-gray-900 lg:py-8">
+                <div class="mx-auto max-w-5xl px-4">
+                    <div class="mb-6 flex items-center justify-between">
+                        <h2 class="text-lg font-bold text-gray-900 dark:text-white lg:text-2xl">{{ __('client.discussion') }}
+                            ({{ $article->comments()->count() }})
+                        </h2>
                     </div>
                     @auth
                         <div class="flex">
-                            <div class="mr-3 shrink-0 hidden sm:block">
-                                <img class="w-9 h-9 rounded-full"
-                                     src="{{ auth()->user()->avatar() }}"
-                                     alt="{{ auth()->user()->username }}">
+                            <div class="mr-3 hidden shrink-0 sm:block">
+                                <img class="h-9 w-9 rounded-full" src="{{ auth()->user()->avatar() }}" alt="{{ auth()->user()->username }}">
                             </div>
                             <form action="{{ route('news.comment', $article->id) }}" method="POST" class="mb-6 w-full">
                                 @csrf
-                                <div
-                                    class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-                                    <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
+                                <div class="mb-4 w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700">
+                                    <div class="rounded-t-lg bg-white px-4 py-2 dark:bg-gray-800">
                                         <label for="comment" class="sr-only">{{ __('client.your_comment') }}</label>
                                         <textarea name="comment" id="comment" rows="4"
-                                                  class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                                                  placeholder="{{ __('client.write_a_comment') }}" required></textarea>
+                                            class="w-full border-0 bg-white px-0 text-sm text-gray-900 focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
+                                            placeholder="{{ __('client.write_a_comment') }}" required></textarea>
                                     </div>
                                 </div>
                                 <button type="submit"
-                                        class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                    class="bg-primary-700 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 inline-flex items-center rounded-lg px-4 py-2.5 text-center text-xs font-medium text-white focus:ring-4">
                                     {{ __('client.post_comment') }}
                                 </button>
                             </form>
                         </div>
                     @endauth
 
-                    @foreach($article->comments()->latest()->paginate(5) as $comment)
+                    @foreach ($article->comments()->latest()->paginate(5) as $comment)
                         <article
-                            class="p-4 lg:p-6 mb-6 text-base bg-white border border-gray-100 dark:border-gray-700 rounded-lg dark:bg-gray-800">
+                            class="mb-6 rounded-lg border border-gray-100 bg-white p-4 text-base dark:border-gray-700 dark:bg-gray-800 lg:p-6">
                             <div class="flex">
                                 <div class="mr-4">
                                     <div
-                                        class="rounded-lg bg-gray-100 w-9 flex flex-col items-center justify-center font-medium dark:bg-gray-700">
+                                        class="flex w-9 flex-col items-center justify-center rounded-lg bg-gray-100 font-medium dark:bg-gray-700">
                                         <a href="{{ route('news.comments.upvote', $comment->id) }}"
-                                           class="text-gray-500 dark:text-gray-400 py-1 dark:hover:bg-gray-600 rounded-t-lg hover:bg-gray-200 w-full focus:ring-2 focus:outline-none focus:ring-gray-50 dark:bg-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                           style="display: flex;justify-content: center;">+</a>
+                                            class="w-full rounded-t-lg py-1 text-gray-500 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-50 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                            style="display: flex;justify-content: center;">+</a>
                                         <span
-                                            class="text-gray-900 font-medium py-1 px-2 lg:px-0 text-xs lg:text-sm dark:text-white">{{ $comment->upvotes }}</span>
+                                            class="px-2 py-1 text-xs font-medium text-gray-900 dark:text-white lg:px-0 lg:text-sm">{{ $comment->upvotes }}</span>
                                         <a href="{{ route('news.comments.downvote', $comment->id) }}"
-                                           class="text-gray-500  dark:text-gray-400 py-1 dark:hover:bg-gray-600 rounded-b-lg hover:bg-gray-200 w-full focus:ring-2 focus:outline-none focus:ring-gray-50 dark:bg-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                           style="display: flex;justify-content: center;">-</a>
+                                            class="w-full rounded-b-lg py-1 text-gray-500 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-50 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                            style="display: flex;justify-content: center;">-</a>
                                     </div>
                                 </div>
                                 <div class="w-full">
-                                    <footer class="flex justify-between items-center mb-2 w-full">
+                                    <footer class="mb-2 flex w-full items-center justify-between">
                                         <a href="#" class="flex items-center">
-                                            <img class="mr-2 w-6 h-6 rounded-full"
-                                                 src="{{ $comment->user->avatar() }}"
-                                                 alt="{{ $comment->user->username }}">
-                                            <p class="inline-flex flex-col md:flex-row items-start mr-3 text-sm text-gray-900 dark:text-white">
+                                            <img class="mr-2 h-6 w-6 rounded-full" src="{{ $comment->user->avatar() }}"
+                                                alt="{{ $comment->user->username }}">
+                                            <p class="mr-3 inline-flex flex-col items-start text-sm text-gray-900 dark:text-white md:flex-row">
                                                 <span class="font-semibold">{{ $comment->user->username }}</span>
                                                 <time class="text-sm text-gray-600 dark:text-gray-400 md:ml-2" pubdate
-                                                      title="{{ $comment->created_at->diffForHumans() }}">{{ $comment->created_at->diffForHumans() }}</time>
+                                                    title="{{ $comment->created_at->diffForHumans() }}">{{ $comment->created_at->diffForHumans() }}</time>
                                             </p>
                                         </a>
                                         @auth
                                             <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
-                                                    class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                                    type="button">
-                                                <svg class="w-4 h-4" aria-hidden="true"
-                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                     viewBox="0 0 16 3">
+                                                class="inline-flex items-center rounded-lg bg-white p-2 text-center text-sm font-medium text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-50 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                                type="button">
+                                                <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                    viewBox="0 0 16 3">
                                                     <path
-                                                        d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                                                        d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
                                                 </svg>
                                                 <span class="sr-only">{{ __('client.comment_settings') }}</span>
                                             </button>
+
                                             <!-- Dropdown menu -->
                                             <div id="dropdownComment1"
-                                                 class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                class="z-10 hidden w-36 divide-y divide-gray-100 rounded bg-white shadow dark:divide-gray-600 dark:bg-gray-700">
                                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                                     aria-labelledby="dropdownMenuIconHorizontalButton">
-                                                    @if($article->user->id == auth()->user()->id OR auth()->user()->is_admin())
+                                                    @if (
+                                                        $article->user->id == auth()->user()->id or
+                                                            auth()->user()->is_admin())
                                                         <li>
                                                             <a href="{{ route('news.comments.remove', $comment->id) }}"
-                                                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ __('client.remove') }}</a>
+                                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ __('client.remove') }}</a>
                                                         </li>
                                                     @endif
-                                                    @if($article->user->id !== auth()->user()->id OR auth()->user()->is_admin())
+                                                    @if (
+                                                        $article->user->id !== auth()->user()->id or
+                                                            auth()->user()->is_admin())
                                                         <li>
                                                             <a href="{{ route('news.comments.report', $comment->id) }}"
-                                                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ __('client.report') }}</a>
+                                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ __('client.report') }}</a>
                                                         </li>
                                                     @endif
                                                 </ul>

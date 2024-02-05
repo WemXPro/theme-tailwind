@@ -12,14 +12,13 @@
 
 <article class="article article-style-b">
     <div class="article-header">
-        <div class="article-image" data-background="{{ $backgroundImageUrl }}"
-            style="background-image: url('{{ $backgroundImageUrl }}');"></div>
+        <div class="article-image" data-background="{{ $backgroundImageUrl }}" style="background-image: url('{{ $backgroundImageUrl }}');">
+        </div>
         @empty(!$badgeText)
             <div class="article-badge">
                 <div class="article-badge-item {{ $badgeClass }}"><i class="fas fa-fire"></i> {{ $badgeText }}</div>
             </div>
         @endempty
-
     </div>
     <div class="article-details">
         <div class="article-title">

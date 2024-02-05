@@ -3,28 +3,31 @@
 @section('container')
     <script src="https://js.stripe.com/v3/"></script>
 
-    <h1 class="text-3xl font-semibold mb-3 dark:text-gray-300">{!! __('client.stripe_card_payment') !!}</h1>
-    <p class="text-lg ml-2 dark:text-gray-400">${{ $payment->amount }} {{ $payment->currency }}</p>
-    <form action="{{ route('payment.process', ['gateway' => $gateway->id, 'payment' => $payment->id]) }}" method="post" id="payment-form" class="mt-4">
+    <h1 class="mb-3 text-3xl font-semibold dark:text-gray-300">{!! __('client.stripe_card_payment') !!}</h1>
+    <p class="ml-2 text-lg dark:text-gray-400">${{ $payment->amount }} {{ $payment->currency }}</p>
+
+    <form action="{{ route('payment.process', ['gateway' => $gateway->id, 'payment' => $payment->id]) }}" method="post" id="payment-form"
+        class="mt-4">
         @csrf
         <div class="form-group">
             <input type="hidden" name="price_id" value="{{ $payment->id }}">
             <input type="hidden" name="gateway" value="{{ $gateway->id }}">
-            <label for="card-element" class="block text-gray-700 font-medium dark:text-gray-300">
+            <label for="card-element" class="block font-medium text-gray-700 dark:text-gray-300">
                 {!! __('client.credit_debit_card') !!}
             </label>
             <div id="card-element"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1">
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                 <!-- A Stripe Element will be inserted here. -->
             </div>
             <!-- Used to display form errors. -->
-            <div id="card-errors" role="alert" class="text-red-500 mt-2 dark:text-red-400"></div>
+            <div id="card-errors" role="alert" class="mt-2 text-red-500 dark:text-red-400"></div>
         </div>
         <button type="submit"
-            class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus:ring-offset-gray-800">
+            class="mt-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus:ring-offset-gray-800">
             {!! __('client.submit_payment') !!}
         </button>
     </form>
+
     <script>
         // Create a Stripe instance.
         const stripe = Stripe('{{ $gateway->config['publicKey'] }}');
