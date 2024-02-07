@@ -14,7 +14,7 @@
         </div>
         <div class="flex">
             <button
-                type="button" data-modal-target="renewService-22" data-modal-toggle="renewService-22"
+                type="button" data-modal-target="renewService-{{$order->id}}" data-modal-toggle="renewService-{{$order->id}}"
                 class="text-white bg-yellow-800 hover:bg-yellow-900 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-yellow-300 dark:text-gray-800 dark:hover:bg-yellow-400 dark:focus:ring-yellow-800"
             >
                 <i class="bx bx-recycle mr-1"></i>
