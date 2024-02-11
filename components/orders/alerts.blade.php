@@ -8,8 +8,8 @@
                     d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                     clip-rule="evenodd"></path>
             </svg>
-            <span class="sr-only">Info</span>
-            <h3 class="text-lg font-medium">This service has been suspended</h3>
+            <span class="sr-only">{{ __('client.info') }}</span>
+            <h3 class="text-lg font-medium">{!! __('client.ptero_alerts_suspended') !!}</h3>
         </div>
         <div class="mb-4 mt-2 text-sm">
             The due date for this service was on the {{ $order->due_date->translatedFormat('d M Y') }}
@@ -21,10 +21,10 @@
             and licenses.
         </div>
         <div class="flex">
-            <button type="button" data-modal-target="renewService-22" data-modal-toggle="renewService-22"
+            <button type="button" data-modal-target="renewService-{{$order->id}}" data-modal-toggle="renewService-{{$order->id}}"
                 class="mr-2 inline-flex items-center rounded-lg bg-yellow-800 px-3 py-1.5 text-center text-xs font-medium text-white hover:bg-yellow-900 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-300 dark:text-gray-800 dark:hover:bg-yellow-400 dark:focus:ring-yellow-800">
                 <i class="bx bx-recycle mr-1"></i>
-                Renew
+                {!! __('client.renew') !!}
             </button>
         </div>
     </div>
@@ -40,20 +40,17 @@
                     d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                     clip-rule="evenodd"></path>
             </svg>
-            <span class="sr-only">Important</span>
-            <h3 class="text-lg font-medium">This service has been cancelled</h3>
+            <span class="sr-only">{{ __('client.important') }}</span>
+            <h3 class="text-lg font-medium">{!! __('client.ptero_alerts_cancelled') !!}</h3>
         </div>
         <div class="mb-4 mt-2 text-sm">
-            This service is set to be cancelled on {{ $order->cancelled_at->translatedFormat('d M Y') }}
-            ({{ $order->cancelled_at->diffForHumans() }})<br> <br> If you have changed your mind, you can undo the cancellation before this
-            date. If no action is taken, your service will be suspended and terminated. All files and data belonging to this service will be
-            deleted forever.
+            {!! __('client.cancel_alert_desc', ['translated_format' => $order->cancelled_at->translatedFormat('d M Y'), 'diff_for_humans' => $order->cancelled_at->diffForHumans()]) !!}
         </div>
         <div class="flex">
             <a href="{{ route('service', ['order' => $order->id, 'page' => 'cancel-undo']) }}"
                 class="mr-2 inline-flex items-center rounded-lg bg-red-800 px-3 py-1.5 text-center text-xs font-medium text-white hover:bg-red-900 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                 <i class='bx bx-revision font-2xl mr-1'></i>
-                Do Not Cancel
+                {{ __('client.do_not_cancel') }}
             </a>
         </div>
     </div>
@@ -69,12 +66,11 @@
                     d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                     clip-rule="evenodd"></path>
             </svg>
-            <span class="sr-only">Important</span>
-            <h3 class="text-lg font-medium">This service has been terminated</h3>
+            <span class="sr-only">{{ __('client.important') }}</span>
+            <h3 class="text-lg font-medium">{!! __('client.ptero_alerts_terminated') !!}</h3>
         </div>
         <div class="mb-4 mt-2 text-sm">
-            This service was terminated. Termination can happen due to a couple of reasons. You were late on payment, or you cancelled the
-            service. All data / files / licenses belonging to this service have been deleted or revoked. This process is irreversible
+            {!! __('client.ptero_alerts_terminated_desc') !!}
         </div>
         <div class="flex">
         </div>
