@@ -6,8 +6,8 @@
             <h4>Chat with Pulse</h4>
             <div class="card-header-action">
                 <div class="dropdown d-inline">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         Actions
                     </button>
                     <div class="dropdown-menu" x-placement="bottom-start"
@@ -59,7 +59,6 @@
             </form>
         </div>
     </div>
-
 
     <script>
         const chatForm = document.getElementById('chat-form');
