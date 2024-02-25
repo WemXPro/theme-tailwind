@@ -12,13 +12,7 @@
             <h3 class="text-lg font-medium">{!! __('client.ptero_alerts_suspended') !!}</h3>
         </div>
         <div class="mb-4 mt-2 text-sm">
-            The due date for this service was on the {{ $order->due_date->translatedFormat('d M Y') }}
-            ({{ $order->due_date->diffForHumans() }})<br><br>
-
-            We regret to inform you that your service has been suspended due to overdue payment. To avoid termination, please settle any
-            outstanding invoices within @settings('orders::terminate_suspended_after', 7) days from the due date. If payment is not received
-            within this timeframe, your service will be terminated, resulting in the deletion or revocation of all associated data, files,
-            and licenses.
+            {!! __('client.suspended_order_alert', ['translated_format' => $order->due_date->translatedFormat('d M Y'), 'diff_for_humans' => $order->due_date->diffForHumans(), 'terminate_suspended_after' => @settings('orders::terminate_suspended_after', 7)]) !!}
         </div>
         <div class="flex">
             <button type="button" data-modal-target="renewService-{{$order->id}}" data-modal-toggle="renewService-{{$order->id}}"

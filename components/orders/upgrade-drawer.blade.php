@@ -36,7 +36,7 @@
         @if ($order->hasActiveSubscription())
             <div class="mb-4 flex items-center rounded-lg bg-blue-50 p-4 text-sm text-blue-800 dark:bg-gray-900 dark:text-blue-400"
                 role="alert">
-                <span class="sr-only">Info</span>
+                <span class="sr-only">{!! __('client.info') !!}</span>
                 <div>
                     <span class="font-medium">{{ __('client.cancel_subscription_to_continue') }}
                 </div>

@@ -221,7 +221,7 @@
                     @if ($gateway->driver == 'Balance')
                         <option @if ($gateway->default) selected @endif value="{{ $gateway->id }}" data-gateway-type="once"
                             @if (Auth::user()->balance >= $package->prices->first()->totalPrice())  @endif>
-                            Pay with Balance ({{ currency('symbol') }}{{ number_format(Auth::user()->balance, 2) }})
+                            {!! __('client.pay_with_balance') !!} ({{ currency('symbol') }}{{ number_format(Auth::user()->balance, 2) }})
                         </option>
                         @continue
                     @endif

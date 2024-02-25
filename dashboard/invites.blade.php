@@ -62,9 +62,9 @@
                                                 class="@if ($invite->status == 'pending') bg-yellow-500 @elseif($invite->status == 'active') bg-green-500 @endif mr-2 h-2.5 w-2.5 rounded-full">
                                             </div>
                                             @if ($invite->status == 'pending')
-                                                Pending
+                                                {!! __('client.pending') !!}
                                             @elseif($invite->status == 'active')
-                                                Active
+                                                {!! __('client.active') !!}
                                             @endif
                                         </div>
                                     </td>
@@ -79,9 +79,9 @@
                                                 </path>
                                             </svg>
                                             @if ($invite->is_admin)
-                                                Administrator
+                                                {!! __('client.administrator') !!}
                                             @else
-                                                Member
+                                                {!! __('client.member') !!}
                                             @endif
                                         </div>
                                     </td>
@@ -96,15 +96,15 @@
                                         <a href="{{ route('invites.reject', $invite->id) }}"
                                             class="inline-flex items-center rounded-lg bg-red-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                             @if ($invite->status == 'pending')
-                                                Reject
+                                                {!! __('client.reject') !!}
                                             @elseif($invite->status == 'active')
-                                                Leave
+                                                {!! __('client.leave') !!}
                                             @endif
                                         </a>
                                         @if ($invite->status == 'pending')
                                             <a href="{{ route('invites.accept', $invite->id) }}"
                                                 class="inline-flex items-center rounded-lg bg-green-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                                Accept
+                                                {!! __('client.accept') !!}
                                             </a>
                                         @endif
                                     </td>

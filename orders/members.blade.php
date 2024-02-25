@@ -18,7 +18,7 @@
                                 <path clip-rule="evenodd" fill-rule="evenodd"
                                     d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                             </svg>
-                            Invite Member
+                            {!! __('client.invite_member') !!}
                         </button>
                     </div>
                 </div>
@@ -26,13 +26,13 @@
                     <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
                         <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-4 py-3">User</th>
-                                <th scope="col" class="px-4 py-3">User Role</th>
-                                <th scope="col" class="px-4 py-3">Status</th>
-                                <th scope="col" class="px-4 py-3">Last seen</th>
-                                <th scope="col" class="px-4 py-3">Created</th>
+                                <th scope="col" class="px-4 py-3">{!! __('client.user') !!}</th>
+                                <th scope="col" class="px-4 py-3">{!! __('client.user_role') !!}</th>
+                                <th scope="col" class="px-4 py-3">{!! __('client.status') !!}</th>
+                                <th scope="col" class="px-4 py-3">{!! __('client.last_seen') !!}</th>
+                                <th scope="col" class="px-4 py-3">{!! __('client.created') !!}</th>
                                 <th scope="col text-right" class="px-4 py-3">
-                                    <span>Actions</span>
+                                    <span>{!! __('client.actions') !!}</span>
                                 </th>
                             </tr>
                         </thead>
@@ -63,9 +63,9 @@
                                                 </path>
                                             </svg>
                                             @if ($member->is_admin)
-                                                Administrator
+                                                {!! __('client.administrator') !!}
                                             @else
-                                                Member
+                                                {!! __('client.member') !!}
                                             @endif
                                         </div>
                                     </td>
@@ -75,9 +75,9 @@
                                                 class="@if ($member->status == 'pending') bg-yellow-500 @elseif($member->status == 'active') bg-green-500 @endif mr-2 h-2.5 w-2.5 rounded-full">
                                             </div>
                                             @if ($member->status == 'pending')
-                                                Pending
+                                                {!! __('client.pending') !!}
                                             @elseif($member->status == 'active')
-                                                Active
+                                                {!! __('client.active') !!}
                                             @endif
                                         </div>
                                     </td>
@@ -105,14 +105,14 @@
                                                         data-drawer-show="drawer-update-member-{{ $member->id }}"
                                                         aria-controls="drawer-update-member-{{ $member->id }}"
                                                         style="width: 100%;text-align: start;"class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                        Edit
+                                                        {!! __('client.edit') !!}
                                                     </button>
                                                 </li>
                                             </ul>
                                             <div class="py-1">
                                                 <a href="{{ route('service', ['order' => $order, 'page' => 'delete-member', 'member_id' => $member->id]) }}"
                                                     class="block px-4 py-2 text-sm text-red-600 hover:bg-red-100 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white">
-                                                    Delete
+                                                    {!! __('client.delete') !!}
                                                 </a>
                                             </div>
                                         </div>
@@ -141,7 +141,7 @@
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                         </svg>
-                                        <span class="sr-only">Close menu</span>
+                                        <span class="sr-only">{!! __('client.close_menu') !!}</span>
                                     </button>
                                     <form
                                         action="{{ route('service', ['page' => 'update-member', 'order' => $order->id, 'member_id' => $member->id]) }}"
@@ -163,20 +163,18 @@
                                         </div>
                                         <div class="mb-6">
                                             <label for="is_admin-{{ $member->id }}"
-                                                class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">User Role</label>
+                                                class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">{!! __('client.user_role') !!}</label>
                                             <select id="is_admin-{{ $member->id }}" onchange="hidePermissions({{ $member->id }})"
                                                 name="is_admin"
                                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
-                                                <option value="1" @if ($member->is_admin) selected @endif>Administrator (All
-                                                    Permissions)</option>
-                                                <option value="0" @if (!$member->is_admin) selected @endif>Member (Selected
-                                                    Permissions)</option>
+                                                <option value="1" @if ($member->is_admin) selected @endif>{!! __('client.all_administrator_permissions') !!}</option>
+                                                <option value="0" @if (!$member->is_admin) selected @endif>{!! __('client.select_member_permissions') !!}</option>
                                             </select>
                                         </div>
                                         <div class="@if ($member->is_admin) hidden @endif mb-6"
                                             id="permissions-{{ $member->id }}">
                                             <label for="permissions"
-                                                class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Permissions</label>
+                                                class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">{!! __('client.permissions') !!}</label>
 
                                             <div style="height: 400px; overflow: scroll; padding: 5px;">
                                                 @foreach ($order->getService()->permissions()->all() as $key => $permission)
@@ -212,9 +210,9 @@
                 <nav class="flex flex-col items-start justify-between space-y-3 p-4 md:flex-row md:items-center md:space-y-0"
                     aria-label="Table navigation">
                     <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                        Showing
+                        {!! __('client.showing_span') !!}
                         <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
-                        of
+                        {!! __('client.of') !!}
                         <span class="font-semibold text-gray-900 dark:text-white">{{ $order->members()->count() }}</span>
                     </span>
                 </nav>
@@ -231,10 +229,9 @@
                 <path
                     d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z" />
             </svg>
-            Invite Member
+            {!! __('client.invite_member') !!}
         </h5>
-        <p class="mb-6 text-sm text-gray-500 dark:text-gray-400">Invite a team member to come and manage this order. If the user is not
-            registered, they'll be sent an email to register and join the team.</p>
+        <p class="mb-6 text-sm text-gray-500 dark:text-gray-400">{!! __('client.invite_member_desc') !!}</p>
 
         <button type="button" data-drawer-hide="drawer-invite-member" aria-controls="drawer-invite-member"
             class="absolute right-2.5 top-2.5 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -242,7 +239,7 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
             </svg>
-            <span class="sr-only">Close menu</span>
+            <span class="sr-only">{!! __('client.close_menu') !!}</span>
         </button>
         <form action="{{ route('service', ['page' => 'invite-member', 'order' => $order->id]) }}" class="mb-6">
             <div class="relative mb-6">
@@ -259,15 +256,15 @@
                     placeholder="john@example.com">
             </div>
             <div class="mb-6">
-                <label for="is_admin-0" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">User Role</label>
+                <label for="is_admin-0" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">{!! __('client.user_role') !!}</label>
                 <select id="is_admin-0" onchange="hidePermissions(0)" name="is_admin"
                     class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
-                    <option value="1">Administrator (All Permissions)</option>
-                    <option value="0" selected>Member (Selected Permissions)</option>
+                    <option value="1">{!! __('client.all_administrator_permissions') !!}</option>
+                    <option value="0" selected>{!! __('client.select_member_permissions') !!}</option>
                 </select>
             </div>
             <div class="mb-6" id="permissions-0">
-                <label for="permissions" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Permissions</label>
+                <label for="permissions" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">{!! __('client.permissions') !!}</label>
                 <div style="height: 400px; overflow: scroll; padding: 5px;">
                     @foreach ($order->getService()->permissions()->all() as $key => $permission)
                         <div class="mb-3 flex">
@@ -289,8 +286,7 @@
                 </div>
             </div>
             <button type="submit"
-                class="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-2 mr-2 flex w-full items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4">Send
-                Invite
+                class="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-2 mr-2 flex w-full items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4">{!! __('client.send_invite') !!}
             </button>
         </form>
     </div>

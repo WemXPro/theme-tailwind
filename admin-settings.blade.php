@@ -6,7 +6,7 @@
     <div class="card-body">
         <div class="row">
             <div class="form-group col-md-12 col-12">
-                <label for="user">Default Theme Color</label>
+                <label for="user">{!! __('admin.default_theme_color') !!}</label>
                 <select class="form-control select2 select2-hidden-accessible" name="theme::default::theme-color" tabindex="-1"
                     aria-hidden="true">
                     @foreach (config('utils.tailwind-colors') as $color)
