@@ -36,9 +36,6 @@
                     </button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                         {!! __('auth.locked_out') !!}
-                        <a href="{{ route('contact') }}" class="text-primary-600 dark:text-primary-500 font-medium hover:underline">
-                            {!! __('client.contact_us') !!}
-                        </a>
                     </p>
                 </form>
             </div>
