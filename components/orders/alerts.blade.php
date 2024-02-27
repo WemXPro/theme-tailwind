@@ -12,7 +12,7 @@
             <h3 class="text-lg font-medium">{!! __('client.ptero_alerts_suspended') !!}</h3>
         </div>
         <div class="mb-4 mt-2 text-sm">
-            {!! __('client.suspended_order_alert', ['translated_format' => $order->due_date->translatedFormat('d M Y'), 'diff_for_humans' => $order->due_date->diffForHumans(), 'terminate_suspended_after' => @settings('orders::terminate_suspended_after', 7)]) !!}
+            {!! __('client.suspended_order_alert', ['translated_format' => $order->due_date->translatedFormat('d M Y'), 'diff_for_humans' => $order->due_date->diffForHumans(), 'terminate_suspended_after' => settings('orders::terminate_suspended_after', 7)]) !!}
         </div>
         <div class="flex">
             <button type="button" data-modal-target="renewService-{{$order->id}}" data-modal-toggle="renewService-{{$order->id}}"
