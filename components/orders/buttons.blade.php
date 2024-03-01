@@ -28,7 +28,7 @@
 @endif
 
 @if ($order->getService()->canLoginToPanel())
-    <a href="{{ route('service', ['order' => $order->id, 'page' => 'login-to-panel']) }}"
+    <a href="{{ route('service', ['order' => $order->id, 'page' => 'login-to-panel']) }}" target="_blank"
         class="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 flex items-center rounded-lg px-3 py-2 text-center text-sm font-medium text-white focus:outline-none focus:ring-4">
         {!! __('client.login_to_panel') !!}
     </a>
