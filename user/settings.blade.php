@@ -308,7 +308,7 @@
                             <label for="organization" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                                 {!! __('client.organization') !!} {!! __('client.optional') !!}
                             </label>
-                            <input type="text" name="company_name" value="{{ auth()->user()->address->company_name }}" id="organization"
+                            <input type="text" name="company_name" value="{{ auth()->user()->address->company_name ?? '' }}" id="organization"
                                 class="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 sm:text-sm">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
@@ -318,7 +318,7 @@
                             <select id="countries" name="country"
                                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                                 @foreach (config('utils.countries') as $key => $country)
-                                    <option value="{{ $key }}" @if (auth()->user()->address->country == $key) selected @endif>
+                                    <option value="{{ $key }}" @if (auth()->user()->address->country ?? '' == $key) selected @endif>
                                         {{ $country }}</option>
                                 @endforeach
                             </select>
@@ -327,7 +327,7 @@
                             <label for="address" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                                 {!! __('auth.address') !!}
                             </label>
-                            <input type="text" name="address" value="{{ auth()->user()->address->address }}" id="address"
+                            <input type="text" name="address" value="{{ auth()->user()->address->address ?? '' }}" id="address"
                                 class="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 sm:text-sm">
                         </div>
                         {{-- <div class="col-span-6 sm:col-span-3">
@@ -343,7 +343,7 @@
                                 {!! __('admin.city') !!}
                             </label>
                             <input type="text" placeholder="{{ __('client.city') }}" name="city"
-                                value="{{ auth()->user()->address->city }}" id="city"
+                                value="{{ auth()->user()->address->city ?? '' }}" id="city"
                                 class="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 sm:text-sm">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
@@ -351,7 +351,7 @@
                                 {!! __('auth.zip_code') !!}
                             </label>
                             <input type="text" placeholder="{{ __('client.zip_code') }}" name="zip_code"
-                                value="{{ auth()->user()->address->zip_code }}" id="zip_code"
+                                value="{{ auth()->user()->address->zip_code ?? '' }}" id="zip_code"
                                 class="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 sm:text-sm">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
@@ -359,7 +359,7 @@
                                 {!! __('client.state_region_provice') !!}
                             </label>
                             <input type="text" placeholder="{{ __('client.region') }}" name="region"
-                                value="{{ auth()->user()->address->region }}" id="region"
+                                value="{{ auth()->user()->address->region ?? '' }}" id="region"
                                 class="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 sm:text-sm">
                         </div>
                         <div class="col-span-6 sm:col-span-3">
