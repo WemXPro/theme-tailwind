@@ -56,7 +56,7 @@
                         </ul>
 
                         <a href="{{ route('store.package', ['package' => $package->id]) }}"
-                            class="bg-primary-600 hover:bg-primary-700 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:ring-4 dark:text-white">
+                            class="bg-primary-600 hover:bg-primary-700 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:ring-4 dark:text-white mt-auto">
                             {!! __('client.get_started') !!}
                         </a>
                     </div>
