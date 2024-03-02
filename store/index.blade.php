@@ -26,7 +26,7 @@
                     </h3>
                     <p class="mb-3 font-light text-gray-500 dark:text-gray-400">{!! $category->description !!}</p>
                     <a href="{{ route('store.service', ['service' => $category->link]) }}"
-                        class="bg-primary-600 hover:bg-primary-700 focus:ring-bue-200 dark:focus:ring-primary-900 mb-4 flex justify-center rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:ring-4">
+                        class="bg-primary-600 hover:bg-primary-700 focus:ring-bue-200 dark:focus:ring-primary-900 mb-4 flex justify-center rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:ring-4 mt-auto">
                         {!! __('client.pricing') !!}
                         <svg aria-hidden="true" class="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
