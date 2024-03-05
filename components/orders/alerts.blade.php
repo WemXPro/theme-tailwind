@@ -14,13 +14,6 @@
         <div class="mb-4 mt-2 text-sm">
             {!! __('client.suspended_order_alert', ['translated_format' => $order->due_date->translatedFormat('d M Y'), 'diff_for_humans' => $order->due_date->diffForHumans(), 'terminate_suspended_after' => settings('orders::terminate_suspended_after', 7)]) !!}
         </div>
-        <div class="flex">
-            <button type="button" data-modal-target="renewService-{{$order->id}}" data-modal-toggle="renewService-{{$order->id}}"
-                class="mr-2 inline-flex items-center rounded-lg bg-yellow-800 px-3 py-1.5 text-center text-xs font-medium text-white hover:bg-yellow-900 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-300 dark:text-gray-800 dark:hover:bg-yellow-400 dark:focus:ring-yellow-800">
-                <i class="bx bx-recycle mr-1"></i>
-                {!! __('client.renew') !!}
-            </button>
-        </div>
     </div>
 @endif
 
@@ -86,8 +79,6 @@
         </div>
         <div class="mb-4 mt-2 text-sm">
             {!! __('client.ptero_alerts_failed_server_desc') !!}
-        </div>
-        <div class="flex">
         </div>
     </div>
 @endif
