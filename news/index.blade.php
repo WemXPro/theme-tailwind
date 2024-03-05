@@ -129,7 +129,9 @@
                         </h2>
                         <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{!! Str::words($article->short_desc, 50, '...') !!}</p>
                         <div class="flex items-center justify-between">
+
                             <div class="mt-4 flex items-center space-x-4" data-popover-target="popover-user-profile-{{ $article->user->id }}">
+                                @if ($article->show_author)
                                 <img class="h-7 w-7 rounded-full" src="{{ $article->user->avatar() }}" alt="">
                                 <span class="font-medium dark:text-white">
                                     {{ $article->user->username }}
@@ -171,7 +173,9 @@
                                     </div>
                                     <div data-popper-arrow></div>
                                 </div>
+                                @endif
                             </div>
+
                             <a href="{{ route('news.article', $article->path) }}"
                                 class="text-primary-600 dark:text-primary-500 inline-flex items-center font-medium hover:underline">
                                 {{ __('client.read_more') }}
