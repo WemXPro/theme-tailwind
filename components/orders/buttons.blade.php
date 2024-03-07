@@ -41,5 +41,8 @@
 
 @if ($order->isRecurring())
     @include(Theme::path('components.orders.renew-modal'), $order)
-    @include(Theme::path('components.orders.cancel-modal'), $order)
+
+    @if($order->package->settings('allow_cancellation', true))
+        @include(Theme::path('components.orders.cancel-modal'), $order)
+    @endif
 @endif

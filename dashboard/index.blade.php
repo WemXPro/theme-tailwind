@@ -113,7 +113,7 @@
                                         <th scope="col" class="min-w-[14rem] px-4 py-3">{!! __('client.product') !!}</th>
                                         <th scope="col" class="min-w-[14rem] px-4 py-3">{!! __('client.members') !!}</th>
                                         <th scope="col" class="min-w-[10rem] px-4 py-3">
-                                            {!! __('client.service') !!}
+                                            {!! __('client.due_date') !!}
                                             <svg class="ml-1 inline-block h-4 w-4" fill="currentColor" viewbox="0 0 20 20"
                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                                 <path clip-rule="evenodd" fill-rule="evenodd"
@@ -193,7 +193,11 @@
                                                 </div>
                                             </td>
                                             <td class="px-4 py-3">
-                                                {{ method_exists($order->service(), 'getDisplayName') ? $order->service()->getDisplayName() : $order->service }}
+                                                @if ($order->isRecurring())
+                                                    {{ $order->due_date->translatedFormat(settings('date_format', 'd M Y')) }}
+                                                @else
+                                                    {{ __('client.never') }}
+                                                @endif
                                             </td>
                                             <td class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
                                                 {{ $order->package['category']['name'] }}</td>
@@ -343,7 +347,13 @@
                                                     @endif
                                                 </div>
                                             </td>
-                                            <td class="px-4 py-3">{{ $order->service }}</td>
+                                            <td class="px-4 py-3">
+                                                @if ($order->isRecurring())
+                                                    {{ $order->due_date->translatedFormat(settings('date_format', 'd M Y')) }}
+                                                @else
+                                                    {{ __('client.never') }}
+                                                @endif
+                                            </td>
                                             <td class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
                                                 {{ $order->package['category']['name'] }}</td>
                                             <td class="whitespace-nowrap px-4 py-3">
