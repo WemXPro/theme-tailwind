@@ -132,39 +132,21 @@
                                 <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
                                     <thead class="bg-gray-50 text-xs uppercase dark:bg-gray-700">
                                     <tr>
-                                        <th scope="col" class="px-4 py-3">
+                                        <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                             <span class="sr-only">{!! __('client.expand_collapse_row') !!}</span>
                                         </th>
                                         <th scope="col"
-                                            class="min-w-[14rem] px-4 py-3">{!! __('client.product') !!}</th>
+                                            class="px-4 py-3 whitespace-nowrap">{!! __('client.product') !!}</th>
                                         <th scope="col"
-                                            class="min-w-[14rem] px-4 py-3">{!! __('client.members') !!}</th>
-                                        <th scope="col" class="min-w-[10rem] px-4 py-3">
+                                            class="px-4 py-3 whitespace-nowrap">{!! __('client.members') !!}</th>
+                                        <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                             {!! __('client.due_date') !!}
-                                            <svg class="ml-1 inline-block h-4 w-4" fill="currentColor"
-                                                 viewbox="0 0 20 20"
-                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path clip-rule="evenodd" fill-rule="evenodd"
-                                                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"/>
-                                            </svg>
                                         </th>
-                                        <th scope="col" class="min-w-[6rem] px-4 py-3">
+                                        <th scope="col" class="px-4 py-3 whitespace-nowrap">
                                             {!! __('client.category') !!}
-                                            <svg class="ml-1 inline-block h-4 w-4" fill="currentColor"
-                                                 viewbox="0 0 20 20"
-                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path clip-rule="evenodd" fill-rule="evenodd"
-                                                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"/>
-                                            </svg>
                                         </th>
-                                        <th scope="col" class="min-w-[7rem] px-4 py-3">
+                                        <th scope="col" class="px-4 py-3 whitespace-nowrap text-right">
                                             {!! __('client.status') !!}
-                                            <svg class="ml-1 inline-block h-4 w-4" fill="currentColor"
-                                                 viewbox="0 0 20 20"
-                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path clip-rule="evenodd" fill-rule="evenodd"
-                                                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"/>
-                                            </svg>
                                         </th>
                                     </tr>
                                     </thead>
@@ -236,7 +218,7 @@
                                             </td>
                                             <td class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
                                                 {{ $order->package['category']['name'] }}</td>
-                                            <td class="whitespace-nowrap px-4 py-3">
+                                            <td class="whitespace-nowrap px-4 py-3 text-right">
                                                     <span
                                                         class="@if ($order->status == 'active') bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300
                                                         @elseif($order->status == 'suspended')
@@ -403,7 +385,7 @@
                                             </td>
                                             <td class="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
                                                 {{ $order->package['category']['name'] }}</td>
-                                            <td class="whitespace-nowrap px-4 py-3">
+                                            <td class="whitespace-nowrap px-4 py-3 text-right">
                                                 <span
                                                     class="@if ($order->status == 'active') bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300
                                                     @elseif($order->status == 'suspended')
