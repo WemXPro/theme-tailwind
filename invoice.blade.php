@@ -50,7 +50,7 @@
                             @if (Auth::guest() or Auth::user()->id !== $payment->user->id)
                                 {!! __('client.address_only_vissible') !!} {{ $payment->user->username }}
                             @else
-                                {{ $payment->user->first_name }} {{ $payment->user->last_name }} <br>
+                                {{ $payment->user->address->company_name ?? $payment->user->fullname }} <br>
                                 @isset($payment->user->address->address)
                                     {{ $payment->user->address->address }},
                                 @endisset {{ $payment->user->address->city }} <br>

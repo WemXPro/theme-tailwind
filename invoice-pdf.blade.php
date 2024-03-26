@@ -45,7 +45,7 @@
         <table class="invoice-info-container">
             <tr>
                 <td rowspan="2" class="client-name">
-                    {{ $payment->user->first_name }} {{ $payment->user->last_name }}
+                    {{ $payment->user->address->company_name ?? $payment->user->fullname }}
                 </td>
                 <td>
                     @settings('app_name')
