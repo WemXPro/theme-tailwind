@@ -1,5 +1,4 @@
 <!-- drawer component -->
-@php($enabledModules = Module::allEnabled())
 <div id="drawer-example"
      class="fixed left-0 top-0 z-40 h-screen w-80 -translate-x-full overflow-y-auto bg-white p-4 transition-transform dark:bg-gray-800"
      tabindex="-1" aria-labelledby="drawer-label">
@@ -185,7 +184,7 @@
                                 </li>
                             @endif
                         @endforeach
-                        @foreach ($enabledModules as $module)
+                        @foreach (enabledModules() as $module)
                             @includeIf(Theme::moduleView($module->getLowerName(), 'elements.footer-resources'))
                         @endforeach
                     </ul>
@@ -202,7 +201,7 @@
                                 </li>
                             @endif
                         @endforeach
-                        @foreach ($enabledModules as $module)
+                        @foreach (enabledModules() as $module)
                             @includeIf(Theme::moduleView($module->getLowerName(), 'elements.footer-help'))
                         @endforeach
                     </ul>
@@ -221,7 +220,7 @@
                                 </li>
                             @endif
                         @endforeach
-                        @foreach ($enabledModules as $module)
+                        @foreach (enabledModules() as $module)
                             @includeIf(Theme::moduleView($module->getLowerName(), 'elements.footer-legal'))
                         @endforeach
                     </ul>

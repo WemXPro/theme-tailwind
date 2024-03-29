@@ -1,5 +1,5 @@
-<div class="flex items-center justify-between lg:order-2">
-    @foreach ($enabledModules as $module)
+<div class="flex flex-wrap items-center justify-between lg:order-2">
+    @foreach (enabledModules() as $module)
         @includeIf(Theme::moduleView($module->getLowerName(), 'elements.navbar-dropdown-left'))
     @endforeach
     {{-- color selection menu  --}}
@@ -248,7 +248,7 @@
                     <div class="text-sm text-gray-900 dark:text-white">{!! __('client.invoice_history') !!}</div>
                 </a>
 
-                @foreach ($enabledModules as $module)
+                @foreach (enabledModules() as $module)
                     @if (config($module->getLowerName() . '.elements.apps'))
                         @foreach (config($module->getLowerName() . '.elements.apps') as $key => $menu)
                             <a href="{{ $menu['href'] }}"
@@ -267,7 +267,7 @@
             </div>
         </div>
 
-        @foreach ($enabledModules as $module)
+        @foreach (enabledModules() as $module)
             @includeIf(Theme::moduleView($module->getLowerName(), 'elements.navbar-dropdown-right'))
         @endforeach
 
@@ -372,7 +372,7 @@
             </ul>
             <ul class="py-1 font-light text-gray-500 dark:text-gray-400" aria-labelledby="userMenuDropdownButton">
                 {{-- load module nav items  --}}
-                @foreach ($enabledModules as $module)
+                @foreach (enabledModules() as $module)
                     @if (config($module->getLowerName() . '.elements.user_dropdown'))
                         @foreach (config($module->getLowerName() . '.elements.user_dropdown') as $key => $menu)
                             <li>

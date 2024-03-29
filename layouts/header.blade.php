@@ -1,5 +1,4 @@
 {{-- header  --}}
-@php($enabledModules = Module::allEnabled())
 <header>
     <nav class="border-gray-200 bg-white px-4 py-2.5 dark:bg-gray-900 lg:px-6">
         <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between px-4 md:px-6">
@@ -63,7 +62,7 @@
                 @endforeach
 
                 {{-- load module nav items  --}}
-                @foreach ($enabledModules as $module)
+                @foreach (enabledModules() as $module)
                     @if (config($module->getLowerName() . '.elements.main_menu'))
                         @foreach (config($module->getLowerName() . '.elements.main_menu') as $key => $menu)
                             <li class="mr-2">
