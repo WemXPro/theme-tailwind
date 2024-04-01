@@ -1,4 +1,5 @@
-@if (auth()->user()->payments()->whereStatus('unpaid')->where('show_as_unpaid_invoice', true)->count() > 0)
+@php($paymentsCount = auth()->user()->payments()->whereStatus('unpaid')->where('show_as_unpaid_invoice', true)->count())
+@if ($paymentsCount > 0)
     <div class="mb-4 flex rounded-lg border border-gray-300 bg-gray-50 p-4 text-sm text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
         role="alert">
         <svg aria-hidden="true" class="mr-3 inline h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"
@@ -10,7 +11,7 @@
         <span class="sr-only">{!! __('client.info') !!}</span>
         <div>
             {!! __('client.unpaid_warn', [
-                'count' => auth()->user()->payments()->whereStatus('unpaid')->where('show_as_unpaid_invoice', true)->count(),
+                'count' => $paymentsCount,
             ]) !!}
         </div>
     </div>
@@ -29,7 +30,7 @@
         class="block max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
         <div class="flex flex-col items-center justify-center">
             <dt class="mb-2 text-3xl font-extrabold dark:text-gray-200">
-                {{ auth()->user()->payments()->whereStatus('unpaid')->where('show_as_unpaid_invoice', true)->count() }}
+                {{ $paymentsCount }}
             </dt>
             <dd class="text-gray-500 dark:text-gray-400">{!! __('client.invoices') !!}</dd>
         </div>
