@@ -27,6 +27,7 @@
                     </div>
                 </div>
 
+                @if(settings('allow_custom_avatars', true))
                 <form action="{{ route('upload-profile-picture') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <label for="dropzone-file"
@@ -50,6 +51,7 @@
                         {!! __('client.upload') !!}
                     </button>
                 </form>
+                @endif
             </div>
             <div class="mb-4 rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-6 xl:p-8">
                 <h3 class="text-xl font-bold dark:text-white">{!! __('client.two_factor_authentication') !!}</h3>
