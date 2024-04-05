@@ -50,7 +50,7 @@
                     <label for="first_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                         {!! __('auth.first_name', ['default' => 'First Name']) !!}
                     </label>
-                    <input type="text" name="first_name" id="first_name"
+                    <input type="text" name="first_name" id="first_name" onchange="generateUsername()"
                         class="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 sm:text-sm"
                         placeholder="{!! __('John') !!}" required="">
                 </div>
@@ -67,9 +67,10 @@
                 <div>
 
                     <label for="username" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">{!! __('auth.your_username') !!}</label>
-                    <input type="text" name="username" id="username"
+                    <input type="text" name="username" id="username" onchange="usernameAvailability(this.value)"
                         class="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 sm:text-sm"
                         placeholder="{!! __('auth.username') !!}" required="">
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500" style="display: none;" id="username_error_desc"></p>
                 </div>
             </div>
             <div class="my-6 grid gap-5 sm:grid-cols-1">
@@ -198,6 +199,36 @@
 </div>
 
 <script>
+    function generateUsername() {
+        var first_name = document.getElementById('first_name').value;
+        var random_number = Math.floor(Math.random() * 100);
+        var username = first_name + random_number;
+        document.getElementById('username').value = username.toLowerCase().replace(/\s/g, '');
+    }
+
+    function usernameAvailability(username) {
+        fetch('/api/v1/users/username-availability?username=' + username, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', // This header is to mimic an AJAX request
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) {
+                document.getElementById('username_error_desc').style.display = '';
+                document.getElementById('username_error_desc').innerHTML = data.errors[0];
+            } else {
+                document.getElementById('username_error_desc').style.display = 'none';
+                document.getElementById('username_error_desc').innerHTML = '';
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error.body);
+        });
+    }
+
     regenPassword();
     function regenPassword() 
     {
