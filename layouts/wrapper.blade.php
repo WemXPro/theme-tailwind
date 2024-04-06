@@ -50,8 +50,6 @@
     @yield('header')
 </head>
 
-@include(Theme::path('layouts.widgets.require_address'))
-
 <body class="bg-white dark:bg-gray-900" style="min-height: 100vh;display: flex;flex-direction: column;">
     @include(Theme::path('layouts.header'))
 

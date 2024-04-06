@@ -9,14 +9,16 @@
                         <img class="mr-2 h-8 w-8" src="@settings('logo', 'https://imgur.com/oJDxg2r.png')" />
                         @settings('app_name', 'WemX')
                     </a>
-                    <a href="{{ route('login') }}" class="text-primary-100 inline-flex items-center text-sm font-medium hover:text-white">
+                    @guest
+                    <a href="{{ route('login') }}" class="text-primary-100 inline-flex items-center text-sm font-medium hover:text-white"> 
                         <svg class="mr-1 h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        {!! __('auth.back_to_login') !!}
+                        {!! __('auth.back_to_login') !!} 
                     </a>
+                    @endguest
                 </div>
                 <div class="bg-primary-500 block rounded-lg p-8 text-white">
                     <h2 class="mb-1 text-2xl font-semibold">@settings('theme::default::auth::title', 'Your Game, Our World: Hosting Perfected')
