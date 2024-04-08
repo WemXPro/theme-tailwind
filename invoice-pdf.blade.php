@@ -94,8 +94,8 @@
                         @endif
                         <span style="display: inline-block; vertical-align: middle;">{{ $payment->description }}</span>
                     </td>
-                    <td class="right">{{ currency('symbol') }}{{ number_format($payment->amount, 2) }}</td>
-                    <td class="bold">{{ currency('symbol') }}{{ number_format($payment->amount, 2) }}</td>
+                    <td class="right">{{ price($payment->amount) }}</td>
+                    <td class="bold">{{ price($payment->amount) }}</td>
                 </tr>
             </tbody>
         </table>
@@ -121,7 +121,7 @@
                             @endif
                         </div>
                     </td>
-                    <td class="large total">{{ currency('symbol') }}{{ number_format($payment->amount, 2) }}</td>
+                    <td class="large total">{{ price($payment->amount) }}</td>
                 </tr>
             </tbody>
         </table>

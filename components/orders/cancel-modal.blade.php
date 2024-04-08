@@ -48,8 +48,7 @@
                         <div>
 
                             <span class="font-medium">{!! __('client.ptero_cancellation_fee_info', [
-                                'symbol' => currency('symbol'),
-                                'cancellation_fee' => number_format($order->price['cancellation_fee'], 2),
+                                'cancellation_fee' => price($order->price['cancellation_fee']),
                             ]) !!}
                         </div>
                     </div>
@@ -84,7 +83,7 @@
                                 @foreach (App\Models\Gateways\Gateway::getActive() as $gateway)
                                     @if ($gateway->name == 'Balance')
                                         <option value="{{ $gateway->id }}" @if (Auth::user()->balance >= $order->price['cancellation_fee']) selected @endif>
-                                            {!! __('client.pay_with_balance') !!} ({{ currency('symbol') }}{{ number_format(Auth::user()->balance, 2) }})
+                                            {!! __('client.pay_with_balance') !!} ({{ price(Auth::user()->balance) }})
                                         </option>
                                         @continue
                                     @endif

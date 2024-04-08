@@ -30,10 +30,9 @@
                         <p class="font-light text-gray-500 dark:text-gray-400 sm:text-lg">
                             {!! __('client.price_block_desc', [
                                 'period' => mb_strtolower($package->prices->first()->period()),
-                                'total_price' => $package->prices->first()->totalPrice(),
-                                'renewal_price' => $package->prices->first()->renewal_price,
-                                'per_period' => mb_strtolower($package->prices->first()->periodToHuman()),
-                                'symbol' => currency('symbol'),
+                                'total_price' => price($package->prices->first()->totalPrice()),
+                                'renewal_price' => price($package->prices->first()->renewal_price),
+                                'per_period' => mb_strtolower($package->prices->first()->period()),
                             ]) !!}
                         </p>
                         <div class="my-8 flex items-baseline justify-center">

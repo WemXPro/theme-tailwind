@@ -50,18 +50,18 @@
                                             <a href="@isset($transaction->payment_id){{ route('invoice', ['payment' => $transaction->payment_id]) }}@else # @endif">{{ $transaction->description }}</a>
                                         </th>
                                         <td class="px-6 py-4">
-                                            {{ currency('symbol') }}{{ number_format($transaction->balance_before_transaction, 2) }}
+                                           {{ price($transaction->balance_before_transaction) }}
                                         </td>
                                         <td class="px-6 py-4 text-right">
                                             @if ($transaction->result == '+')
                                                 <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
-                                                    {{ $transaction->result }} {{ currency('symbol') }}{{ number_format($transaction->amount, 2) }}</span>
+                                                    {{ $transaction->result }} {{ price($transaction->amount) }}</span>
                                             @elseif($transaction->result == '-')
                                                 <span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
-                                                    {{ $transaction->result }} {{ currency('symbol') }}{{ number_format($transaction->amount, 2) }}</span>
+                                                    {{ $transaction->result }} {{ price($transaction->amount) }}</span>
                                             @elseif($transaction->result == '=')
                                                 <span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                                                    {{ $transaction->result }} {{ currency('symbol') }}{{ number_format($transaction->amount, 2) }}</span>
+                                                    {{ $transaction->result }} {{ price($transaction->amount) }}</span>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4">

@@ -67,7 +67,7 @@
                                 class="dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
                                 <div class="block">
                                     <div class="w-full text-lg font-semibold">
-                                        {{ currency('symbol') }}{{ number_format($price->renewal_price, 2) }}
+                                        {{ price($price->renewal_price) }}
                                         /
                                         {{ $price->periodToHuman() }}</div>
                                     <div class="w-full">{!! $price->type == 'recurring'
@@ -78,7 +78,7 @@
                                             'per_period' => mb_strtolower($price->period()),
                                             'symbol' => currency('symbol'),
                                         ])
-                                        : __('client.price_onetime_block_desc', ['symbol' => currency('symbol'), 'price' => number_format($price->price, 2)]) !!}
+                                        : __('client.price_onetime_block_desc', ['price' => price($price->price)]) !!}
                                         @isset($price->data['badge'])
                                             <span
                                                 class="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300 inline-block rounded px-2.5 py-0.5 text-xs font-medium">{{ $price->data['badge'] }}</span>
@@ -271,7 +271,7 @@
                                 @if ($gateway->driver == 'Balance')
                                     <option @if ($gateway->default) selected @endif value="{{ $gateway->id }}"
                                         data-gateway-type="once" @if (Auth::user()->balance >= $package->prices->first()->totalPrice())  @endif>
-                                        Pay with Balance ({{ currency('symbol') }}{{ number_format(Auth::user()->balance, 2) }})
+                                        Pay with Balance ({{ price(Auth::user()->balance) }})
                                     </option>
                                     @continue
                                 @endif
@@ -351,13 +351,13 @@
                     <p class="mb-4 flex justify-between text-sm font-normal text-gray-700 dark:text-gray-400"><span
                             id="period">{{ $package->prices->first()->periodToHuman() }}</span>
                         <span>{{ currency('symbol') }}<span
-                                id="recurring">{{ number_format($package->prices->first()->renewal_price, 2) }}</span></span>
+                                id="recurring">{{ price($package->prices->first()->renewal_price) }}</span></span>
                     </p>
 
                     <hr class="my-4 h-px border-0 bg-gray-200 dark:bg-gray-700">
                     <p class="mb-4 flex justify-between text-sm font-normal text-gray-700 dark:text-gray-400">
                         <span>{!! __('client.setup_fee') !!}</span> <span>{{ currency('symbol') }}<span
-                                id="setup_fee">{{ number_format($package->prices->first()->setup_fee, 2) }}</span></span>
+                                id="setup_fee">{{ price($package->prices->first()->setup_fee) }}</span></span>
                     </p>
 
                     @if($package->configOptions->count() > 0 )
@@ -418,7 +418,7 @@
                 <p class="mt-3 text-sm text-gray-500 dark:text-gray-400" id="disclosure">
                     @if ($package->prices->first()->cancellation_fee > 0)
                         {!! __('client.selected_price_includes_cancellation_fee') !!}
-                        {{ currency('symbol') }}{{ number_format($package->prices->first()->cancellation_fee, 2) }}
+                        {{ price($package->prices->first()->cancellation_fee) }}
                     @endif
                 </p>
             </div>

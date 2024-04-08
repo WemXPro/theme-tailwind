@@ -50,7 +50,7 @@
                                 {{ $payment->description }}
                             </th>
                             <td class="px-6 py-4">
-                                {{ currency('symbol') }}{{ number_format($payment->amount, 2) }}
+                                {{ price($payment->amount) }}
                             </td>
                             <td class="px-6 py-4">
                                 <div class="pl-3">

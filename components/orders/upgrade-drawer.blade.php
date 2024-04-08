@@ -124,7 +124,7 @@
                 @foreach (App\Models\Gateways\Gateway::getActive() as $gateway)
                     @if ($gateway->name == 'Balance')
                         <option value="{{ $gateway->id }}" @if (Auth::user()->balance >= 0) selected @endif>
-                            {{ __('client.pay_with_balance') }} ({{ currency('symbol') }}{{ number_format(Auth::user()->balance, 2) }})
+                            {{ __('client.pay_with_balance') }} ({{ price(Auth::user()->balance) }})
                         </option>
                         @continue
                     @endif

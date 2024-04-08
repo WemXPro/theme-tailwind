@@ -156,7 +156,7 @@
                                         @if ($gateway->name == 'Balance')
                                             <option value="{{ $gateway->id }}" @if (Auth::user()->balance >= $payment->amount) selected @endif>
                                                 {{ __('client.pay_with_balance') }}
-                                                ({{ currency('symbol') }}{{ number_format(Auth::user()->balance, 2) }})
+                                                ({{ price(Auth::user()->balance) }})
                                             </option>
                                             @continue
                                         @endif
