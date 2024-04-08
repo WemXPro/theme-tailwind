@@ -114,6 +114,54 @@
                     </div>
                 @endif
 
+                @if($package->configOptions->count() > 0 )
+                <div class="relative mt-8 p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5 mb-6">
+                    <div class="custom-note">
+                        <div class="flex justify-between mb-3 rounded-t sm:mb-3">
+                            <div class="text-lg text-gray-900 md:text-xl dark:text-white">
+                                <h3 class="font-semibold">Configurable Options</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                    Configurable options allow you to customize your product.
+                                </p>
+                            </div>
+                        </div>
+                        {{-- load configurable options --}}
+                        @foreach($package->configOptions as $option)
+                            @if($option->type == 'number')
+                            <div class="mb-4">
+                                <label for="quantity-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $option->data['label'] ?? 'Undefined' }}</label>
+                                <div class="relative flex items-center max-w-[8rem]">
+                                    <button type="button" onclick="decrementInput('option-{{ $option->id }}')" id="decrement-button" data-input-counter-decrement="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                        <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                        </svg>
+                                    </button>
+                                    <input type="text" id="option-{{ $option->id }}" min="{{ $option->data['min'] ?? '0' }}" min="{{ $option->data['max'] ?? '0' }}" value="{{ $option->data['default_value'] ?? '0' }}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="999" required>
+                                    <button type="button" id="increment-button" onclick="incrementInput('option-{{ $option->id }}')" data-input-counter-increment="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                        <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $option->data['label'] ?? 'description' }}</p>
+                            </div>
+                            @elseif($option->type == 'range')
+            
+                            <div class="relative mb-10">
+                                <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $option->data['label'] ?? 'Undefined' }}</label>
+                                <input id="option-{{ $option->id }}" type="range" value="{{ $option->data['default_value'] ?? 0 }}" min="{{ $option->data['min'] ?? 0 }}" max="{{ $option->data['max'] ?? 10 }}" step="{{ $option->data['step'] ?? 1 }}" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                                <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">Min ({{ $option->data['min'] ?? 0 }})</span>
+                                {{-- <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$500</span>
+                                <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$1000</span> --}}
+                                <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">Max ({{ $option->data['max'] ?? 0 }})</span>
+                            </div>
+            
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+
                 @if ($package->service()->hasCheckoutConfig($package))
                     <div class="relative mb-6 mt-8 rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
                         <div class="custom-note">
@@ -312,6 +360,14 @@
                                 id="setup_fee">{{ number_format($package->prices->first()->setup_fee, 2) }}</span></span>
                     </p>
 
+                    @if($package->configOptions->count() > 0 )
+                    <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+                    <p class="font-normal text-sm text-gray-700 dark:text-gray-400 flex justify-between mb-4">
+                        <span>Options</span> <span>{{ currency('symbol') }}<span
+                                id="config_options_price">0.00</span></span>
+                    </p>
+                    @endif
+
                     <hr class="my-4 h-px border-0 bg-gray-200 dark:bg-gray-700">
                     <p class="mb-4 flex justify-between text-sm font-normal text-gray-700 dark:text-gray-400">
                         <span>{{ __('client.discount') }}</span> <span>-{{ currency('symbol') }}<span id="discounted">0.00</span></span>
@@ -434,6 +490,9 @@
         function getTotalPrice(price) {
             totalPrice = (price.price + price.setup_fee);
 
+            // calculate custom options price
+            totalPrice = totalPrice + calculateCustomOptionsPrice();
+
             // apply discount
             totalPrice = totalPrice - getTotalDiscount(totalPrice);
 
@@ -443,6 +502,20 @@
             @endif
 
             return totalPrice.toFixed(2);
+        }
+
+        function calculateCustomOptionsPrice() {
+            let price = 0;
+            @foreach($package->configOptions as $option)
+                @if($option->type == 'select')
+                @elseif($option->type == 'number')
+                    price += {{ $option->data['monthly_price_unit'] }} / 30 * document.getElementById('option-{{ $option->id }}').value * activePrice().period;
+                @elseif($option->type == 'range')
+                    price += {{ $option->data['monthly_price_unit'] }} / 30 * document.getElementById('option-{{ $option->id }}').value * activePrice().period;
+                @endif
+            @endforeach
+            document.getElementById('config_options_price').innerHTML = price.toFixed(2);
+            return price;
         }
 
         function getTotalDiscount(totalPrice) {
