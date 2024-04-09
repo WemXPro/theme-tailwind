@@ -66,6 +66,9 @@
                             </thead>
                             <tbody data-accordion="table-column">
                                 @foreach ($emails as $email)
+                                    @if($email->isHidden())
+                                        @continue
+                                    @endif
                                     <tr class="cursor-pointer border-b text-gray-500 transition hover:bg-gray-200 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700"
                                         id="table-column-header-0" data-accordion-target="#table-column-body-{{ $email->id }}"
                                         aria-expanded="false" aria-controls="table-column-body-{{ $email->id }}">
