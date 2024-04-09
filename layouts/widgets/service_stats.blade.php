@@ -39,7 +39,8 @@
         class="block max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
         <div class="flex flex-col items-center justify-center">
             <dt class="mb-2 text-3xl font-extrabold dark:text-gray-200">
-                {{ currency('symbol') }}{{ number_format(Auth::user()->balance, 2) }}</dt>
+                {{ price(Auth::user()->balance) }}
+            </dt>
             <dd class="text-gray-500 dark:text-gray-400">{!! __('client.balance') !!}</dd>
         </div>
     </a>

@@ -48,7 +48,7 @@
                         @foreach (range(1, 12) as $value)
                             <option value="{{ $value }}" @if ($value == 1) selected @endif>{{ $value }}
                                 {{ ucfirst($order->period()) }} -
-                                {{ currency('symbol') }}{{ number_format($value * $order->price['renewal_price'], 2) }}</option>
+                                {{ price($value * $order->price['renewal_price']) }}</option>
                         @endforeach
                     </select>
                     <!-- Modal footer -->
