@@ -1,5 +1,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+@php($allowToggleMode = settings('theme::allow_toggle_mode', 1))
+@php($defaultMode = settings('theme::default_mode', 'dark'))
 <script>
     tailwind.config = {
         darkMode: 'class',
@@ -61,12 +63,20 @@
     }
 
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
-            '(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
+    if('{{ $allowToggleMode }}' === '0') {
+        const currentTheme = '{{ $defaultMode }}';
+        if (currentTheme) {
+            document.documentElement.classList.add(currentTheme);
+        }
     } else {
-        document.documentElement.classList.remove('dark')
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+            '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
     }
+
 
     function getColors() {
         color = getActiveColor();
