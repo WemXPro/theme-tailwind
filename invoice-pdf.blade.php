@@ -5,6 +5,33 @@
     <meta charset="utf-8">
     <title>{{ __('client.invoice_template') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @font-face {
+            font-family: 'DejaVu Sans';
+            src: url('{{ storage_path("fonts/DejaVuSans.ttf") }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body, table, th, td, div, span {
+            font-family: 'DejaVu Sans', sans-serif;
+        }
+        .status-span {
+            display: inline-block;
+            background-color: #237142;
+            color: #86efac;
+            border-radius: 5px;
+            font-size: 26px;
+            text-transform: capitalize;
+            line-height: 40px;
+            padding: 0 10px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .status-span.unpaid {
+            background-color: #bf3a3a;
+            color: #ffffff;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,21 +45,8 @@
 
         <table style="width:100%; margin-bottom: 30px;">
             <tr>
-                <td style="text-align:center; vertical-align:middle;">
-                    <span
-                        style="
-                            width: 128px;
-                            height: 40px;
-                            background-color: @if ($payment->status == 'unpaid') #bf3a3a @else #237142 @endif;
-                            color: @if ($payment->status == 'unpaid') #ffffff @else #86efac @endif;
-                            display: block;
-                            border-radius: 5px;
-                            font-size: 26px;
-                            text-transform: capitalize;
-                            line-height: 40px;
-                            padding-bottom: 5px;
-                            font-weight: 600;
-                    ">
+                <td style="vertical-align:middle;">
+                    <span class="status-span {{ $payment->status == 'unpaid' ? 'unpaid' : '' }}">
                         {{ __('client.' . $payment->status) }}
                     </span>
                 </td>
