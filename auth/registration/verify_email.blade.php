@@ -118,5 +118,19 @@
                 document.getElementById(nextId).focus();
             }
         }
+        document.querySelectorAll('input[id^="code-"]').forEach(input => {
+            input.addEventListener('paste', function(event) {
+                event.preventDefault();
+                const pasteData = event.clipboardData.getData('text').trim();
+                if (pasteData.length === 6) {
+                    pasteData.split('').forEach((char, index) => {
+                        const field = document.getElementById(`code-${index + 1}`);
+                        if (field) {
+                            field.value = char;
+                        }
+                    });
+                }
+            });
+        });
     </script>
 @endsection
