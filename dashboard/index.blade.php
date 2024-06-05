@@ -14,13 +14,13 @@
 
 @push('widgets')
     <div class="flex flex-wrap">
-        <div class="w-full pl-4 pl-4 pl-4 pr-4 pr-4 pr-4 sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <div class="w-full pl-4 pl-4 pl-4 pr-4 pr-4 pr-4 lg:w-1/4">
             @include(Theme::path('layouts.widgets.user_balance'))
         </div>
         @endpush
 
         @section('container')
-            <div class="w-full pl-4 pl-4 pl-4 pr-4 pr-4 pr-4 sm:w-1/2 md:w-2/3 lg:w-3/4">
+            <div class="w-full pl-4 pl-4 pl-4 pr-4 pr-4 pr-4 lg:w-3/4">
                 @include(Theme::path('layouts.widgets.service_stats'))
 
                 <section class="py-3 dark:bg-gray-900 sm:py-5">
@@ -28,7 +28,7 @@
                         <!-- Start coding here -->
                         <div class="relative overflow-visible bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
                             <div
-                                class="flex flex-col items-center justify-between space-y-3 border-b p-4 dark:border-gray-700 md:flex-row md:space-x-4 md:space-y-0">
+                                class="flex flex-col items-center justify-between space-y-3 border-b p-4 dark:border-gray-700 xl:flex-row lg:space-x-4 lg:space-y-0">
                                 <div class="flex w-full items-center space-x-3">
                                     <h5 class="font-semibold dark:text-white">{!! __('client.your_services') !!}</h5>
                                     <div class="font-medium text-gray-400">
@@ -57,7 +57,7 @@
                                     @endif
 
                                 </div>
-                                <div class="flex w-full flex-row items-center justify-end space-x-3">
+                                <div class="flex w-full flex-col md:flex-row items-center justify-end gap-5 md:space-x-3">
                                     <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
                                             class="hover:text-primary-700 flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 md:w-auto"
                                             type="button">
