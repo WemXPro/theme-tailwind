@@ -1,5 +1,5 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+
 @php($allowToggleMode = settings('theme::allow_toggle_mode', 1))
 @php($defaultMode = settings('theme::default_mode', 'dark'))
 <script>
