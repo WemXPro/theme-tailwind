@@ -4,7 +4,7 @@
     <div class="w-full">
         <div class="mb-8 flex items-center justify-center space-x-4 lg:hidden">
             <a href="#" class="flex items-center text-2xl font-semibold">
-                <img class="mr-2 h-8 w-8" src="@settings('logo', 'https://imgur.com/oJDxg2r.png')" />
+                <img class="mr-2 h-8 w-8" src="@settings('logo', '/assets/core/img/logo.png')" />
                 <span class="text-gray-900 dark:text-white">@settings('app_name', 'WemX')</span>
             </a>
         </div>
@@ -187,7 +187,7 @@
                             <span id="copy_password">{{ __('client.copy') }}</span>
                     </button>
                 </div>
-                
+
             </div>
             <!-- Modal footer -->
             <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -235,7 +235,7 @@
     }
 
     regenPassword();
-    function regenPassword() 
+    function regenPassword()
     {
         var length = document.getElementById('password_length').value;
         var result = '';

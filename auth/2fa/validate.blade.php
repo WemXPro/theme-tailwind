@@ -39,7 +39,7 @@
             <div class="bg-primary-600 flex items-center justify-center px-4 py-6 sm:px-0 lg:py-0">
                 <div class="max-w-md xl:max-w-xl">
                     <a href="#" class="mb-4 flex items-center text-2xl font-semibold text-white">
-                        <img class="mr-2 h-8 w-8" src="@settings('logo', 'https://imgur.com/oJDxg2r.png')" alt="logo">
+                        <img class="mr-2 h-8 w-8" src="@settings('logo', '/assets/core/img/logo.png')" alt="logo">
                         @settings('app_name', 'WemX')
                     </a>
                     <h1 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-white xl:text-5xl">

@@ -3,7 +3,7 @@
 
 <head>
     <title>@yield('title') - @settings('app_name', 'WemX')</title>
-    <link rel="icon" href="@settings('favicon', 'https://imgur.com/oJDxg2r.png')">
+    <link rel="icon" href="@settings('favicon', '/assets/core/img/logo.png')">
 
     {{-- meta tags --}}
     <meta charset="utf-8">

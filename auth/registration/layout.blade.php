@@ -6,17 +6,17 @@
             <div class="bg-primary-600 hidden w-full max-w-md p-12 lg:block lg:h-screen">
                 <div class="mb-8 flex items-center space-x-4">
                     <a href="#" class="flex items-center text-2xl font-semibold text-white">
-                        <img class="mr-2 h-8 w-8" src="@settings('logo', 'https://imgur.com/oJDxg2r.png')" />
+                        <img class="mr-2 h-8 w-8" src="@settings('logo', '/assets/core/img/logo.png')" />
                         @settings('app_name', 'WemX')
                     </a>
                     @guest
-                    <a href="{{ route('login') }}" class="text-primary-100 inline-flex items-center text-sm font-medium hover:text-white"> 
+                    <a href="{{ route('login') }}" class="text-primary-100 inline-flex items-center text-sm font-medium hover:text-white">
                         <svg class="mr-1 h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        {!! __('auth.back_to_login') !!} 
+                        {!! __('auth.back_to_login') !!}
                     </a>
                     @endguest
                 </div>
