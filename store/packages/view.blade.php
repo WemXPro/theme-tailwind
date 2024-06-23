@@ -143,7 +143,7 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $option->data['label'] ?? 'description' }}</p>
+                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $option->data['label'] ?? 'description' }}</p>
                             </div>
                             @elseif($option->type == 'range')
             
@@ -155,7 +155,18 @@
                                 <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$1000</span> --}}
                                 <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">Max ({{ $option->data['max'] ?? 0 }})</span>
                             </div>
-            
+
+                            @elseif($option->type == 'select')
+                            <div class="">
+                                <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $option->data['label'] ?? 'Undefined' }}</label>
+                                <select id="option-{{ $option->id }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    @foreach($option->data['options'] as $key => $selectOption)
+                                        <option value="{{ $selectOption['value'] }}">{{ $selectOption['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $option->data['label'] ?? 'description' }}</p>
+
+                            </div>
                             @endif
                         @endforeach
                     </div>
@@ -514,7 +525,9 @@
                     price += {{ $option->data['monthly_price_unit'] }} / 30 * document.getElementById('option-{{ $option->id }}').value * activePrice().period;
                 @endif
             @endforeach
-            document.getElementById('config_options_price').innerHTML = price.toFixed(2);
+            @if($package->configOptions->count() > 0 )
+                document.getElementById('config_options_price').innerHTML = price.toFixed(2);
+            @endif
             return price;
         }
 
