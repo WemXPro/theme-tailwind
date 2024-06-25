@@ -129,27 +129,27 @@
                         @foreach($package->configOptions as $option)
                             @if($option->type == 'number')
                             <div class="mb-4">
-                                <label for="quantity-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $option->data['label'] ?? 'Undefined' }}</label>
+                                <label for="quantity-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
                                 <div class="relative flex items-center max-w-[8rem]">
                                     <button type="button" onclick="decrementInput('option-{{ $option->id }}')" id="decrement-button" data-input-counter-decrement="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                         <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
                                         </svg>
                                     </button>
-                                    <input type="text" id="option-{{ $option->id }}" min="{{ $option->data['min'] ?? '0' }}" min="{{ $option->data['max'] ?? '0' }}" value="{{ $option->data['default_value'] ?? '0' }}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="999" required>
+                                    <input type="text" id="option-{{ $option->id }}" name="custom_options[{{ $option->key }}]" min="{{ $option->data['min'] ?? '0' }}" max="{{ $option->data['max'] ?? '0' }}" value="{{ $option->data['default_value'] ?? '0' }}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="999" required>
                                     <button type="button" id="increment-button" onclick="incrementInput('option-{{ $option->id }}')" data-input-counter-increment="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                         <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
                                         </svg>
                                     </button>
                                 </div>
-                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $option->data['label'] ?? 'description' }}</p>
+                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{!! $option->data['description'] ?? '' !!}</p>
                             </div>
                             @elseif($option->type == 'range')
             
                             <div class="relative mb-10">
-                                <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $option->data['label'] ?? 'Undefined' }}</label>
-                                <input id="option-{{ $option->id }}" type="range" value="{{ $option->data['default_value'] ?? 0 }}" min="{{ $option->data['min'] ?? 0 }}" max="{{ $option->data['max'] ?? 10 }}" step="{{ $option->data['step'] ?? 1 }}" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                                <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
+                                <input id="option-{{ $option->id }}" type="range" name="custom_options[{{ $option->key }}]" value="{{ $option->data['default_value'] ?? 0 }}" min="{{ $option->data['min'] ?? 0 }}" max="{{ $option->data['max'] ?? 10 }}" step="{{ $option->data['step'] ?? 1 }}" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
                                 <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">Min ({{ $option->data['min'] ?? 0 }})</span>
                                 {{-- <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$500</span>
                                 <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$1000</span> --}}
@@ -157,15 +157,20 @@
                             </div>
 
                             @elseif($option->type == 'select')
-                            <div class="">
-                                <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $option->data['label'] ?? 'Undefined' }}</label>
-                                <select id="option-{{ $option->id }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <div class="mb-4">
+                                <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
+                                <select id="option-{{ $option->id }}" name="custom_options[{{ $option->key }}]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     @foreach($option->data['options'] as $key => $selectOption)
-                                        <option value="{{ $selectOption['value'] }}">{{ $selectOption['name'] }}</option>
+                                        <option value="{{ $key }}" @if($option->data['label'] ?? 'null' == $selectOption['default_value']) selected @endif data-select-option-value="{{ $selectOption['value'] }}" data-select-option-unitprice="{{ $selectOption['monthly_price'] }}">{{ $selectOption['name'] }} @ {{ price($selectOption['monthly_price'] / 30) }} {{ strtolower(__('admin.daily')) }}</option>
                                     @endforeach
                                 </select>
-                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $option->data['label'] ?? 'description' }}</p>
-
+                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{!! $option->data['description'] ?? '' !!}</p>
+                            </div>
+                            @elseif($option->type == 'text')
+                            <div class="mb-4">
+                                <label for="helper-text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
+                                <input type="{{ $option->data['type'] ?? 'text' }}" name="custom_options[{{ $option->key }}]" value="{{ $option->data['default_value'] ?? '' }}" placeholder="{{ $option->data['placeholder'] ?? '' }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{!! $option->data['description'] ?? '' !!}</p>                                
                             </div>
                             @endif
                         @endforeach
@@ -517,8 +522,12 @@
 
         function calculateCustomOptionsPrice() {
             let price = 0;
+
             @foreach($package->configOptions as $option)
                 @if($option->type == 'select')
+                    select = document.getElementById('option-{{ $option->id }}');
+                    price += select.options[select.selectedIndex].getAttribute('data-select-option-unitprice') / 30 * activePrice().period;
+                    
                 @elseif($option->type == 'number')
                     price += {{ $option->data['monthly_price_unit'] }} / 30 * document.getElementById('option-{{ $option->id }}').value * activePrice().period;
                 @elseif($option->type == 'range')
@@ -528,6 +537,7 @@
             @if($package->configOptions->count() > 0 )
                 document.getElementById('config_options_price').innerHTML = price.toFixed(2);
             @endif
+
             return price;
         }
 
