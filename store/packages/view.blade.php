@@ -670,6 +670,8 @@
                 return '{!! __('admin.month') !!}';
             } else if (price.period == 90) {
                 return '{!! __('admin.quarter') !!}';
+            } else if (price.period == 180) {
+                return '{!! __('admin.semi_year') !!}';
             } else if (price.period == 365) {
                 return '{!! __('admin.year') !!}';
             } else if (price.period == 730) {
@@ -696,6 +698,8 @@
                 return '{!! __('admin.monthly') !!}';
             } else if (price.period == 90) {
                 return '{!! __('admin.quaterly') !!}';
+            } else if (price.period == 180) {
+                return '{!! __('admin.semi_yearly') !!}';
             } else if (price.period == 365) {
                 return '{!! __('admin.yearly') !!}';
             } else if (price.period == 730) {
