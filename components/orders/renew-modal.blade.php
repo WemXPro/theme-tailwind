@@ -63,20 +63,22 @@
                                         <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                       </svg>
                                     </div>
-                                    <input datepicker inline-datepicker datepicker-autohide id="renew-customdate-input" name="" onchange="customRenewalDateUpdated(this.value)" type="text" value="{{ $order->due_date->format('m/d/Y') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                                    <input autocomplete="off" datepicker datepicker-title="{{ __('client.current_due_date') }} {{ $order->due_date->translatedFormat(settings('date_format', 'd M Y')) }}" inline-datepicker datepicker-autohide datepicker-min-date="{{ $order->due_date->addDays(14)->format('m/d/Y') }}" id="renew-customdate-input" name="" type="text" value="{{ $order->due_date->format('m/d/Y') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
                                 </div>
                             </div>
 
                             <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                                 <div class="flex flex-col pb-3">
                                     <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">{{ __('client.total') }}</dt>
-                                    <dd class="text-lg font-semibold" id="custom-renewal-total">{{ price(0, 2, true) }}</dd>
+                                    <dd class="text-lg font-semibold" id="custom-renewal-total">-</dd>
                                 </div>
                             </dl>
                             
                         </div>
                 
-                        <a href="#" onclick="toggleCustomRenewalDate()" id="toggle-custom-renewal-date" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ __('client.select_custom_date') }}</a>
+                        @if ($order->package->settings('allow_custom_renewal_date', true))
+                            <a href="#" onclick="toggleCustomRenewalDate()" id="toggle-custom-renewal-date" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ __('client.select_custom_date') }}</a>
+                        @endif
                     </div>
                 
                     <!-- Modal footer -->
@@ -115,19 +117,21 @@
         }
     }
 
-    function customRenewalDateUpdated(date) {
-        var totalElement = document.getElementById('custom-renewal-total');
+    // add event listener that listens for the date change
+    var renewalDatePicker = document.getElementById('renew-customdate-input');
+    renewalDatePicker.addEventListener('changeDate', function() {
+        var startDate = new Date('{{ $order->due_date->format('m/d/Y') }}');
+        var endDate = new Date(this.value);
 
-        // parse date 
-        var date = new Date(date);
+        // get the difference in days between start and end date
+        var diffTime = Math.abs(endDate - startDate);
+        var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        var dailyPrice = {{ $order->price()->renewal_price / $order->price()->period }};
+        var currencySymbol = '{{ currency('symbol') }}';
+        var currencyCode = '{{ currency('short') }}';
 
-        // get due date
-        var dueDate = new Date('{{ $order->due_date->format('Y-m-d') }}');
-
-        // calculate difference in days
-        var diffTime = Math.abs(date - dueDate);
-
-        // calculate difference in days
         
-    }
+        var totalPrice = diffDays * dailyPrice;
+        document.getElementById('custom-renewal-total').innerText = currencySymbol + totalPrice.toFixed(2) + ' ' + currencyCode;
+    });
 </script>
