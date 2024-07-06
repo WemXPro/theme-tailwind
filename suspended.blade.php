@@ -7,7 +7,7 @@
 @endsection
 
 @section('container')
-    <section class="bg-white dark:bg-gray-900">
+    <section>
         <div class="mx-auto max-w-screen-md px-4 py-8 text-center lg:px-12 lg:py-16">
             <a href="#" class="mb-5 flex items-center justify-center text-3xl font-semibold text-gray-900 dark:text-white">
                 <img src="@settings('logo')" style="width: 40px;" class="mr-2 rounded" alt="">

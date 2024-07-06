@@ -14,7 +14,7 @@
 
             <section class="py-3 dark:bg-gray-900 sm:py-5">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <div class="flex flex-col items-center justify-between space-y-3 p-4 dark:bg-gray-800 md:flex-row md:space-x-4 md:space-y-0">
+                    <div class="flex flex-col items-center justify-between space-y-3 p-4 bg-white dark:bg-gray-800 md:flex-row md:space-x-4 md:space-y-0">
                         <ul class="hidden flex-wrap text-center text-sm font-medium text-gray-500 dark:text-gray-400 md:flex">
                             <li class="mr-2 lg:mr-4">
                                 <a href="/invoices"

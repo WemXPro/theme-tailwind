@@ -50,7 +50,7 @@
     @yield('header')
 </head>
 
-<body class="bg-white dark:bg-gray-900" style="min-height: 100vh;display: flex;flex-direction: column;">
+<body class="bg-gray-100 dark:bg-gray-900" style="min-height: 100vh;display: flex;flex-direction: column;">
     @include(Theme::path('layouts.header'))
 
     <div class="container mx-auto mx-auto mb-10 mt-10 max-w-screen-xl px-4 md:px-6">

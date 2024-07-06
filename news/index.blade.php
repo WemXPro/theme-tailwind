@@ -7,7 +7,7 @@
 @endsection
 
 @section('container')
-    <section class="bg-white dark:bg-gray-900">
+    <section>
         <div class="mx-auto grid max-w-screen-lg gap-8 px-4 lg:gap-16 lg:px-6">
             <div>
                 <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">{{ __('client.latest_news') }}</h2>

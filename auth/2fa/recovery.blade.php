@@ -3,7 +3,7 @@
 @section('title', 'Recover 2FA')
 
 @section('container')
-    <section class="flex bg-white dark:bg-gray-900" style="height: 100%;">
+    <section class="flex" style="height: 100%;">
         <div class="mx-auto max-w-screen-md px-4 py-8 lg:py-16" style="width: 100%;">
             <div class="stepper mb-8">
                 <ol class="flex w-full items-center text-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:text-base">

@@ -12,7 +12,7 @@
 
 @section('container')
     @php($article->translate())
-    <main class="bg-white pb-16 antialiased dark:bg-gray-900 lg:pb-24">
+    <main class="pb-16 antialiased dark:bg-gray-900 lg:pb-24">
         <div class="mx-auto flex max-w-screen-xl justify-between px-4">
             <article class="format format-sm sm:format-base lg:format-lg format-blue dark:format-invert mx-auto w-full max-w-5xl">
                 <header class="not-format mb-4 lg:mb-6">
@@ -189,7 +189,7 @@
         </div>
 
         @if ($article->allow_comments)
-            <section class="bg-white py-8 antialiased dark:bg-gray-900 lg:py-8">
+            <section class="py-8 antialiased dark:bg-gray-900 lg:py-8">
                 <div class="mx-auto max-w-5xl px-4">
                     <div class="mb-6 flex items-center justify-between">
                         <h2 class="text-lg font-bold text-gray-900 dark:text-white lg:text-2xl">{{ __('client.discussion') }}

@@ -3,7 +3,7 @@
 @section('title', __('client.pricing_for_service', ['service' => $category->name]))
 
 @section('container')
-    <section class="bg-white dark:bg-gray-900">
+    <section>
         <div class="mx-auto max-w-screen-xl px-4 py-8 lg:px-6">
             <div class="mx-auto mb-8 max-w-screen-md text-center lg:mb-12">
                 <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">{!! __('client.pricing_for_service', ['service' => $category->name]) !!}</h2>

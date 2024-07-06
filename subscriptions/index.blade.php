@@ -1,7 +1,7 @@
 @extends(Theme::wrapper())
 @section('title', __('client.subscriptions'))
 @section('container')
-    <section class="bg-gray-50 dark:bg-gray-900">
+    <section>
         <div class="mx-auto max-w-screen-xl">
             <!-- Start coding here -->
             <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">

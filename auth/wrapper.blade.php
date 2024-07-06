@@ -33,7 +33,7 @@
     @endif
 </head>
 
-<body class="dark:bg-gray-900">
+<body class="bg-gray-100 dark:bg-gray-900">
     <div class="app">
         @yield('container')
     </div>

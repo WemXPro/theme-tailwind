@@ -1,5 +1,7 @@
 @extends(Theme::wrapper())
+
 @section('title', $title)
+
 @section('container')
     <div class="mt-10 flex flex-col items-center">
         <div class="bg-primary-600 dark:bg-primary-900 mb-6 inline-flex h-24 w-24 items-center justify-center rounded-lg text-6xl text-white">

@@ -7,7 +7,7 @@
 @endsection
 
 @section('container')
-    <main class="bg-white pb-16 pt-8 dark:bg-gray-900 lg:pb-24 lg:pt-16">
+    <main class="pb-16 pt-8 lg:pb-24 lg:pt-16">
         <article class="format format-sm sm:format-base lg:format-lg format-blue dark:format-invert mx-auto w-full max-w-2xl">
             <header class="not-format mb-4 lg:mb-6">
                 <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 dark:text-white lg:mb-6 lg:text-4xl">

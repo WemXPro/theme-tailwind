@@ -1,7 +1,7 @@
 @extends(Theme::path('auth.wrapper'))
 
 @section('container')
-    <section class="bg-white dark:bg-gray-900">
+    <section>
         <div class="grid lg:h-screen lg:grid-cols-2">
             <div class="flex items-center justify-center px-4 py-6 sm:px-0 lg:py-0">
                 <form method="POST" action="{{ route('2fa.recover.access') }}" class="w-full max-w-md space-y-4 md:space-y-6 xl:max-w-xl">

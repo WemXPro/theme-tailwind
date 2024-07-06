@@ -3,7 +3,7 @@
 @section('title', __('client.members'))
 
 @section('content')
-    <section class="bg-gray-50 dark:bg-gray-900">
+    <section>
         <div class="mx-auto max-w-screen-xl">
             <!-- Start coding here -->
             <div class="relative overflow-visible bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
