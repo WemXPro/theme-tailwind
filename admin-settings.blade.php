@@ -5,25 +5,44 @@
     </div>
     <div class="card-body">
         <div class="row">
-                <div class="form-group col-12">
-                    {{-- <label class="form-label">Default Theme Layout</label> --}}
-                    <div class="row gutters-sm">
+            <div class="form-group col-12">
+                <label class="form-label">Default Theme Layout</label>
+                <div class="row gutters-sm">
 
-                    @foreach(config('utils.theme_presets') as $key => $theme)
-                      <div class="col-6 col-sm-3">
-                        <label class="imagecheck mb-4">
-                          <h6 class="text-dark">{{ $theme['name'] }}</h6>
+                @foreach(config('utils.theme_presets') as $key => $theme)
+                    <div class="col-6 col-sm-3">
+                    <label class="imagecheck mb-4">
+                        <h6 class="text-dark">{{ $theme['name'] }}</h6>
 
-                          <input name="theme::default::theme-preset" type="radio" value="{{ $key }}" onchange="document.getElementById('theme_colors').value = '{{ $theme['colors'] }}'" class="imagecheck-input" @if(settings('theme::default::theme', '{"50": "#F9FAFB","100": "#F3F4F6","200": "#E5E7EB","300": "#D1D5DB","400": "#9CA3AF","500": "#6B7280","600": "#4B5563","700": "#374151","800": "#1F2937","900": "#111827"}') == $theme['colors']) checked="" @endif>
-                          <figure class="imagecheck-figure">
-                            <img src="{{ $theme['image'] }}" alt="" class="imagecheck-image">
-                          </figure>
-                        </label>
-                      </div>
-                    @endforeach
-
+                        <input name="theme::default::theme-preset" type="radio" value="{{ $key }}" onchange="document.getElementById('theme_colors').value = '{{ $theme['colors'] }}'" class="imagecheck-input" @if(settings('theme::default::theme', '{"50": "#F9FAFB","100": "#F3F4F6","200": "#E5E7EB","300": "#D1D5DB","400": "#9CA3AF","500": "#6B7280","600": "#4B5563","700": "#374151","800": "#1F2937","900": "#111827"}') == $theme['colors']) checked="" @endif>
+                        <figure class="imagecheck-figure">
+                        <img src="{{ $theme['image'] }}" alt="" class="imagecheck-image">
+                        </figure>
+                    </label>
                     </div>
+                @endforeach
+
                 </div>
+            </div>
+            <div class="form-group col-12">
+                <label class="form-label">Category Structure</label>
+                <div class="row gutters-sm">
+
+                @foreach(config('utils.category_structures') as $key => $structure)
+                    <div class="col-6 col-sm-3">
+                    <label class="imagecheck mb-4">
+                        <h6 class="text-dark">{{ $structure['name'] }}</h6>
+
+                        <input name="theme:default:categories_structure" type="radio" class="imagecheck-input" value="{{ $key }}" @if(settings('theme:default:categories_structure', 'grid') == $key) checked="" @endif>
+                        <figure class="imagecheck-figure">
+                        <img src="{{ $structure['image'] }}" alt="" class="imagecheck-image">
+                        </figure>
+                    </label>
+                    </div>
+                @endforeach
+
+                </div>
+            </div>
             <div class="form-group col-12">
                 <label>{!! __('admin.theme') !!}</label>
                 <textarea name="theme::default::theme" id="theme_colors" class="form-control">@settings('theme::default::theme', '{"50": "#F9FAFB","100": "#F3F4F6","200": "#E5E7EB","300": "#D1D5DB","400": "#9CA3AF","500": "#6B7280","600": "#4B5563","700": "#374151","800": "#1F2937","900": "#111827"}')</textarea>
