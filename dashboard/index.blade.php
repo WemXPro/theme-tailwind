@@ -255,11 +255,8 @@
                                                             {!! __('client.billing_cycle') !!}
                                                         </h6>
                                                         <div class="flex items-center text-gray-500 dark:text-gray-400">
-                                                                <span
-                                                                    class="text-dark mr-1 font-bold dark:text-gray-200">
-                                                                    {{ currency('symbol') }}{{ $order->price['renewal_price'] }}</span>
-                                                            /
-                                                            {{ $order->periodToHuman() }}
+                                                                <span class="text-dark mr-1 font-bold dark:text-gray-200">
+                                                                    {{ price($order->price['renewal_price']) }}</span> / {{ $order->periodToHuman() }}
                                                         </div>
                                                     </div>
                                                     <div class="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
@@ -424,7 +421,7 @@
                                                         </h6>
                                                         <div class="flex items-center text-gray-500 dark:text-gray-400">
                                                             <span class="text-dark mr-1 font-bold dark:text-gray-200">
-                                                                {{ currency('symbol') }}{{ $order->price['renewal_price'] }}
+                                                                {{ price($order->price['renewal_price']) }}
                                                             </span>
                                                             / {{ $order->periodToHuman() }}
                                                         </div>

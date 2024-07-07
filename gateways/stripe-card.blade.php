@@ -4,7 +4,7 @@
     <script src="https://js.stripe.com/v3/"></script>
 
     <h1 class="mb-3 text-3xl font-semibold dark:text-gray-300">{!! __('client.stripe_card_payment') !!}</h1>
-    <p class="ml-2 text-lg dark:text-gray-400">${{ $payment->amount }} {{ $payment->currency }}</p>
+    <p class="ml-2 text-lg dark:text-gray-400">{{ price($payment->currency) }}</p>
 
     <form action="{{ route('payment.process', ['gateway' => $gateway->id, 'payment' => $payment->id]) }}" method="post" id="payment-form"
         class="mt-4">

@@ -97,7 +97,7 @@
                                                     <div class="text-sm font-normal text-gray-500 dark:text-gray-400"></div>
                                                 </td>
                                                 <td class="whitespace-nowrap p-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                                                    {{ currency('symbol') }}{{ $payment->amount }}
+                                                    {{ price($payment->amount) }}
                                                 </td>
                                                 <td class="whitespace-nowrap p-4 text-base font-semibold text-gray-900 dark:text-white">
                                                     1
@@ -106,7 +106,7 @@
                                                     0%
                                                 </td>
                                                 <td class="whitespace-nowrap p-4 text-base font-semibold">
-                                                    {{ currency('symbol') }}{{ $payment->amount }}
+                                                    {{ price($payment->amount) }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -121,7 +121,7 @@
                                 {!! __('client.subtotal') !!}
                             </div>
                             <div class="text-base font-medium text-gray-900 dark:text-white">
-                                {{ currency('symbol') }}{{ $payment->amount }}
+                                {{ price($payment->amount) }}
                             </div>
                         </div>
                         {{-- @if (settings('taxes'))
@@ -133,14 +133,15 @@
                         <div class="flex justify-between">
                             <div class="text-sm font-medium uppercase text-gray-500 dark:text-gray-400">
                                 {!! __('client.discounts') !!}</div>
-                            <div class="text-base font-medium text-gray-900 dark:text-white">{{ currency('symbol') }}0
+                            <div class="text-base font-medium text-gray-900 dark:text-white">{{ price(0) }}
                             </div>
                         </div>
                         <div class="flex justify-between">
                             <div class="text-base font-semibold uppercase text-gray-900 dark:text-white">
                                 {!! __('client.total') !!}</div>
                             <div class="text-base font-bold text-gray-900 dark:text-white">
-                                {{ currency('symbol') }}{{ $payment->amount }}</div>
+                                {{ price($payment->amount) }}
+                            </div>
                         </div>
                     </div>
                     @if ($payment->status == 'unpaid')

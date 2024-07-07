@@ -62,7 +62,7 @@
                                 class="text-md sm:text-md mb-2 flex flex items-center justify-between leading-none text-gray-700 dark:text-gray-200">
                                 {{ $package->name }}
                                 <span
-                                    class="ml-2.5 mr-2 rounded bg-gray-100 px-2.5 py-0.5 text-sm font-medium uppercase text-gray-800 dark:bg-gray-700 dark:text-gray-300">{{ currency('symbol') }}{{ $package->prices()->first()->renewal_price }}/{{ $package->prices()->first()->period() }}</span>
+                                    class="ml-2.5 mr-2 rounded bg-gray-100 px-2.5 py-0.5 text-sm font-medium uppercase text-gray-800 dark:bg-gray-700 dark:text-gray-300">{{ price($package->prices()->first()->renewal_price) }}/{{ $package->prices()->first()->period() }}</span>
                             </h2>
                             @if ($order->package->id == $package->id)
                                 <a href="#" class="ml-2 text-blue-600"

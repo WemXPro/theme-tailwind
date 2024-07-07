@@ -37,7 +37,7 @@
                         </p>
                         <div class="my-8 flex items-baseline justify-center">
                             <span
-                                class="mr-2 text-5xl font-extrabold">{{ currency('symbol') }}{{ $package->prices->first()->renewal_price }}</span>
+                                class="mr-2 text-5xl font-extrabold">{{ price($package->prices->first()->renewal_price) }}</span>
                             <span class="text-gray-500 dark:text-gray-400">/{{ $package->prices->first()->periodToHuman() }}</span>
                         </div>
 

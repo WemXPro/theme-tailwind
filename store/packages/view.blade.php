@@ -73,8 +73,8 @@
                                     <div class="w-full">{!! $price->type == 'recurring'
                                         ? __('client.price_block_desc', [
                                             'period' => mb_strtolower($price->period()),
-                                            'total_price' => $price->totalPrice(),
-                                            'renewal_price' => $price->renewal_price,
+                                            'total_price' => price($price->totalPrice()),
+                                            'renewal_price' => price($price->renewal_price),
                                             'per_period' => mb_strtolower($price->period()),
                                             'symbol' => currency('symbol'),
                                         ])
