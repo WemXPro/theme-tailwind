@@ -42,10 +42,10 @@
                 <form action="{{ route('service', ['order' => $order->id, 'page' => 'renew']) }}" method="POST">
                     @csrf
                     <div class="mb-4">
-                        <div class="mb-4" id="renew-presets" style="display: unset">
-                            <label for="renew-presets-input"
+                        <div class="mb-4" id="renew-presets-{{ $order->id }}" style="display: unset">
+                            <label for="renew-presets-input-{{ $order->id }}"
                                 class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">{!! __('client.renew_for') !!}</label>
-                            <select id="renew-presets-input" name="days"
+                            <select id="renew-presets-input-{{ $order->id }}" name="days"
                                 class="mb-6 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                                 @foreach (range(1, 12) as $value)
                                     <option value="{{ $value * $order->price()->period }}" @if ($value == 1) selected @endif>{{ $value }}
@@ -54,30 +54,30 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="mb-4" id="renew-customdate" style="display: none;">
+                        <div class="mb-4" id="renew-customdate-{{ $order->id }}" style="display: none;">
                             <div>
-                                <label for="renew-presets-input" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">{{ __('client.select_date') }}</label>
+                                <label for="renew-presets-input-{{ $order->id }}" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">{{ __('client.select_date') }}</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                       <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                       </svg>
                                     </div>
-                                    <input autocomplete="off" datepicker datepicker-title="{{ __('client.current_due_date') }} {{ $order->due_date->translatedFormat(settings('date_format', 'd M Y')) }}" inline-datepicker datepicker-autohide datepicker-min-date="{{ $order->due_date->addDays(14)->format('m/d/Y') }}" id="renew-customdate-input" name="" type="text" value="{{ $order->due_date->format('m/d/Y') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                                    <input autocomplete="off" datepicker datepicker-title="{{ __('client.current_due_date') }} {{ $order->due_date->translatedFormat(settings('date_format', 'd M Y')) }}" inline-datepicker datepicker-autohide datepicker-min-date="{{ $order->due_date->addDays(14)->format('m/d/Y') }}" id="renew-customdate-input-{{ $order->id }}" name="" type="text" value="{{ $order->due_date->format('m/d/Y') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm mb-6 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
                                 </div>
                             </div>
 
                             <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                                 <div class="flex flex-col pb-3">
                                     <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">{{ __('client.total') }}</dt>
-                                    <dd class="text-lg font-semibold" id="custom-renewal-total">-</dd>
+                                    <dd class="text-lg font-semibold" id="custom-renewal-total-{{ $order->id }}">-</dd>
                                 </div>
                             </dl>
                             
                         </div>
                 
                         @if ($order->package->settings('allow_custom_renewal_date', true))
-                            <a href="#" onclick="toggleCustomRenewalDate()" id="toggle-custom-renewal-date" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ __('client.select_custom_date') }}</a>
+                            <button type="button" onclick="toggleCustomRenewalDate('{{ $order->id }}')" id="toggle-custom-renewal-date-{{ $order->id }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ __('client.select_custom_date') }}</button>
                         @endif
                     </div>
                 
@@ -95,12 +95,12 @@
 </div>
 
 <script>
-    function toggleCustomRenewalDate() {
-        var customDate = document.getElementById('renew-customdate');
-        var presets = document.getElementById('renew-presets');
-        var presetsInput = document.getElementById('renew-presets-input');
-        var customDateInput = document.getElementById('renew-customdate-input');
-        var toggle = document.getElementById('toggle-custom-renewal-date');
+    function toggleCustomRenewalDate(orderId) {
+        var customDate = document.getElementById('renew-customdate-' + orderId);
+        var presets = document.getElementById('renew-presets-' + orderId);
+        var presetsInput = document.getElementById('renew-presets-input-' + orderId);
+        var customDateInput = document.getElementById('renew-customdate-input-' + orderId);
+        var toggle = document.getElementById('toggle-custom-renewal-date-' + orderId);
 
         if (customDate.style.display === 'none') {
             customDate.style.display = 'unset';
@@ -118,7 +118,7 @@
     }
 
     // add event listener that listens for the date change
-    var renewalDatePicker = document.getElementById('renew-customdate-input');
+    var renewalDatePicker = document.getElementById('renew-customdate-input-{{ $order->id }}');
     renewalDatePicker.addEventListener('changeDate', function() {
         var startDate = new Date('{{ $order->due_date->format('m/d/Y') }}');
         var endDate = new Date(this.value);
@@ -132,6 +132,6 @@
 
         
         var totalPrice = diffDays * dailyPrice;
-        document.getElementById('custom-renewal-total').innerText = currencySymbol + totalPrice.toFixed(2) + ' ' + currencyCode;
+        document.getElementById('custom-renewal-total-{{ $order->id }}').innerText = currencySymbol + totalPrice.toFixed(2) + ' ' + currencyCode;
     });
 </script>
