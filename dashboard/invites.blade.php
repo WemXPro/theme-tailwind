@@ -6,10 +6,10 @@
 
 @section('container')
     <div class="flex flex-wrap">
-        <div class="w-full pl-4 pl-4 pl-4 pr-4 pr-4 pr-4 sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <div class="w-full pl-2 pr-2 sm:w-1/2 md:w-1/3 lg:w-1/3">
             @include(Theme::path('layouts.widgets.user_balance'))
         </div>
-        <div class="w-full pl-4 pl-4 pl-4 pr-4 pr-4 pr-4 sm:w-1/2 md:w-2/3 lg:w-3/4">
+        <div class="w-full pl-2 pr-2 sm:w-1/2 md:w-2/3 lg:w-2/3">
             @include(Theme::path('layouts.widgets.service_stats'))
 
             <section class="py-3 dark:bg-gray-900 sm:py-5">

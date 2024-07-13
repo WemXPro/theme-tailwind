@@ -5,6 +5,12 @@
 @section('content')
     @includeIf(Theme::serviceView($order->service, 'stats'))
 
+    @foreach (enabledModules() as $module)
+        @if(settings("widget:order-manage-top:{$module->getLowerName()}", false))
+            @includeIf(Theme::moduleView($module->getLowerName(), 'widgets.order-manage-top-widget'), ['order' => $order])
+        @endif
+    @endforeach
+
     @if($order->isRecurring() AND !$order->hasActiveSubscription())
     <div class="mb-4 flex rounded-lg bg-gray-50 p-4 dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <label class="flex justify-between w-full items-center cursor-pointer" onclick="enableBalanceRenew()">
@@ -140,6 +146,12 @@
         @endif
 
         @includeIf(Theme::serviceView($order->service, 'service'))
+
+        @foreach (enabledModules() as $module)
+            @if(settings("widget:order-manage-bottom:{$module->getLowerName()}", false))
+                @includeIf(Theme::moduleView($module->getLowerName(), 'widgets.order-manage-bottom-widget'), ['order' => $order])
+            @endif
+        @endforeach
     </div>
 
     <script>

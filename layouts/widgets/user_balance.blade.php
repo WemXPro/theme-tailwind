@@ -1,5 +1,5 @@
 <div
-    class="mb-6 rounded-lg bg-white p-3 p-6 leading-6 text-gray-500 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 dark:bg-gray-800 dark:text-gray-400">
+    class="mb-4 rounded-lg bg-white p-3 p-6 leading-6 text-gray-500 text-slate-700 shadow rounded-lg dark:bg-gray-800 dark:text-gray-400">
     <div class="text-center text-gray-500 dark:text-gray-400">
         @if (auth()->user()->avatar !== null)
             <img class="mx-auto mb-4 h-20 w-20 rounded-full" src="{{ auth()->user()->avatar() }}" alt="user photo" />
