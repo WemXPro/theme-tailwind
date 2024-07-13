@@ -130,7 +130,7 @@
                                         </span>
                                         <span class="block truncate text-sm font-normal text-gray-500 dark:text-gray-400">
                                             @if (Auth::user()->oauthService('github')->exists())
-                                                <a class="text-blue-500"
+                                                <a class="text-primary-500"
                                                     href="{{ Auth::user()->oauthService('github')->first()->external_profile }}"
                                                     target="_blank">{{ Auth::user()->oauthService('github')->first()->external_profile }}</a>
                                             @else
@@ -318,7 +318,7 @@
                                 {{ __('client.select_an_option') }}
                             </label>
                             <select id="countries" name="country"
-                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
                                 @foreach (config('utils.countries') as $key => $country)
                                     <option value="{{ $key }}" @if (auth()->user()->address->country == $key) selected @endif>
                                         {{ $country }}</option>
@@ -369,7 +369,7 @@
                                 <input type="checkbox" value="1" name="is_subscribed" class="peer sr-only"
                                     @if (auth()->user()->is_subscribed) checked @endif />
                                 <div
-                                    class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800">
+                                    class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-primary-800">
                                 </div>
                                 <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
                                     {!! __('client.subscribe_to_emails') !!}
@@ -682,7 +682,7 @@
                             <div class="flex h-5 items-center">
                                 <input id="helper-checkbox" aria-describedby="helper-checkbox-text" name="disclosure" type="checkbox"
                                     value="1" required
-                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
+                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600">
                             </div>
                             <div class="ml-2 text-sm">
                                 <label for="helper-checkbox" class="font-medium text-gray-900 dark:text-gray-300"></label>
