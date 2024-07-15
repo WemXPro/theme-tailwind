@@ -126,7 +126,7 @@
                             </div>
                         </div>
                         {{-- load configurable options --}}
-                        @foreach($package->configOptions as $option)
+                        @foreach($package->configOptions()->orderBy('order', 'desc')->get() as $option)
                             @if($option->type == 'number')
                             <div class="mb-4">
                                 <label for="quantity-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
@@ -523,7 +523,7 @@
         function calculateCustomOptionsPrice() {
             let price = 0;
 
-            @foreach($package->configOptions as $option)
+            @foreach($package->configOptions()->orderBy('order', 'desc')->get() as $option)
                 @if($option->type == 'select')
                     select = document.getElementById('option-{{ $option->id }}');
                     price += select.options[select.selectedIndex].getAttribute('data-select-option-unitprice') / 30 * activePrice().period;
