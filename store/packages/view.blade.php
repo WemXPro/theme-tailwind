@@ -161,7 +161,7 @@
                                         @endphp
                                         @foreach ($range as $value)
                                             @php
-                                                $percentage = ($value - $min) / ($max - $min) * 100;
+                                                $percentage = round(($value - $min) / ($max - $min) * 100, 2);
                                             @endphp
                                             <span class="text-sm text-gray-500 dark:text-gray-400 absolute" style="left: {{ $percentage }}%; transform: translateX(-50%);">{{ $value }}</span>
                                         @endforeach
