@@ -4,7 +4,7 @@
 
 @section('container')
     @if (Cookie::get('affiliate'))
-        <div class="mb-4 flex items-center rounded-lg border border-blue-300 bg-blue-50 p-4 text-sm text-blue-800 dark:border-blue-800 dark:bg-gray-800 dark:text-blue-400"
+        <div class="mb-4 flex items-center rounded-lg border border-primary-300 bg-primary-50 p-4 text-sm text-primary-800 dark:border-primary-800 dark:bg-gray-800 dark:text-primary-400"
             role="alert">
             <svg class="mr-3 inline h-4 w-4 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                 viewBox="0 0 20 20">
@@ -105,7 +105,7 @@
                                 class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">{!! __('client.domain') !!}</label>
                             <input type="text" id="helper-text" name="domain" value="{{ old('domain') }}"
                                 aria-describedby="helper-text-explanation"
-                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                                 placeholder="i.e example.com">
                             <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">
                                 {!! __('client.enter_domain_helper') !!}
@@ -136,7 +136,7 @@
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
                                         </svg>
                                     </button>
-                                    <input type="text" id="option-{{ $option->id }}" name="custom_option[{{ $option->key }}]" min="{{ $option->data['min'] ?? '0' }}" max="{{ $option->data['max'] ?? '0' }}" value="{{ $option->data['default_value'] ?? '0' }}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="999" required>
+                                    <input type="text" id="option-{{ $option->id }}" name="custom_option[{{ $option->key }}]" min="{{ $option->data['min'] ?? '0' }}" max="{{ $option->data['max'] ?? '0' }}" value="{{ $option->data['default_value'] ?? '0' }}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="999" required>
                                     <button type="button" id="increment-button" onclick="incrementInput('option-{{ $option->id }}')" data-input-counter-increment="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                         <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
@@ -149,19 +149,34 @@
             
                             <div class="relative mb-10">
                                 <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
-                                <input id="option-{{ $option->id }}" type="range" name="custom_option[{{ $option->key }}]" value="{{ $option->data['default_value'] ?? 0 }}" min="{{ $option->data['min'] ?? 0 }}" max="{{ $option->data['max'] ?? 10 }}" step="{{ $option->data['step'] ?? 1 }}" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
-                                <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">Min ({{ $option->data['min'] ?? 0 }})</span>
-                                {{-- <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$500</span>
-                                <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$1000</span> --}}
-                                <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">Max ({{ $option->data['max'] ?? 0 }})</span>
+                                <div class="p-2">
+                                    <input id="option-{{ $option->id }}" type="range" name="custom_option[{{ $option->key }}]" value="{{ $option->data['default_value'] ?? 0 }}" min="{{ $option->data['min'] ?? 0 }}" max="{{ $option->data['max'] ?? 10 }}" step="{{ $option->data['step'] ?? 1 }}" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                                    <div class="relative mt-2">
+                                        <span class="text-sm ml-2 text-gray-500 dark:text-gray-400 absolute left-0 transform -translate-x-1/2 -bottom-6">{{ $option->data['min'] ?? 0 }}</span>
+                                        @php
+                                            $min = $option->data['min'] ?? 0;
+                                            $max = $option->data['max'] ?? 10;
+                                            $step = $option->data['step'] ?? 1;
+                                            $range = range($min + $step, $max - $step, $step);
+                                        @endphp
+                                        @foreach ($range as $value)
+                                            @php
+                                                $percentage = ($value - $min) / ($max - $min) * 100;
+                                            @endphp
+                                            <span class="text-sm text-gray-500 dark:text-gray-400 absolute" style="left: {{ $percentage }}%; transform: translateX(-50%);">{{ $value }}</span>
+                                        @endforeach
+                                        <span class="text-sm mr-2 text-gray-500 dark:text-gray-400 absolute right-0 transform translate-x-1/2 -bottom-6">{{ $option->data['max'] ?? 0 }}</span>
+                                    </div>
+                                </div>
                             </div>
+                            
 
                             @elseif($option->type == 'select')
                             <div class="mb-4">
                                 <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
-                                <select id="option-{{ $option->id }}" name="custom_option[{{ $option->key }}]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <select id="option-{{ $option->id }}" name="custom_option[{{ $option->key }}]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     @foreach($option->data['options'] as $key => $selectOption)
-                                        <option value="{{ $key }}" @if($option->data['label'] ?? 'null' == $selectOption['default_value']) selected @endif data-select-option-value="{{ $selectOption['value'] }}" data-select-option-unitprice="{{ $selectOption['monthly_price'] }}">{{ $selectOption['name'] }} @ {{ price($selectOption['monthly_price'] / 30) }} {{ strtolower(__('admin.daily')) }}</option>
+                                        <option value="{{ $selectOption['value'] }}" @if($option->data['label'] ?? 'null' == $selectOption['default_value']) selected @endif data-select-option-value="{{ $selectOption['value'] }}" data-select-option-unitprice="{{ $selectOption['monthly_price'] }}">{{ $selectOption['name'] }} @ {{ price($selectOption['monthly_price'] / 30) }} {{ strtolower(__('admin.daily')) }}</option>
                                     @endforeach
                                 </select>
                                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{!! $option->data['description'] ?? '' !!}</p>
@@ -169,7 +184,7 @@
                             @elseif($option->type == 'text')
                             <div class="mb-4">
                                 <label for="helper-text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
-                                <input type="{{ $option->data['type'] ?? 'text' }}" name="custom_option[{{ $option->key }}]" value="{{ $option->data['default_value'] ?? '' }}" placeholder="{{ $option->data['placeholder'] ?? '' }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <input type="{{ $option->data['type'] ?? 'text' }}" name="custom_option[{{ $option->key }}]" value="{{ $option->data['default_value'] ?? '' }}" placeholder="{{ $option->data['placeholder'] ?? '' }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{!! $option->data['description'] ?? '' !!}</p>                                
                             </div>
                             @endif
@@ -199,7 +214,7 @@
                                         </label>
                                         @if ($field['type'] == 'select')
                                             <select
-                                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                                                 tabindex="-1" aria-hidden="true" name="{{ $field['key'] }}" id="{{ $field['key'] }}"
                                                 @if (isset($field['disabled']) and $field['disabled']) disabled @endif
                                                 @if (isset($field['multiple']) and $field['multiple']) multiple @endif>
@@ -219,14 +234,14 @@
                                                     @if (getValueByKey($field['key'], $package->data, $field['default_value'] ?? '0')) checked @endif
                                                     @if (isset($field['disabled']) and $field['disabled']) disabled @endif>
                                                 <div
-                                                    class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800">
+                                                    class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-primary-800">
                                                 </div>
                                                 <span
                                                     class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">{!! $field['name'] !!}</span>
                                             </label>
                                         @else
                                             <input
-                                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                                                 type="{{ $field['type'] }}" name="{{ $field['key'] }}" id="{{ $field['key'] }}"
                                                 @isset($field['min']) min="{{ $field['min'] }}" @endisset
                                                 @isset($field['max']) max="{{ $field['max'] }}" @endisset
@@ -262,10 +277,10 @@
                                 <i class='bx bxs-coupon text-gray-500 dark:text-gray-400'></i>
                             </div>
                             <input type="text" id="coupon"
-                                class="mr-4 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                class="mr-4 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                                 placeholder="coupon" name="coupon" value="{{ session('coupon_code') }}" />
                             <button type="button" onclick="applyCoupon()"
-                                class="mr-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">{{ __('client.apply') }}</button>
+                                class="mr-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">{{ __('client.apply') }}</button>
 
                         </div>
                         <p id="coupon-description" class="mt-2 text-sm text-gray-500 dark:text-gray-400"></p>
@@ -315,7 +330,7 @@
                                     <i class='bx bxs-building-house text-gray-500 dark:text-gray-400'></i>
                                 </div>
                                 <input type="text" id="zip_code" required
-                                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                                     placeholder="Zip/Post Code" name="zip_code"
                                     value="{{ session('zip_code', auth()->user()->address->zip_code ?? null) }}" />
                             </div>
@@ -346,7 +361,7 @@
                                 <div></div>
                             </div>
                             <textarea id="message" name="notes" rows="4"
-                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                                 placeholder="{!! __('client.custom_notes_placeholder') !!}"></textarea>
                         </div>
                     </div>
@@ -415,11 +430,11 @@
                         <div class="mb-4 flex items-start">
                             <div class="flex h-5 items-center">
                                 <input required="" id="terms" aria-describedby="terms" type="checkbox"
-                                    class="focus:ring-3 h-4 w-4 rounded border-gray-300 bg-gray-50 focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600" />
+                                    class="focus:ring-3 h-4 w-4 rounded border-gray-300 bg-gray-50 focus:ring-primary-300 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" />
                             </div>
                             <div class="ml-3 text-sm">
                                 <label for="terms" class="font-medium text-gray-900 dark:text-white">{!! __('client.i_accept_the') !!}<a
-                                        class="ml-1 text-blue-700 hover:underline dark:text-blue-500" href="{{ route('page', $page->path) }}"
+                                        class="ml-1 text-primary-700 hover:underline dark:text-primary-500" href="{{ route('page', $page->path) }}"
                                         target="_blank">{!! __('client.terms_and_conditions') !!}</a></label>
                             </div>
                         </div>
