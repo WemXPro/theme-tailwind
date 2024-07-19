@@ -15,7 +15,7 @@
                             class="mb-2 mb-3 mr-2 flex justify-center rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">{!! __('client.visit_website') !!}
                         </a>
                         <a href="https://www.whois.com/whois/{{ $order->domain }}" target="_blank"
-                            class="mb-2 mr-2 flex justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{!! __('client.whois_info') !!}
+                            class="mb-2 mr-2 flex justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{!! __('client.whois_info') !!}
                         </a>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                             </svg>
                             <span class="ml-3 flex-1 whitespace-nowrap">{!! __('client.invoices') !!}</span>
                             <span
-                                class="ml-3 inline-flex h-3 w-3 items-center justify-center rounded-full bg-blue-100 p-3 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                class="ml-3 inline-flex h-3 w-3 items-center justify-center rounded-full bg-primary-100 p-3 text-sm font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
                                 {{ $order->payments->where('user_id', auth()->user()->id)->count() }}
                             </span>
                         </a>

@@ -36,7 +36,7 @@
                             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                                 {!! __('client.drag_and_drop') !!}
                             </p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG (MAX. 800x400px)</p>
                         </div>
                         <input id="dropzone-file" type="file" name="avatar" accept="image/*" required class="hidden">
                     </label>

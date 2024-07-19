@@ -158,7 +158,7 @@
                                                 </svg>
                                             </div>
                                             <input type="email" disabled
-                                                class="datepicker-input block w-full cursor-not-allowed rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                                                class="datepicker-input block w-full cursor-not-allowed rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                                                 placeholder="{{ $member->email }}">
                                         </div>
                                         <div class="mb-6">
@@ -166,7 +166,7 @@
                                                 class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">{!! __('client.user_role') !!}</label>
                                             <select id="is_admin-{{ $member->id }}" onchange="hidePermissions({{ $member->id }})"
                                                 name="is_admin"
-                                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+                                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
                                                 <option value="1" @if ($member->is_admin) selected @endif>{!! __('client.all_administrator_permissions') !!}</option>
                                                 <option value="0" @if (!$member->is_admin) selected @endif>{!! __('client.select_member_permissions') !!}</option>
                                             </select>
@@ -185,7 +185,7 @@
                                                                 name="permissions[{{ $key }}]"
                                                                 aria-describedby="permission-{{ $key }}-text" type="checkbox"
                                                                 value="@if (isset($permission['contains']) and $permission['contains']) contains @endif"
-                                                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
+                                                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600">
                                                         </div>
                                                         <div class="ml-2 text-sm">
                                                             <label for="permission-{{ $key }}"
@@ -252,13 +252,13 @@
                     </svg>
                 </div>
                 <input type="email" name="email" id="email"
-                    class="datepicker-input block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                    class="datepicker-input block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                     placeholder="john@example.com">
             </div>
             <div class="mb-6">
                 <label for="is_admin-0" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">{!! __('client.user_role') !!}</label>
                 <select id="is_admin-0" onchange="hidePermissions(0)" name="is_admin"
-                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
                     <option value="1">{!! __('client.all_administrator_permissions') !!}</option>
                     <option value="0" selected>{!! __('client.select_member_permissions') !!}</option>
                 </select>
@@ -272,7 +272,7 @@
                                 <input id="permission-{{ $key }}" name="permissions[{{ $key }}]"
                                     aria-describedby="permission-{{ $key }}-text" type="checkbox"
                                     value="@if (isset($permission['contains']) and $permission['contains']) contains @endif"
-                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600">
+                                    class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600">
                             </div>
                             <div class="ml-2 text-sm">
                                 <label for="permission-{{ $key }}"

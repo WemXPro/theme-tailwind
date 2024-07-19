@@ -60,7 +60,7 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('invoice', ['payment' => $payment->id]) }}" target="_blank"
-                                    class="font-medium text-blue-600 hover:underline dark:text-blue-500">
+                                    class="font-medium text-primary-600 hover:underline dark:text-primary-500">
                                     {!! __('client.invoice') !!}
                                 </a>
                             </td>
