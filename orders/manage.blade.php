@@ -40,7 +40,7 @@
                     <h6 class="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">{!! __('client.billing_cycle') !!}</h6>
                     <div class="flex items-center text-gray-500 dark:text-gray-400">
                         <span class="mr-1 font-bold text-gray-500 dark:text-white">
-                            {{ price($order->price['renewal_price']) }}
+                            {{ price($order->price()->renewal_price) }}
                         </span>
                         / {{ $order->period() }}
                     </div>
