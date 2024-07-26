@@ -76,6 +76,101 @@
                 @include(Theme::path('components.orders.buttons'), $order)
             </div>
         </div>
+        
+        @if($order->priceModifiers->count() > 0)
+        <div class="relative overflow-x-auto shadow-md rounded">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Description
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <div class="flex items-center">
+                                Value
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <div class="flex items-center">
+                                Base Price
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <div class="flex items-center">
+                                Price / {{ $order->price()->period }} days
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <div class="flex items-center">
+                                Cancellation Fee
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <div class="flex items-center">
+                                Upgrade Fee
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <div class="flex items-center">
+                                Created At
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($order->priceModifiers as $modifier)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $modifier->description }}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ Str::of($modifier->value)->limit(32); }}
+
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ price($modifier->base_price) }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ price($modifier->daily_price * $order->price()->period) }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ price($modifier->cancellation_fee) }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ price($modifier->upgrade_fee) }}
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            {{ $modifier->created_at->diffForHumans() }}
+                        </td>
+                    </tr>
+                    @endforeach
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Total
+                        </th>
+                        <td class="px-6 py-4">
+                            
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ price($order->priceModifiers->sum('base_price')) }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ price($order->priceModifiers->sum('daily_price') * $order->price()->period) }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ price($order->priceModifiers->sum('cancellation_fee')) }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ price($order->priceModifiers->sum('upgrade_fee')) }}
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        @endif
 
         @if ($order->getService()->canChangePassword())
             <div class="mb-4 flex items-end justify-between rounded-lg bg-white p-6 shadow dark:bg-gray-800">

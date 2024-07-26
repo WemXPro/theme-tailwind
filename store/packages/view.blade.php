@@ -170,7 +170,6 @@
                                 </div>
                             </div>
                             
-
                             @elseif($option->type == 'select')
                             <div class="mb-4">
                                 <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
