@@ -146,7 +146,7 @@
                                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{!! $option->data['description'] ?? '' !!}</p>
                             </div>
                             @elseif($option->type == 'range')
-            
+
                             <div class="relative mb-10">
                                 <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
                                 <div class="p-2">
@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             @elseif($option->type == 'select')
                             <div class="mb-4">
                                 <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
@@ -184,7 +184,7 @@
                             <div class="mb-4">
                                 <label for="helper-text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
                                 <input type="{{ $option->data['type'] ?? 'text' }}" name="custom_option[{{ $option->key }}]" value="{{ $option->data['default_value'] ?? '' }}" placeholder="{{ $option->data['placeholder'] ?? '' }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{!! $option->data['description'] ?? '' !!}</p>                                
+                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{!! $option->data['description'] ?? '' !!}</p>
                             </div>
                             @endif
                         @endforeach
@@ -197,9 +197,9 @@
                         <div class="custom-note">
                             <div class="mb-3 flex justify-between rounded-t sm:mb-3">
                                 <div class="text-lg text-gray-900 dark:text-white md:text-xl">
-                                    <h3 class="font-semibold">{!! __('client.custom_option') !!}</h3>
+                                    <h3 class="font-semibold">{!! __('client.custom_options') !!}</h3>
                                     <p class="text-sm text-gray-500 dark:text-gray-400">
-                                        {!! __('client.custom_option_desc') !!}
+                                        {!! __('client.custom_options_desc') !!}
                                     </p>
                                 </div>
                                 <div></div>
@@ -541,7 +541,7 @@
                 @if($option->type == 'select')
                     select = document.getElementById('option-{{ $option->id }}');
                     price += select.options[select.selectedIndex].getAttribute('data-select-option-unitprice') / 30 * activePrice().period;
-                    
+
                 @elseif($option->type == 'number')
                     price += {{ $option->data['monthly_price_unit'] }} / 30 * document.getElementById('option-{{ $option->id }}').value * activePrice().period;
                 @elseif($option->type == 'range')
