@@ -119,9 +119,9 @@
                     <div class="custom-note">
                         <div class="flex justify-between mb-3 rounded-t sm:mb-3">
                             <div class="text-lg text-gray-900 md:text-xl dark:text-white">
-                                <h3 class="font-semibold">Configurable Options</h3>
+                                <h3 class="font-semibold">{{ __('client.configurable_options') }}</h3>
                                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                                    Configurable options allow you to customize your product.
+                                    {{ __('client.configurable_options_desc') }}
                                 </p>
                             </div>
                         </div>
