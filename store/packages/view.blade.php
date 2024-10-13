@@ -147,7 +147,7 @@
                             </div>
                             @elseif($option->type == 'range')
 
-                            <div class="relative mb-10">
+                            <div class="relative mb-6">
                                 <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
                                 <div class="p-2">
                                     <input id="option-{{ $option->id }}" type="range" name="custom_option[{{ $option->key }}]" value="{{ $option->data['default_value'] ?? 0 }}" min="{{ $option->data['min'] ?? 0 }}" max="{{ $option->data['max'] ?? 10 }}" step="{{ $option->data['step'] ?? 1 }}" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
@@ -168,6 +168,9 @@
                                         <span class="text-sm mr-2 text-gray-500 dark:text-gray-400 absolute right-0 transform translate-x-1/2 -bottom-6">{{ $option->data['max'] ?? 0 }}</span>
                                     </div>
                                 </div>
+                                <div class="mt-8">
+                                    <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{!! $option->data['description'] ?? '' !!}</p>
+                                </div>
                             </div>
 
                             @elseif($option->type == 'select')
@@ -175,7 +178,7 @@
                                 <label for="option-{{ $option->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{!! $option->data['label'] ?? $option->key !!}</label>
                                 <select id="option-{{ $option->id }}" name="custom_option[{{ $option->key }}]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     @foreach($option->data['options'] as $key => $selectOption)
-                                        <option value="{{ $selectOption['value'] }}" @if($option->data['label'] ?? 'null' == $selectOption['default_value']) selected @endif data-select-option-value="{{ $selectOption['value'] }}" data-select-option-unitprice="{{ $selectOption['monthly_price'] }}">{{ $selectOption['name'] }} @ {{ price($selectOption['monthly_price'] / 30) }} {{ strtolower(__('admin.daily')) }}</option>
+                                        <option value="{{ $selectOption['value'] }}" data-select-option-value="{{ $selectOption['value'] }}" data-select-option-unitprice="{{ $selectOption['monthly_price'] }}">{{ $selectOption['name'] }} @ {{ price($selectOption['monthly_price'] / 30 * $package->prices->first()->period) }} {{ $package->prices->first()->periodToHuman() }}</option>
                                     @endforeach
                                 </select>
                                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{!! $option->data['description'] ?? '' !!}</p>
