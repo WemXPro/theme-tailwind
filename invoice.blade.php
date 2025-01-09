@@ -84,6 +84,7 @@
                                                 <th scope="col" class="p-4 text-left text-xs font-semibold uppercase tracking-wider">
                                                     {!! __('client.discounts') !!}
                                                 </th>
+
                                                 <th scope="col"
                                                     class="rounded-r-lg p-4 text-left text-xs font-semibold uppercase tracking-wider">
                                                     {!! __('client.total') !!}
@@ -124,12 +125,12 @@
                                 {{ price($payment->amount) }}
                             </div>
                         </div>
-                        {{-- @if (settings('taxes'))
+                        @if (settings('taxes'))
                             <div class="flex justify-between">
                                 <div class="text-sm font-medium uppercase text-gray-500 dark:text-gray-400">{!! __('client.tax_rate') !!}</div>
-                                <div class="text-base font-medium text-gray-900 dark:text-white">0%</div>
+                                <div class="text-base font-medium text-gray-900 dark:text-white">{{ price($payment->tax->amount ?? 0) }}</div>
                             </div>
-                        @endif --}}
+                        @endif
                         <div class="flex justify-between">
                             <div class="text-sm font-medium uppercase text-gray-500 dark:text-gray-400">
                                 {!! __('client.discounts') !!}</div>
