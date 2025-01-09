@@ -57,10 +57,11 @@
 
         // Discount calculation
         const discount = getTotalDiscount(price.price + price.setup_fee);
-        document.getElementById('discounted').textContent = discount.toFixed(2);
+        document.getElementById('discounted').textContent = discount;
 
         // Tax calculation
-        calculateTax((price.price + price.setup_fee) - discount);
+        const taxed = calculateTax((price.price + price.setup_fee) - discount);
+        document.getElementById('taxes').textContent = taxed.toFixed(2);
 
         // Final price (including options, discounts, taxes)
         const total = Math.max(0, getTotalPrice(price)).toFixed(2);
@@ -179,8 +180,7 @@
             @endif
         }
 
-        totalTax = parseFloat(totalTax.toFixed(2));
-        document.getElementById('taxes').textContent = totalTax.toFixed(2);
+        return parseFloat(totalTax.toFixed(2));
     }
 
     function applyCoupon() {
