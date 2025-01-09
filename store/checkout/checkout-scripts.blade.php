@@ -147,6 +147,7 @@
                 totalDiscount += coupon_data.discount_amount;
             }
         }
+        document.getElementById('discounted').textContent = totalDiscount.toFixed(2);
         return parseFloat(totalDiscount.toFixed(2));
     }
 
