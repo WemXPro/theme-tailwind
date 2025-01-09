@@ -57,7 +57,7 @@
 
         // Discount calculation
         const discount = getTotalDiscount(price.price + price.setup_fee);
-        document.getElementById('discounted').textContent = discount;
+        document.getElementById('discounted').textContent = discount.toFixed(2);
 
         // Tax calculation
         const taxed = calculateTax((price.price + price.setup_fee) - discount);
@@ -179,7 +179,7 @@
                 totalTax = totalPrice - (totalPrice / (1 + ratePercent));
             @endif
         }
-
+        document.getElementById("taxes").innerHTML = totalTax.toFixed(2);
         return parseFloat(totalTax.toFixed(2));
     }
 
