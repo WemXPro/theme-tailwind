@@ -1,0 +1,16 @@
+{
+    "name": "Tailwind",
+    "type": "template",
+    "description": "Tailwind CSS template",
+    "version": "1.0.0",
+    "author": "Mubeen",
+    "alias": "tailwind",
+    "wrapper": "layouts/wrapper",
+    "assets": "/assets/themes/default/",
+    "keywords": [],
+    "priority": 0,
+    "providers": [],
+    "files": [],
+    "icon": "https://imgur.png",
+    "wemx_version": "2.2.0"
+}
