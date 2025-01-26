@@ -28,7 +28,7 @@
     <!-- Custom CSS -->
     {{-- @vite(['resources/css/app.css','resources/js/app.js']) --}}
 
-    <link rel="stylesheet" href="{{ Theme::get('Default')->assets }}assets/css/custom.css">
+    <link rel="stylesheet" href="{{ asset('assets/themes/admin/css/custom.css')  }}">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
     @if (settings('google::analytics_code'))
