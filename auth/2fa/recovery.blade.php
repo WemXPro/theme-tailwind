@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 
 @section('title', 'Recover 2FA')
 

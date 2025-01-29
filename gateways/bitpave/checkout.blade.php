@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 
 @section('container')
     <div class="flex flex-wrap">

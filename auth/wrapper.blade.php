@@ -26,7 +26,7 @@
     <meta property="og:image" content="@settings('seo::image', '/static/wemx.png')">
 
     <link rel="icon" href="@settings('favicon', '/assets/core/img/logo.png')">
-    @include(Theme::path('layouts.tailwind'))
+    @include('layouts::tailwind')
 
     @if (Settings::getJson('encrypted::captcha::cloudflare', 'is_enabled', false))
         @turnstileScripts()

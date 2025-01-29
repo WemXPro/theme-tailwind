@@ -155,7 +155,7 @@
     }
 </script>
 
-@include(Theme::path('layouts.cookie'))
+@include('layouts::cookie')
 
 {{-- footer --}}
 <footer class="bg-white p-4 dark:bg-gray-800 sm:p-6" style="margin-top: auto;">
@@ -185,7 +185,7 @@
                             @endif
                         @endforeach
                         @foreach (enabledModules() as $module)
-                            @includeIf(Theme::moduleView($module->getLowerName(), 'elements.footer-resources'))
+                            @includeIf(theme()::moduleView($module->getLowerName(), 'elements.footer-resources'))
                         @endforeach
                     </ul>
                 </div>
@@ -202,7 +202,7 @@
                             @endif
                         @endforeach
                         @foreach (enabledModules() as $module)
-                            @includeIf(Theme::moduleView($module->getLowerName(), 'elements.footer-help'))
+                            @includeIf(theme()::moduleView($module->getLowerName(), 'elements.footer-help'))
                         @endforeach
                     </ul>
                 </div>
@@ -221,7 +221,7 @@
                             @endif
                         @endforeach
                         @foreach (enabledModules() as $module)
-                            @includeIf(Theme::moduleView($module->getLowerName(), 'elements.footer-legal'))
+                            @includeIf(theme()::moduleView($module->getLowerName(), 'elements.footer-legal'))
                         @endforeach
                     </ul>
                 </div>

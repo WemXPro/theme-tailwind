@@ -1,13 +1,13 @@
-@extends(Theme::wrapper(), ['meta_description' => $article->short_desc])
+@extends(theme()::wrapper(), ['meta_description' => $article->short_desc])
 
 @section('title', $article->title)
 
 @section('header')
-    <link rel="stylesheet" href="{{ Theme::get('Default')->assets }}assets/css/typography.min.css">
+   <link rel="stylesheet" href="{{ theme()::assets('css/typography.min.css') }}">
 @endsection
 
 @section('header')
-    <link rel="stylesheet" href="{{ Theme::get('Default')->assets }}assets/css/typography.min.css">
+   <link rel="stylesheet" href="{{ theme()::assets('css/typography.min.css') }}">
 @endsection
 
 @section('container')
@@ -290,7 +290,7 @@
                         </article>
                     @endforeach
                     <div class="mt-2">
-                        {{ $article->comments()->latest()->paginate(5)->links(Theme::pagination()) }}
+                        {{ $article->comments()->latest()->paginate(5)->links(theme()::pagination()) }}
                     </div>
                 </div>
             </section>

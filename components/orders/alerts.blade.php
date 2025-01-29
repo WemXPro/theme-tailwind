@@ -64,7 +64,7 @@
     </div>
 @endif
 
-@if (ErrorLog::where('order_id', $order->id)->where('severity', '!=', 'RESOLVED')->count() !== 0)
+@if (WLogger::where('order_id', $order->id)->where('severity', '!=', 'RESOLVED')->count() !== 0)
     <div id="alert-additional-content-2"
         class="mb-4 rounded-lg border border-red-300 bg-red-50 p-4 text-red-800 dark:border-red-800 dark:bg-gray-800 dark:text-red-400"
         role="alert">

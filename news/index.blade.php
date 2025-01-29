@@ -1,9 +1,9 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 
 @section('title', 'Articles')
 
 @section('header')
-    <link rel="stylesheet" href="{{ Theme::get('Default')->assets }}assets/css/typography.min.css">
+   <link rel="stylesheet" href="{{ theme()::assets('css/typography.min.css') }}">
 @endsection
 
 @section('container')
@@ -15,7 +15,7 @@
             </div>
             <div class="">
                 @if ($articles->count() == 0)
-                    @include(Theme::path('empty-state'), [
+                    @include('theme::empty-state', [
                         'title' => __('client.no_new_articles'),
                         'description' => __('client.no_new_articles_desc'),
                     ])
@@ -190,7 +190,7 @@
                     <hr class="mb-6 border-gray-200 dark:border-gray-700">
                 @endforeach
                 <div class="mt-2 flex items-center justify-end">
-                    {{ $articles->links(Theme::pagination()) }}
+                    {{ $articles->links(theme()::pagination()) }}
                 </div>
             </div>
         </div>

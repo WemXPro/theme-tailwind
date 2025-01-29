@@ -1,4 +1,4 @@
-@extends(Theme::path('auth.registration.layout'))
+@extends('auth::registration.layout')
 
 @section('content')
     <div class="w-full">

@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 
 @section('title', __('client.pricing_for_service', ['service' => $category->name]))
 

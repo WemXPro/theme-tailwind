@@ -1,9 +1,9 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 
 @section('title', 'Suspended')
 
 @section('header')
-    <link rel="stylesheet" href="{{ Theme::get('Default')->assets }}assets/css/typography.min.css">
+   <link rel="stylesheet" href="{{ theme()::assets('css/typography.min.css') }}">
 @endsection
 
 @section('container')

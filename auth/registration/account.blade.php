@@ -1,4 +1,4 @@
-@extends(Theme::path('auth.registration.layout'))
+@extends('auth::registration.layout')
 
 @section('content')
     <div class="w-full">
@@ -41,7 +41,7 @@
         </h1>
 
         {{-- include alerts --}}
-        @include(Theme::path('layouts.alerts'))
+        @include('layouts::alerts')
 
         <form method="POST" action="#">
             @csrf

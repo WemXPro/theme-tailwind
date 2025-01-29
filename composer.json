@@ -1,0 +1,25 @@
+{
+    "name": "wemx/tailwind",
+    "description": "Tailwind CSS template",
+    "authors": [
+        {
+            "name": "Mubeen",
+            "email": "info@wemx.net"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Templates\\Tailwind\\Provider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Templates\\Tailwind\\": "app"
+        }
+    }
+}

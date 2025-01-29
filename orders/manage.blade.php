@@ -1,13 +1,13 @@
-@extends(Theme::path('orders.master'))
+@extends('theme::orders.master')
 
 @section('title', __('client.services'))
 
 @section('content')
-    @includeIf(Theme::serviceView($order->service, 'stats'))
+    @includeIf(theme()::serviceView($order->service, 'stats'))
 
     @foreach (enabledModules() as $module)
         @if(settings("widget:order-manage-top:{$module->getLowerName()}", false))
-            @includeIf(Theme::moduleView($module->getLowerName(), 'widgets.order-manage-top-widget'), ['order' => $order])
+            @includeIf(theme()::moduleView($module->getLowerName(), 'widgets.order-manage-top-widget'), ['order' => $order])
         @endif
     @endforeach
 
@@ -27,7 +27,7 @@
         </div>
         @endif
     @endif
-    
+
     <div id="service">
         <div class="mb-4 rounded-lg bg-gray-50 p-4 dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $order->package['name'] }}
@@ -75,10 +75,10 @@
                 @endif
             </div>
             <div class="mt-4 flex items-center space-x-3">
-                @include(Theme::path('components.orders.buttons'), $order)
+                @include('components::orders.buttons', $order)
             </div>
         </div>
-        
+
         @if($order->priceModifiers->count() > 0)
         <div class="relative overflow-x-auto shadow-md rounded">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -151,7 +151,7 @@
                             Total
                         </th>
                         <td class="px-6 py-4">
-                            
+
                         </td>
                         <td class="px-6 py-4">
                             {{ price($order->priceModifiers->sum('base_price')) }}
@@ -166,7 +166,7 @@
                             {{ price($order->priceModifiers->sum('upgrade_fee')) }}
                         </td>
                         <td class="px-6 py-4 text-right">
-                            
+
                         </td>
                     </tr>
                 </tbody>
@@ -242,17 +242,17 @@
             </div>
         @endif
 
-        @includeIf(Theme::serviceView($order->service, 'service'))
+        @includeIf(theme()::serviceView($order->service, 'service'))
 
         @foreach (enabledModules() as $module)
             @if(settings("widget:order-manage-bottom:{$module->getLowerName()}", false))
-                @includeIf(Theme::moduleView($module->getLowerName(), 'widgets.order-manage-bottom-widget'), ['order' => $order])
+                @includeIf(theme()::moduleView($module->getLowerName(), 'widgets.order-manage-bottom-widget'), ['order' => $order])
             @endif
         @endforeach
     </div>
 
     <script>
-        function enableBalanceRenew() 
+        function enableBalanceRenew()
         {
             window.location.href = "{{ route('service', ['order' => $order->id, 'page' => 'balance-renew']) }}";
         }

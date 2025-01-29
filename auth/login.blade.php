@@ -1,4 +1,4 @@
-@extends(Theme::path('auth.wrapper'))
+@extends('auth::wrapper')
 
 @section('title', __('client.login'))
 
@@ -64,14 +64,9 @@
                             </a>
                         @endif
                     </div>
-                    {{-- <div class="flex items-center">
-                        <div class="h-0.5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                        <div class="px-5 text-center text-gray-500 dark:text-gray-400">or</div>
-                        <div class="h-0.5 w-full bg-gray-200 dark:bg-gray-700"></div>
-                    </div> --}}
 
                     {{-- include alerts --}}
-                    @include(Theme::path('layouts.alerts'))
+                    @include('layouts::alerts')
 
                     <div>
 

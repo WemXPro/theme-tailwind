@@ -26,9 +26,7 @@
     <meta property="og:image" content="@settings('seo::image', '/static/wemx.png')">
 
     <!-- Custom CSS -->
-    {{-- @vite(['resources/css/app.css','resources/js/app.js']) --}}
-
-    <link rel="stylesheet" href="{{ asset('assets/themes/admin/css/custom.css')  }}">
+    <link rel="stylesheet" href="{{ theme()::assets('css/custom.css')  }}">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
     @if (settings('google::analytics_code'))
@@ -46,15 +44,15 @@
         </script>
     @endif
 
-    @include(Theme::path('layouts.tailwind'))
+    @include('layouts::tailwind')
     @yield('header')
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900" style="min-height: 100vh;display: flex;flex-direction: column;">
-    @include(Theme::path('layouts.header'))
+    @include('layouts::header')
 
-    <div class="container mx-auto mx-auto mb-10 mt-10 max-w-screen-xl">
-        @include(Theme::path('layouts.alerts'))
+    <div class="container mx-auto mb-10 mt-10 max-w-screen-xl">
+        @include('layouts::alerts')
 
         <div class="app">
             @stack('widgets')
@@ -62,7 +60,7 @@
         </div>
     </div>
 
-    @include(Theme::path('layouts.footer'))
+    @include('layouts::footer')
 </body>
 
 </html>

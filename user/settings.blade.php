@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 @section('title', __('client.profile'))
 @section('container')
     <div class="grid grid-cols-1 px-4 pt-6 dark:bg-gray-900 xl:grid-cols-3 xl:gap-4">
@@ -242,7 +242,7 @@
                         </li>
                     @endforeach
                     <div class="pagination pt-6">
-                        {{ auth()->user()->devices()->latest()->paginate(5)->links(Theme::pagination()) }}
+                        {{ auth()->user()->devices()->latest()->paginate(5)->links(theme()::pagination()) }}
                     </div>
                 </ul>
                 <div>

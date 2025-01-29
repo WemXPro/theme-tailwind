@@ -86,41 +86,6 @@
                 <input type="text" name="theme::default::auth::customers"
                     value="@settings('theme::default::auth::customers', 'Join over 3.2k members')" class="form-control">
             </div>
-            {{-- <div class="form-group col-12">
-                <label class="form-label">Default Theme Layout</label>
-                <div class="row gutters-sm">
-                    <div class="col-6 col-sm-4">
-                        <label class="imagecheck mb-4">
-                            <input name="default::layout" type="radio" value="stacked" class="imagecheck-input"
-                                @if (Settings::get('default::layout', 'stacked') == 'stacked') checked="" @endif>
-                            <figure class="imagecheck-figure">
-                                <img src="https://tailwindui.com/img/category-thumbnails/application-ui/stacked.png" alt=""
-                                    class="imagecheck-image">
-                            </figure>
-                        </label>
-                    </div>
-                    <div class="col-6 col-sm-4">
-                        <label class="imagecheck mb-4">
-                            <input name="default::layout" type="radio" value="sidebar" class="imagecheck-input"
-                                @if (Settings::get('default::layout', 'stacked') == 'sidebar') checked @endif>
-                            <figure class="imagecheck-figure">
-                                <img src="https://tailwindui.com/img/category-thumbnails/application-ui/sidebar.png" alt=""
-                                    class="imagecheck-image">
-                            </figure>
-                        </label>
-                    </div>
-                    <div class="col-6 col-sm-4">
-                        <label class="imagecheck mb-4">
-                            <input name="default::layout" type="radio" value="multi" class="imagecheck-input"
-                                @if (Settings::get('default::layout', 'stacked') == 'multi') checked="" @endif>
-                            <figure class="imagecheck-figure">
-                                <img src="https://tailwindui.com/img/category-thumbnails/application-ui/multi-column.png" alt=""
-                                    class="imagecheck-image">
-                            </figure>
-                        </label>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
     <div class="card-footer text-right">

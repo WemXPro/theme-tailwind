@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 
 @section('title', $package->name)
 
@@ -261,7 +261,7 @@
                         </div>
                     </div>
                 @else
-                    @includeIf(Theme::serviceView($package->service, 'props.checkout-options'))
+                    @includeIf(theme()::serviceView($package->service, 'props.checkout-options'))
                 @endif
 
                 <div class="relative mt-8 rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">

@@ -12,7 +12,7 @@
                     </span>
                 </a>
             </div>
-            @include(Theme::path('layouts.widgets.user-dropdown'))
+            @include('layouts::widgets.user-dropdown')
         </div>
     </nav>
 
@@ -76,7 +76,7 @@
                             </li>
                         @endforeach
                     @endif
-                    @includeIf(Theme::moduleView($module->getLowerName(), 'elements.main-menu'))
+                    @includeIf(theme()::moduleView($module->getLowerName(), 'elements.main-menu'))
                 @endforeach
             </ul>
         </div>

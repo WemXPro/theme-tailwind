@@ -35,20 +35,21 @@
 @endif
 
 {{-- and $order->package->settings('allow_upgrading', true) --}}
+
 @if ($order->getService()->canUpgrade())
     @if($order->status !== 'terminated')
-        @include(Theme::path('components.orders.upgrade-drawer'), $order)
+        @include('components::orders.upgrade-drawer', $order)
     @endif
 @endif
 
 @if ($order->isRecurring())
     @if($order->status !== 'terminated')
-        @include(Theme::path('components.orders.renew-modal'), $order)
+        @include('components::orders.renew-modal', $order)
     @endif
 
     @if($order->package->settings('allow_cancellation', true))
         @if($order->status !== 'terminated')
-            @include(Theme::path('components.orders.cancel-modal'), $order)
+            @include('components::orders.cancel-modal', $order)
         @endif
     @endif
 @endif

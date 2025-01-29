@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 @section('title', __('client.dashboard'))
 
 {{-- Keywords for search engines --}}
@@ -7,10 +7,10 @@
 @section('container')
     <div class="flex flex-wrap">
         <div class="w-full pl-2 pr-2 sm:w-1/2 md:w-1/3 lg:w-1/3">
-            @include(Theme::path('layouts.widgets.user_balance'))
+            @include('layouts::widgets.user_balance')
         </div>
         <div class="w-full pl-2 pr-2 sm:w-1/2 md:w-2/3 lg:w-2/3">
-            @include(Theme::path('layouts.widgets.service_stats'))
+            @include('layouts::widgets.service_stats')
 
             <section class="py-3 dark:bg-gray-900 sm:py-5">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -98,10 +98,10 @@
                 </div>
                 <div class="flex flex-col items-start justify-between space-y-3 pb-4 pt-3 md:flex-row md:items-center md:space-y-0"
                     aria-label="{{ __('client.table_navigation') }}">
-                    {{ auth()->user()->payments()->where('status', request()->input('where', 'paid'))->where('show_as_unpaid_invoice', request()->input('where', 'paid') == 'paid' ? false : true)->paginate(15)->links(Theme::pagination()) }}
+                    {{ auth()->user()->payments()->where('status', request()->input('where', 'paid'))->where('show_as_unpaid_invoice', request()->input('where', 'paid') == 'paid' ? false : true)->paginate(15)->links(theme()::pagination()) }}
                 </div>
                 @if (auth()->user()->payments->where('status', request()->input('where', 'paid'))->where('show_as_unpaid_invoice', request()->input('where', 'paid') == 'paid' ? false : true)->count() == 0)
-                    @include(Theme::path('empty-state'), [
+                    @include('theme::empty-state', [
                         'title' => __('client.no_records_found'),
                         'description' => __('client.no_record_found_desc', ['paid' => request()->input('where', 'paid')]),
                     ])

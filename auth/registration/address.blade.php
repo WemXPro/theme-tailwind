@@ -1,4 +1,4 @@
-@extends(Theme::path('auth.registration.layout'))
+@extends('auth::registration.layout')
 
 @section('content')
     <div class="w-full">
@@ -10,7 +10,7 @@
         </div>
 
         {{-- include alerts --}}
-        @include(Theme::path('layouts.alerts'))
+        @include('layouts::alerts')
 
         <div class="mb-4">
             <h1 class="leding-tight capitalize mb-2 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">

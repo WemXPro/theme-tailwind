@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 @section('title', __('client.email_history'))
 @section('container')
     <div class="mx-auto my-2">
@@ -133,7 +133,7 @@
                     </div>
                     <div class="flex flex-col items-start justify-between space-y-3 px-4 pb-4 pt-3 md:flex-row md:items-center md:space-y-0"
                         aria-label="{{ __('admin.table_navigation') }}">
-                        {{ $emails->links(Theme::pagination()) }}
+                        {{ $emails->links(theme()::pagination()) }}
                     </div>
                 </div>
             </div>

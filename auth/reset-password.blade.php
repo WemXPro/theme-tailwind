@@ -1,4 +1,4 @@
-@extends(Theme::path('auth.wrapper'))
+@extends('auth::wrapper')
 
 @section('title', __('auth.reset_password'))
 
@@ -12,7 +12,7 @@
                     <h1 class="text-xl font-bold text-gray-900 dark:text-white">{!! __('auth.reset_password') !!}</h1>
 
                     {{-- include alerts --}}
-                    @include(Theme::path('layouts.alerts'))
+                    @include('layouts::alerts')
 
                     <div>
                         <label for="password"

@@ -1,4 +1,4 @@
-@extends(Theme::path('auth.wrapper'))
+@extends('auth::wrapper')
 
 @section('container')
     <section class="bg-white py-8 dark:bg-gray-900 lg:py-0">

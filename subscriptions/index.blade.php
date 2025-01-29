@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 @section('title', __('client.subscriptions'))
 @section('container')
     <section>
@@ -87,7 +87,7 @@
                     <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                         {!! __('client.showing', ['count' => '1-10', 'all' => $subscriptions_paddle->count()]) !!}
                     </span>
-                    {{ $subscriptions_paddle->links(Theme::pagination()) }}
+                    {{ $subscriptions_paddle->links(theme()::pagination()) }}
                 </nav>
             </div>
         </div>

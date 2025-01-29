@@ -1,4 +1,4 @@
-@extends(Theme::path('orders.master'))
+@extends('theme::orders.master')
 
 @section('title', __('client.members'))
 

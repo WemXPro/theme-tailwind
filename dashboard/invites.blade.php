@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 @section('title', __('client.dashboard'))
 
 {{-- Keywords for search engines --}}
@@ -7,10 +7,10 @@
 @section('container')
     <div class="flex flex-wrap">
         <div class="w-full pl-2 pr-2 sm:w-1/2 md:w-1/3 lg:w-1/3">
-            @include(Theme::path('layouts.widgets.user_balance'))
+            @include('layouts::widgets.user_balance')
         </div>
         <div class="w-full pl-2 pr-2 sm:w-1/2 md:w-2/3 lg:w-2/3">
-            @include(Theme::path('layouts.widgets.service_stats'))
+            @include('layouts::widgets.service_stats')
 
             <section class="py-3 dark:bg-gray-900 sm:py-5">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -115,7 +115,7 @@
                 </div>
                 <div class="mt-6">
                     @if ($invites->count() == 0)
-                        @include(Theme::path('empty-state'), [
+                        @include('theme::empty-state', [
                             'title' => __('client.no_records_found'),
                             'description' => __('client.no_records_found_description', ['object' => __('client.invites')]),
                         ])

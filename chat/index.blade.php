@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 @section('title', 'Chat')
 @section('container')
     <div class="card chat-box" id="mychatbox">

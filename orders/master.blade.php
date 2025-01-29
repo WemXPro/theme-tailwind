@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 @section('title', __('client.dashboard'))
 
 {{-- Keywords for search engines --}}
@@ -86,10 +86,10 @@
                     @endforeach
                 </ul>
             </div>
-            @includeIf(Theme::serviceView($order->package->service, 'order_sidebar'))
+            @includeIf(theme()::serviceView($order->package->service, 'order_sidebar'))
         </div>
         <div class="w-full pl-4 pl-4 pl-4 pr-4 pr-4 pr-4 sm:w-1/2 md:w-2/3 lg:w-3/4">
-            @include(Theme::path('components.orders.alerts'), $order)
+            @include('components::orders.alerts', $order)
             @yield('content')
         </div>
     </div>

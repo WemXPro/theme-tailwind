@@ -1,6 +1,6 @@
 <div class="flex flex-wrap items-center justify-between lg:order-2">
     @foreach (enabledModules() as $module)
-        @includeIf(Theme::moduleView($module->getLowerName(), 'elements.navbar-dropdown-left'))
+        @includeIf(theme()::moduleView($module->getLowerName(), 'elements.navbar-dropdown-left'))
     @endforeach
     {{-- color selection menu  --}}
     <button id="dropdownPalleteButton" data-dropdown-toggle="dropdownPallete" aria-label="dropdownPallete"
@@ -264,13 +264,13 @@
                             </a>
                         @endforeach
                     @endif
-                    @includeIf(Theme::moduleView($module->getLowerName(), 'elements.apps'))
+                    @includeIf(theme()::moduleView($module->getLowerName(), 'elements.apps'))
                 @endforeach
             </div>
         </div>
 
         @foreach (enabledModules() as $module)
-            @includeIf(Theme::moduleView($module->getLowerName(), 'elements.navbar-dropdown-right'))
+            @includeIf(theme()::moduleView($module->getLowerName(), 'elements.navbar-dropdown-right'))
         @endforeach
 
         <button type="button"
@@ -388,7 +388,7 @@
                             </li>
                         @endforeach
                     @endif
-                    @includeIf(Theme::moduleView($module->getLowerName(), 'elements.user-dropdown'))
+                    @includeIf(theme()::moduleView($module->getLowerName(), 'elements.user-dropdown'))
                 @endforeach
             </ul>
             <ul class="py-1 font-light text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">

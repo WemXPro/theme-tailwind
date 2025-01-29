@@ -1,4 +1,4 @@
-@extends(Theme::wrapper())
+@extends('layouts::wrapper')
 
 @section('title')
     {!! __('client.payment_canceled') !!}
@@ -11,7 +11,7 @@
                 <div class="flex justify-center mx-auto mb-6 items-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-red-100 dark:bg-red-900">
                     <svg class="w-8 h-8 sm:w-12 sm:h-12 text-red-700 dark:text-red-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
-                    </svg>                
+                    </svg>
                 </div>
                 <p class="mb-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-4xl">
                     {!! __('client.payment_canceled') !!}
