@@ -62,7 +62,7 @@
                 @endforeach
 
                 {{-- load module nav items  --}}
-                @foreach (enabledModules() as $module)
+                @foreach (enabledExtensions() as $module)
                     @if (config($module->getLowerName() . '.elements.main_menu'))
                         @foreach (config($module->getLowerName() . '.elements.main_menu') as $key => $menu)
                             <li class="mr-2">

@@ -5,7 +5,7 @@
 @section('content')
     @includeIf(theme()::serviceView($order->service, 'stats'))
 
-    @foreach (enabledModules() as $module)
+    @foreach (enabledExtensions() as $module)
         @if(settings("widget:order-manage-top:{$module->getLowerName()}", false))
             @includeIf(theme()::moduleView($module->getLowerName(), 'widgets.order-manage-top-widget'), ['order' => $order])
         @endif
@@ -244,7 +244,7 @@
 
         @includeIf(theme()::serviceView($order->service, 'service'))
 
-        @foreach (enabledModules() as $module)
+        @foreach (enabledExtensions() as $module)
             @if(settings("widget:order-manage-bottom:{$module->getLowerName()}", false))
                 @includeIf(theme()::moduleView($module->getLowerName(), 'widgets.order-manage-bottom-widget'), ['order' => $order])
             @endif

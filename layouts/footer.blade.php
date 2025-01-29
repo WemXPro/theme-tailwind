@@ -184,7 +184,7 @@
                                 </li>
                             @endif
                         @endforeach
-                        @foreach (enabledModules() as $module)
+                        @foreach (enabledExtensions() as $module)
                             @includeIf(theme()::moduleView($module->getLowerName(), 'elements.footer-resources'))
                         @endforeach
                     </ul>
@@ -201,7 +201,7 @@
                                 </li>
                             @endif
                         @endforeach
-                        @foreach (enabledModules() as $module)
+                        @foreach (enabledExtensions() as $module)
                             @includeIf(theme()::moduleView($module->getLowerName(), 'elements.footer-help'))
                         @endforeach
                     </ul>
@@ -220,7 +220,7 @@
                                 </li>
                             @endif
                         @endforeach
-                        @foreach (enabledModules() as $module)
+                        @foreach (enabledExtensions() as $module)
                             @includeIf(theme()::moduleView($module->getLowerName(), 'elements.footer-legal'))
                         @endforeach
                     </ul>
