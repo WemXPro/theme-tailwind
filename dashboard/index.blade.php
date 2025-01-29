@@ -7,11 +7,14 @@
 @section('keywords', 'WemX Dashboard, WemX Panel')
 
 @php
-    if (Cookie::get('filter_orders', 'all') == 'all') {
-        $orders = auth()->user()->orders()->orderBy('status', 'asc')->orderBy('created_at', 'desc')->paginate(10);
-    } else {
-        $orders = auth()->user()->orders()->where('status', Cookie::get('filter_orders', 'active'))->orderBy('status', 'asc')->orderBy('created_at', 'desc')->paginate(10);
+    $filterStatus = Cookie::get('filter_orders', 'all');
+    $userOrders = auth()->user()->orders();
+    $userOrdersCount = count($userOrders->get());
+
+    if ($filterStatus !== 'all') {
+        $userOrders->where('status', $filterStatus);
     }
+    $orders = $userOrders->orderBy('status', 'asc')->orderBy('created_at', 'desc')->paginate(10);
 @endphp
 
 @push('widgets')
@@ -315,7 +318,7 @@
                                                        class="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700">
                                                 <label for="all"
                                                        class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">{{ __('admin.view_all') }}
-                                                    ({{ auth()->user()->orders->count() }})
+                                                    ({{ $userOrdersCount }})
                                                 </label>
                                             </li>
                                             @foreach (auth()->user()->orders()->distinct()->pluck('status') as $status)
@@ -403,6 +406,11 @@
                                                         </small></span>
                                             </th>
                                             <td class="px-4 py-3">
+                                                @php
+                                                    $membersCount =  $order->members()->count();
+                                                    $members = $order->members()->limit(2)->get();
+                                                @endphp
+
                                                 <div class="flex -space-x-4 rtl:space-x-reverse">
                                                     @if ($order->user->avatar)
                                                         <img
@@ -411,11 +419,12 @@
                                                     @else
                                                         <div
                                                             class="relative mt-0.5 inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-gray-500 bg-gray-100 dark:bg-gray-600">
-                                                                <span
-                                                                    class="font-medium text-gray-600 dark:text-gray-300">{{ substr($order->user->username, 0, 2) }}</span>
+                                                            <span
+                                                                class="font-medium text-gray-600 dark:text-gray-300">{{ substr($order->user->username, 0, 2) }}</span>
                                                         </div>
                                                     @endif
-                                                    @foreach ($order->members()->paginate(2) as $member)
+
+                                                    @foreach ($members as $member)
                                                         @if ($member->user->avatar ?? false)
                                                             <img
                                                                 class="@if ($loop->last) z-10 @endif h-10 w-10 rounded-full border-2 border-white dark:border-gray-800"
@@ -423,14 +432,17 @@
                                                         @else
                                                             <div
                                                                 class="relative mt-0.5 inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-gray-500 bg-gray-100 dark:bg-gray-600">
-                                                                    <span
-                                                                        class="font-medium text-gray-600 dark:text-gray-300">{{ substr($member->email, 0, 2) }}</span>
+                                                                <span
+                                                                    class="font-medium text-gray-600 dark:text-gray-300">{{ substr($member->email, 0, 2) }}</span>
                                                             </div>
                                                         @endif
                                                     @endforeach
-                                                    @if ($order->members()->count() > 2)
+
+                                                    @if ($membersCount > 2)
                                                         <a class="z-30 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-gray-700 text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800"
-                                                           href="{{ route('service', ['order' => $member->order->id, 'page' => 'members']) }}">+{{ $order->members()->count() - 2 }}</a>
+                                                           href="{{ route('service', ['order' => $order->id, 'page' => 'members']) }}">
+                                                            +{{ $membersCount - 2 }}
+                                                        </a>
                                                     @endif
                                                 </div>
                                             </td>
