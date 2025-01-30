@@ -8,7 +8,7 @@
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Templates\\Tailwind\\Provider"
+        "Templates\\Tailwind\\Theme"
     ],
     "files": [],
     "icon": "https://imgur.png",

@@ -10,7 +10,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Templates\\Tailwind\\Provider"
+                "Templates\\Tailwind\\Theme"
             ],
             "aliases": {
 
