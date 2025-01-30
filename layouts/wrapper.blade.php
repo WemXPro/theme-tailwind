@@ -12,7 +12,7 @@
 
     <!-- Meta Description Tag: Affects click-through rates from search results -->
     <meta name="description"
-        content="{{ $meta_description ?? settings('seo::description', 'Manage your orders with an easy-to-use Dashboard') }}">
+          content="{{ $meta_description ?? settings('seo::description', 'Manage your orders with an easy-to-use Dashboard') }}">
     <meta name="theme-color" content="@settings('seo::color', '#4f46e5')">
     <meta name="keywords" content="{{ $meta_keywords ?? settings('seo::keywords', '') }}">
 
@@ -22,7 +22,7 @@
     <!-- Open Graph Tags: Enhances visibility and engagement on social media platforms -->
     <meta property="og:title" content="{{ trim($__env->yieldContent('title')) }} - @settings('seo::title', 'WemX')">
     <meta property="og:description"
-        content="{{ $meta_description ?? settings('seo::description', 'Manage your orders with an easy-to-use Dashboard') }}">
+          content="{{ $meta_description ?? settings('seo::description', 'Manage your orders with an easy-to-use Dashboard') }}">
     <meta property="og:image" content="@settings('seo::image', '/static/wemx.png')">
 
     <!-- Custom CSS -->
@@ -31,13 +31,15 @@
 
     @if (settings('google::analytics_code'))
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings('google::analytics_code') }}"></script>
+        <script async
+                src="https://www.googletagmanager.com/gtag/js?id={{ settings('google::analytics_code') }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
 
             function gtag() {
                 dataLayer.push(arguments);
             }
+
             gtag('js', new Date());
 
             gtag('config', '{{ settings('google::analytics_code') }}');
@@ -49,18 +51,21 @@
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900" style="min-height: 100vh;display: flex;flex-direction: column;">
-    @include('layouts::header')
+@if(settings('theme::default::navigation', 'navbar') == 'navbar')
+    @include('layouts::navbar')
+@endif
 
-    <div class="container mx-auto mb-10 mt-10 max-w-screen-xl">
-        @include('layouts::alerts')
-
-        <div class="app">
-            @stack('widgets')
-            @yield('container')
-        </div>
+<div class="container mx-auto mb-10 mt-10 max-w-screen-xl">
+    @if(settings('theme::default::navigation', 'navbar') == 'sidebar')
+        @include('layouts::sidebar')
+    @endif
+    @include('layouts::alerts')
+    <div class="app">
+        @stack('widgets')
+        @yield('container')
     </div>
-
-    @include('layouts::footer')
+</div>
+@include('layouts::footer')
 </body>
 
 </html>
