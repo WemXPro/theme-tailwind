@@ -77,4 +77,6 @@ return [
     ],
 
     'socials' => ['discord', 'github', 'twitter'],
+
+    'footer_types' => ['default', 'minimal'],
 ];

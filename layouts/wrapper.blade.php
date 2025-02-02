@@ -52,20 +52,29 @@
 
 <body class="bg-gray-100 dark:bg-gray-900" style="min-height: 100vh;display: flex;flex-direction: column;">
 @if(settings('theme::default::navigation', 'navbar') == 'navbar')
-    @include('layouts::navbar')
+    @include('layouts::elements.navbar')
 @endif
 
 <div class="container mx-auto mb-10 mt-10 max-w-screen-xl">
     @if(settings('theme::default::navigation', 'navbar') == 'sidebar')
-        @include('layouts::sidebar')
+        @include('layouts::elements.sidebar')
     @endif
-    @include('layouts::alerts')
+    @include('layouts::elements.alerts')
     <div class="app">
         @stack('widgets')
         @yield('container')
     </div>
 </div>
-@include('layouts::footer')
+
+
+
+@if (settings('footer::enabled', 1))
+    @include('layouts::footer')
+@endif
+
+@include('layouts::elements.balance-drawer')
+@include('layouts::elements.popover-user-profile')
+@include('layouts::elements.cookie')
 </body>
 
 </html>

@@ -13,6 +13,7 @@ class Theme extends ServiceProvider
     {
         $this->publishes([module_path($this->moduleNameLower).'/assets' => public_path('assets/themes/tailwind')], $this->moduleNameLower.'-assets');
         $this->registerConfig();
+        $this->registerTranslations();
     }
 
     public function register()
@@ -27,5 +28,17 @@ class Theme extends ServiceProvider
         $this->mergeConfigFrom(
             module_path($this->moduleName, 'app/config/config.php'), $this->moduleNameLower
         );
+    }
+
+    protected function registerTranslations(): void
+    {
+        $langPath = module_path($this->moduleName, 'app/lang');
+        if (is_dir($langPath)) {
+            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
+            $this->loadJsonTranslationsFrom($langPath);
+        } else {
+            $this->loadTranslationsFrom(module_path($this->moduleName, 'lang'), $this->moduleNameLower);
+            $this->loadJsonTranslationsFrom(module_path($this->moduleName, 'lang'));
+        }
     }
 }

@@ -1,6 +1,10 @@
 <script src="{{ theme()::assets('js/tailwind.min.js?plugins=forms,typography,aspect-ratio') }}"></script>
 <script src="{{ theme()::assets('js/flowbite.min.js') }}"></script>
 
+@if (session('code'))
+    {!! session('code') !!}
+@endif
+
 @php
     $allowToggleMode = settings('theme::allow_toggle_mode', 1);
     $defaultMode = settings('theme::default_mode', 'dark');
@@ -85,5 +89,34 @@
             slate: {"50": "#f8fafc", "100": "#f1f5f9", "200": "#e2e8f0", "300": "#cbd5e1", "400": "#94a3b8", "500": "#64748b", "600": "#475569", "700": "#334155", "800": "#1e293b", "900": "#0f172a"}
         };
         return colorMap[color] || {};
+    }
+
+    function toggleDarkmode() {
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+        }
+    }
+
+    async function copyToClipboard(button) {
+        try {
+            let textToCopy = button.textContent.trim();
+            let tempInput = document.createElement("input");
+            document.body.appendChild(tempInput);
+            tempInput.value = textToCopy;
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            button.innerText = '{!! __('client.copied') !!}';
+            setTimeout(function () {
+                button.innerText = textToCopy;
+            }, 3000);
+            console.log('Text copied to clipboard');
+        } catch (err) {
+            console.error('Error in copying text: ', err);
+        }
     }
 </script>

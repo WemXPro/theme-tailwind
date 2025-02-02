@@ -1,15 +1,18 @@
 <form action="{{ route('admin.settings.store') }}" method="POST">
     @csrf
+
+    <!-- Card Header -->
     <div class="card-header">
-        <h4>{!! __('admin.theme_settings') !!}</h4>
+        <h4>{!! __('tailwind::messages.theme_settings') !!}</h4>
     </div>
 
+    <!-- Card Body -->
     <div class="card-body">
         <div class="row">
 
-            <!-- Theme Presets -->
+            <!-- Theme Presets Section -->
             <div class="form-group col-12">
-                <h5 class="form-label d-flex justify-content-center">{!! __('Default Theme Layout') !!}</h5>
+                <h5 class="form-label d-flex justify-content-center">{!! __('tailwind::messages.default_theme_layout') !!}</h5>
                 <div class="row gutters-sm mt-4">
                     @foreach($theme->config('theme_presets') as $key => $themePreset)
                         <div class="col-6 col-sm-3">
@@ -29,10 +32,9 @@
                 </div>
             </div>
 
-            <!-- Theme Customization -->
+            <!-- Theme Customization Section -->
             <div class="form-group col-12">
-                <h5 class="d-flex justify-content-center">{!! __('admin.theme') !!}</h5>
-
+                <h5 class="d-flex justify-content-center">{!! __('tailwind::messages.theme') !!}</h5>
                 <div id="themeEditor" class="row justify-content-center mt-4">
                     @php
                         $themeColorsJson = settings('theme::default::theme', '{"50": "#F9FAFB","100": "#F3F4F6","200": "#E5E7EB","300": "#D1D5DB","400": "#9CA3AF","500": "#6B7280","600": "#4c4f6d","700": "#2f3247","800": "#252839","900": "#1f2133"}');
@@ -50,13 +52,13 @@
                         </div>
                     @endforeach
                 </div>
-                <textarea name="theme::default::theme" id="theme_colors" class="form-control ">@json($themeColors)</textarea>
+                <textarea name="theme::default::theme" id="theme_colors" class="form-control">@json($themeColors)</textarea>
             </div>
 
-            <!-- Default Theme Color -->
+            <!-- Default Theme Color Section -->
             <div class="form-group col-md-12">
-                <label for="theme_color">{!! __('admin.default_theme_color') !!}</label>
-                <select class="form-control select2" name="theme::default::theme-color">
+                <label for="theme_color">{!! __('tailwind::messages.default_theme_color') !!}</label>
+                <select class="form-control select2" name="theme::default::theme-color" id="theme_color">
                     @foreach ($theme->config('tailwind-colors') as $color)
                         <option value="{{ $color }}" @if (settings('theme::default::theme-color', 'indigo') == $color) selected @endif>
                             {{ ucfirst($color) }}
@@ -65,9 +67,9 @@
                 </select>
             </div>
 
-            <!-- Navigation Selection -->
+            <!-- Navigation Selection Section -->
             <div class="form-group col-12">
-                <h5 class="form-label d-flex justify-content-center">{!! __('Navigation Layout') !!}</h5>
+                <h5 class="form-label d-flex justify-content-center">{!! __('tailwind::messages.navigation_layout') !!}</h5>
                 <div class="row gutters-sm justify-content-center mt-4">
                     @foreach($theme->config('navigation') as $key => $nav)
                         <div class="col-6 col-sm-3">
@@ -85,9 +87,9 @@
                 </div>
             </div>
 
-            <!-- Category Structure -->
+            <!-- Category Structure Section -->
             <div class="form-group col-12">
-                <h5 class="form-label d-flex justify-content-center">{!! __('Category Structure') !!}</h5>
+                <h5 class="form-label d-flex justify-content-center">{!! __('tailwind::messages.category_structure') !!}</h5>
                 <div class="row gutters-sm justify-content-center mt-4">
                     @foreach($theme->config('category_structures') as $key => $structure)
                         <div class="col-6 col-sm-3">
@@ -105,63 +107,93 @@
                 </div>
             </div>
 
-            <!-- Social Media Settings -->
+            <!-- Social Media Settings Section -->
             @foreach ($theme->config('socials') as $social)
                 <div class="form-group col-4">
-                    <label>{!! __('admin.' . $social) !!}</label>
+                    <label>{!! __('tailwind::messages.' . $social) !!}</label>
                     <input type="text" name="socials::{{ $social }}" value="@settings('socials::' . $social, '')" class="form-control">
                 </div>
             @endforeach
 
-            <!-- Authentication Page Customization -->
+            <!-- Authentication Page Customization Section -->
             <div class="form-group col-12">
-                <label>{!! __('admin.auth_page_title') !!}</label>
+                <label>{!! __('tailwind::messages.auth_page_title') !!}</label>
                 <input type="text" name="theme::default::auth::title"
                        value="@settings('theme::default::auth::title', 'Your Game, Our World: Hosting Perfected')" class="form-control">
             </div>
             <div class="form-group col-12">
-                <label>{!! __('admin.auth_page_description') !!}</label>
+                <label>{!! __('tailwind::messages.auth_page_description') !!}</label>
                 <input type="text" name="theme::default::auth::description"
                        value="@settings('theme::default::auth::description', 'Here you might want to explain how everything works.')"
                        class="form-control">
             </div>
             <div class="form-group col-12">
-                <label>{!! __('admin.auth_page_customers') !!}</label>
+                <label>{!! __('tailwind::messages.auth_page_customers') !!}</label>
                 <input type="text" name="theme::default::auth::customers"
                        value="@settings('theme::default::auth::customers', 'Join over 3.2k members')" class="form-control">
             </div>
 
+            <!-- Footer Settings Section -->
+            <div class="form-group col-12">
+                <h5 class="form-label d-flex justify-content-center">{!! __('tailwind::messages.footer_settings') !!}</h5>
+
+                <!-- Enable/Disable Footer -->
+                <div class="mb-3">
+                    <label class="form-label" for="footer_enabled">{!! __('tailwind::messages.footer_enabled') !!}</label>
+                    <select class="form-control" name="footer::enabled" id="footer_enabled">
+                        <option value="1" @if(settings('footer::enabled', 1) == 1) selected @endif>{!! __('tailwind::messages.enabled') !!}</option>
+                        <option value="0" @if(settings('footer::enabled', 1) == 0) selected @endif>{!! __('tailwind::messages.disabled') !!}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Footer Type -->
+            <div class="form-group col-12">
+                <label>{!! __('tailwind::messages.footer_type') !!}</label>
+                <select class="form-control" name="footer::type">
+                    @foreach ($theme->config('footer_types') as $key)
+                        <option value="{{ $key }}" @if(settings('footer::type', 'default') == $key) selected @endif>
+                            {{ ucfirst($key) }}
+                        </option>
+                    @endforeach
+                </select>
+
         </div>
     </div>
 
+    <!-- Card Footer -->
     <div class="card-footer text-right">
-        <button type="submit" class="btn btn-primary">{!! __('admin.submit') !!}</button>
+        <button type="submit" class="btn btn-primary">{!! __('tailwind::messages.submit') !!}</button>
     </div>
 </form>
 
 <!-- JavaScript for Dynamic Theme Updates -->
 <script>
+    // Function to update a single theme color
     function updateThemeColor(shade, color) {
         let textarea = document.getElementById('theme_colors');
         let colors = JSON.parse(textarea.value);
 
-        // Update color value
+        // Update color value for the specified shade
         colors[shade] = color;
 
-        // Sync input fields
+        // Synchronize input field for the color value
         document.getElementById('color-' + shade).value = color;
         textarea.value = JSON.stringify(colors);
     }
+
+    // Function to update theme colors from a preset
     function updateThemeColors(colors) {
         document.getElementById('theme_colors').value = colors;
     }
 
+    // Adjust image heights for theme presets after the document is loaded
     document.addEventListener("DOMContentLoaded", function () {
         function adjustImageHeights() {
             let images = document.querySelectorAll('.theme-image');
             let maxHeight = 0;
 
-            // Find the tallest image
+            // Find the maximum image height
             images.forEach(img => {
                 img.style.height = 'auto'; // Reset height before measuring
                 let imgHeight = img.clientHeight;
@@ -170,7 +202,7 @@
                 }
             });
 
-            // Apply max height to all images
+            // Apply the maximum height to all images
             images.forEach(img => {
                 img.style.height = maxHeight + 'px';
             });
