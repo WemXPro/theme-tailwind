@@ -15,7 +15,7 @@
             <section class="py-3 dark:bg-gray-900 sm:py-5">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     @if (auth()->user()->balance_transactions()->count() == 0)
-                        @include('theme::empty-state', [
+                        @include('theme::dashboard.empty-state', [
                             'title' => 'No records found',
                             'description' => 'You have an empty balance history, click the widget to update your balance.',
                         ])

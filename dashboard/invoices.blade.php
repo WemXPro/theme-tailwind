@@ -101,7 +101,7 @@
                     {{ auth()->user()->payments()->where('status', request()->input('where', 'paid'))->where('show_as_unpaid_invoice', request()->input('where', 'paid') == 'paid' ? false : true)->paginate(15)->links(theme()::pagination()) }}
                 </div>
                 @if (auth()->user()->payments->where('status', request()->input('where', 'paid'))->where('show_as_unpaid_invoice', request()->input('where', 'paid') == 'paid' ? false : true)->count() == 0)
-                    @include('theme::empty-state', [
+                    @include('theme::dashboard.empty-state', [
                         'title' => __('client.no_records_found'),
                         'description' => __('client.no_record_found_desc', ['paid' => request()->input('where', 'paid')]),
                     ])

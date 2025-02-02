@@ -728,7 +728,7 @@
                         </div>
                         @if (count($orders) == 0)
                             <div class="mt-4">
-                                @include('theme::empty-state', [
+                                @include('theme::dashboard.empty-state', [
                                     'title' => __('client.no_orders_found'),
                                     'description' => __('client.no_orders_found_desc'),
                                 ])

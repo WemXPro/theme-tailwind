@@ -4,7 +4,7 @@
 
 @section('container')
     <div class="pt:mt-0 mx-auto flex flex-col items-center justify-center px-6 pt-8 dark:bg-gray-900 md:h-screen">
-        <a href="../../" class="mb-8 flex items-center justify-center text-2xl font-semibold dark:text-white lg:mb-10">
+        <a href="../../.." class="mb-8 flex items-center justify-center text-2xl font-semibold dark:text-white lg:mb-10">
             @if (Settings::has('logo'))
                 <img src="@settings('logo')" class="mr-4 h-12 rounded" alt="@settings('app_name', 'WemX')" />
             @endif

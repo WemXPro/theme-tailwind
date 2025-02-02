@@ -1,4 +1,5 @@
-@php($paymentsCount = auth()->user()->payments()->whereStatus('unpaid')->where('show_as_unpaid_invoice', true)->count())
+@php($paymentsCount = $paymentsCount ?? auth()->user()->payments()->whereStatus('unpaid')->where('show_as_unpaid_invoice', true)->count())
+@php($userOrdersCount = $userOrdersCount ?? auth()->user()->orders()->count())
 @if ($paymentsCount > 0)
     <div class="mb-4 flex rounded-lg border border-gray-300 bg-gray-50 p-4 text-sm text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
         role="alert">
@@ -22,7 +23,6 @@
         class="block max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
         <div class="flex flex-col items-center justify-center">
             <dt class="mb-2 text-3xl font-extrabold dark:text-gray-200">{{ $userOrdersCount }}</dt>
-            </dt>
             <dd class="text-gray-500 dark:text-gray-400">{!! __('client.services') !!}</dd>
         </div>
     </a>

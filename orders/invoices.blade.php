@@ -72,7 +72,7 @@
         <div class="flex flex-col items-start justify-between space-y-3 pb-4 pt-3 md:flex-row md:items-center md:space-y-0"
             aria-label="Table navigation"></div>
         @if (auth()->user()->payments->where('order_id', $order->id)->where('status', request()->input('where', 'paid'))->count() == 0)
-            @include('theme::empty-state', [
+            @include('theme::dashboard.empty-state', [
                 'title' => 'No records found',
                 'description' =>
                     'You have not yet ' .

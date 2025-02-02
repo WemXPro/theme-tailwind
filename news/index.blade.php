@@ -15,7 +15,7 @@
             </div>
             <div class="">
                 @if ($articles->count() == 0)
-                    @include('theme::empty-state', [
+                    @include('theme::dashboard.empty-state', [
                         'title' => __('client.no_new_articles'),
                         'description' => __('client.no_new_articles_desc'),
                     ])

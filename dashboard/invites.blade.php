@@ -115,7 +115,7 @@
                 </div>
                 <div class="mt-6">
                     @if ($invites->count() == 0)
-                        @include('theme::empty-state', [
+                        @include('theme::dashboard.empty-state', [
                             'title' => __('client.no_records_found'),
                             'description' => __('client.no_records_found_description', ['object' => __('client.invites')]),
                         ])
