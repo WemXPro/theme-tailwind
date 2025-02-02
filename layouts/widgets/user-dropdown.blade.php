@@ -27,94 +27,12 @@
         <div class="divide-y divide-gray-100 dark:divide-gray-800">
             <div class="-left-32 top-10 z-50 w-96 list-none rounded bg-white p-3 text-base shadow dark:bg-gray-800">
                 <div class="grid grid-cols-3 gap-2">
-                    <button onclick="setColor('rose')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-rose-600 dark:bg-rose-400"></span>{!! __('client.rose') !!}
-                    </button>
-                    <button onclick="setColor('pink')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-pink-600 dark:bg-pink-400"></span>{!! __('client.pink') !!}
-                    </button>
-                    <button onclick="setColor('fuchsia')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-fuchsia-600 dark:bg-fuchsia-400"></span>{!! __('client.fuchsia') !!}
-                    </button>
-                    <button onclick="setColor('purple')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-purple-600 dark:bg-purple-400"></span>{!! __('client.purple') !!}
-                    </button>
-                    <button onclick="setColor('violet')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-violet-600 dark:bg-violet-400"></span>{!! __('client.violet') !!}
-                    </button>
-                    <button onclick="setColor('indigo')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-indigo-600 dark:bg-indigo-400"></span>{!! __('client.indigo') !!}
-                    </button>
-                    <button onclick="setColor('blue')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-blue-600 dark:bg-blue-400"></span>{!! __('client.blue') !!}
-                    </button>
-                    <button onclick="setColor('sky')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-sky-600 dark:bg-sky-400"></span>{!! __('client.sky') !!}
-                    </button>
-                    <button onclick="setColor('cyan')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-cyan-600 dark:bg-cyan-400"></span>{!! __('client.cyan') !!}
-                    </button>
-                    <button onclick="setColor('teal')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-teal-600 dark:bg-teal-400"></span>{!! __('client.teal') !!}
-                    </button>
-                    <button onclick="setColor('emerald')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-emerald-600 dark:bg-emerald-400"></span>{!! __('client.emerald') !!}
-                    </button>
-                    <button onclick="setColor('green')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-green-600 dark:bg-green-400"></span>{!! __('client.green') !!}
-                    </button>
-                    <button onclick="setColor('lime')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-lime-600 dark:bg-lime-400"></span>{!! __('client.lime') !!}
-                    </button>
-                    <button onclick="setColor('yellow')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-yellow-600 dark:bg-yellow-400"></span>{!! __('client.yellow') !!}
-                    </button>
-                    <button onclick="setColor('amber')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-amber-600 dark:bg-amber-400"></span>{!! __('client.amber') !!}
-                    </button>
-                    <button onclick="setColor('orange')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-orange-600 dark:bg-orange-400"></span>{!! __('client.orange') !!}
-                    </button>
-                    <button onclick="setColor('red')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-red-600 dark:bg-red-400"></span>{!! __('client.red') !!}
-                    </button>
-                    <button onclick="setColor('stone')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-stone-600 dark:bg-stone-400"></span>{!! __('client.stone') !!}
-                    </button>
-                    <button onclick="setColor('neutral')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-neutral-600 dark:bg-neutral-400"></span>{!! __('client.neutral') !!}
-                    </button>
-                    <button onclick="setColor('zinc')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-zinc-600 dark:bg-zinc-400"></span>{!! __('client.zinc') !!}
-                    </button>
-                    <button onclick="setColor('gray')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-gray-600 dark:bg-gray-400"></span>{!! __('client.gray') !!}
-                    </button>
-                    <button onclick="setColor('slate')"
-                            class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
-                                class="mr-2 inline-block h-4 w-6 rounded bg-slate-600 dark:bg-slate-400"></span>{!! __('client.slate') !!}
-                    </button>
+                    @foreach(theme()::configs('tailwind-colors') as $color)
+                        <button onclick="setColor('{{ $color }}')"
+                                class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
+                                class="mr-2 inline-block h-4 w-6 rounded bg-{{ $color }}-600 dark:bg-{{ $color }}-400"></span>{!! __('client.' . $color) !!}
+                        </button>
+                    @endforeach
                 </div>
             </div>
 
@@ -171,7 +89,7 @@
             </div>
             <div class="grid">
                 @foreach (auth()->user()->notifications()->latest()->paginate(5) as $notification)
-                    <a @isset($notification->button_url) href="{{ $notification->button_url }}" @else href="#" @endisset
+                    <a href="{{ $notification->button_url ?? "#" }}"
                     class="flex border-b px-4 py-3 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-600">
                         <span
                                 class="text-primary-800 dark:text-primary-400 inline-flex items-center rounded-full p-1.5 text-sm font-semibold">
@@ -251,8 +169,8 @@
                 </a>
 
                 @foreach (enabledExtensions() as $module)
-                    @if (config($module->getLowerName() . '.elements.apps'))
-                        @foreach (config($module->getLowerName() . '.elements.apps') as $key => $menu)
+                    @if ($module->config('elements.apps'))
+                        @foreach ($module->config('elements.apps') as $key => $menu)
                             <a href="{{ $menu['href'] }}"
                                class="group block rounded-lg p-4 text-center hover:bg-gray-100 dark:hover:bg-gray-600">
                                 <div
@@ -375,8 +293,8 @@
             <ul class="py-1 font-light text-gray-500 dark:text-gray-400" aria-labelledby="userMenuDropdownButton">
                 {{-- load module nav items  --}}
                 @foreach (enabledExtensions() as $module)
-                    @if (config($module->getLowerName() . '.elements.user_dropdown'))
-                        @foreach (config($module->getLowerName() . '.elements.user_dropdown') as $key => $menu)
+                    @if ($module->config('elements.user_dropdown'))
+                        @foreach ($module->config('elements.user_dropdown') as $key => $menu)
                             <li>
                                 <a href="{{ $menu['href'] }}"
                                    class="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
