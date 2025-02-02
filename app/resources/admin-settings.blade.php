@@ -58,7 +58,7 @@
             <!-- Default Theme Color Section -->
             <div class="form-group col-md-12">
                 <label for="theme_color">{!! __('tailwind::messages.default_theme_color') !!}</label>
-                <select class="form-control select2" name="theme::default::theme-color" id="theme_color">
+                <select class="form-control" name="theme::default::theme-color" id="theme_color">
                     @foreach ($theme->config('tailwind-colors') as $color)
                         <option value="{{ $color }}" @if (settings('theme::default::theme-color', 'indigo') == $color) selected @endif>
                             {{ ucfirst($color) }}
@@ -133,11 +133,21 @@
                        value="@settings('theme::default::auth::customers', 'Join over 3.2k members')" class="form-control">
             </div>
 
-            <!-- Footer Settings Section -->
-            <div class="form-group col-12">
-                <h5 class="form-label d-flex justify-content-center">{!! __('tailwind::messages.footer_settings') !!}</h5>
-
-                <!-- Enable/Disable Footer -->
+            <div class="form-group col-6">
+                <label for="allow_toggle_mode">{{ __('tailwind::messages.allow_toggle_theme_mode') }}</label>
+                <select class="form-control" name="theme::allow_toggle_mode" tabindex="-1" aria-hidden="true">
+                    <option value="1" @if(settings('theme::allow_toggle_mode', 1) == 1) selected @endif>{!! __('admin.yes') !!}</option>
+                    <option value="0" @if(settings('theme::allow_toggle_mode', 1) == 0) selected @endif>{!! __('admin.no') !!}</option>
+                </select>
+            </div>
+            <div class="form-group col-6">
+                <label for="allow_toggle_mode">{{ __('tailwind::messages.default_theme_mode') }}</label>
+                <select class="form-control" name="theme::default_mode" tabindex="-1" aria-hidden="true">
+                    <option value="dark" @if(settings('theme::default_mode', 'dark') == 'dark') selected @endif>{{ __('tailwind::messages.dark') }}</option>
+                    <option value="light" @if(settings('theme::default_mode', 'dark') == 'light') selected @endif>{{ __('tailwind::messages.light') }}</option>
+                </select>
+            </div>
+            <div class="form-group col-6">
                 <div class="mb-3">
                     <label class="form-label" for="footer_enabled">{!! __('tailwind::messages.footer_enabled') !!}</label>
                     <select class="form-control" name="footer::enabled" id="footer_enabled">
@@ -146,9 +156,7 @@
                     </select>
                 </div>
             </div>
-
-            <!-- Footer Type -->
-            <div class="form-group col-12">
+            <div class="form-group col-6">
                 <label>{!! __('tailwind::messages.footer_type') !!}</label>
                 <select class="form-control" name="footer::type">
                     @foreach ($theme->config('footer_types') as $key)

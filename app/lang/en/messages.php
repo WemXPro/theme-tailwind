@@ -2,7 +2,7 @@
 
 return [
     'theme_settings' => 'Setting up topic',
-    'default_theme_layout' => 'Standard location of the topic',
+    'default_theme_layout' => 'Standard theme pattern',
     'theme' => 'Topic',
     'default_theme_color' => 'The standard color of the topic',
     'navigation_layout' => 'The location of navigation',
@@ -17,10 +17,33 @@ return [
     'footer_type' => 'Footer type',
     'submit' => 'Submit',
     'all_rights_reserved' => 'All rights reserved',
+    'allow_toggle_theme_mode' => 'Allow switching between light and dark mode',
+    'default_theme_mode' => 'Standard topic mode',
+    'light' => 'Light',
+    'dark' => 'Dark',
+
 
     // Social media keys
     'facebook' => 'Facebook',
     'twitter' => 'Twitter',
     'instagram' => 'Instagram',
     'linkedin' => 'LinkedIn',
+    'discord' => 'Discord',
+    'youtube' => 'YouTube',
+    'twitch' => 'Twitch',
+    'snapchat' => 'Snapchat',
+    'whatsapp' => 'WhatsApp',
+    'telegram' => 'Telegram',
+    'pinterest' => 'Pinterest',
+    'tiktok' => 'TikTok',
+    'reddit' => 'Reddit',
+    'tumblr' => 'Tumblr',
+    'flickr' => 'Flickr',
+    'vimeo' => 'Vimeo',
+    'soundcloud' => 'SoundCloud',
+    'spotify' => 'Spotify',
+    'github' => 'GitHub',
+    'gitlab' => 'GitLab',
+    'bitbucket' => 'Bitbucket',
+    'patreon' => 'Patreon',
 ];
