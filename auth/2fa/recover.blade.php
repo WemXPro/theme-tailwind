@@ -10,7 +10,7 @@
                         <h1 class="text-xl font-bold text-gray-900 dark:text-white">{!! __('auth.lost_access_to_device') !!}</h1>
                     </div>
 
-                    @include('layouts::alerts')
+                    @include('layouts::elements.alerts')
 
                     <div>
 

@@ -12,7 +12,7 @@
         </a>
 
         <!-- Card -->
-        @include('layouts::alerts')
+        @include('layouts::elements.alerts')
 
         <div class="w-full rounded-lg bg-white shadow dark:bg-gray-800 sm:max-w-screen-sm md:mt-0 xl:p-0">
             <div class="w-full p-6 sm:p-8 md:p-16">

@@ -10,7 +10,7 @@
         </div>
 
         {{-- include alerts --}}
-        @include('layouts::alerts')
+        @include('layouts::elements.alerts')
 
         <div class="mb-4">
             <h1 class="leding-tight capitalize mb-2 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">

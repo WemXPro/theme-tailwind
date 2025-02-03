@@ -41,7 +41,7 @@
         </h1>
 
         {{-- include alerts --}}
-        @include('layouts::alerts')
+        @include('layouts::elements.alerts')
 
         <form method="POST" action="#">
             @csrf

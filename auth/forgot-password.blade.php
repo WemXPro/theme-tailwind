@@ -11,7 +11,7 @@
                     <h1 class="text-xl font-bold text-gray-900 dark:text-white">{!! __('auth.forgot_password') !!}</h1>
 
                     {{-- include alerts --}}
-                    @include('layouts::alerts')
+                    @include('layouts::elements.alerts')
 
                     <div>
                         <label for="email"

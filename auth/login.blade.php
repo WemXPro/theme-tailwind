@@ -66,7 +66,7 @@
                     </div>
 
                     {{-- include alerts --}}
-                    @include('layouts::alerts')
+                    @include('layouts::elements.alerts')
 
                     <div>
 
