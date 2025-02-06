@@ -61,7 +61,6 @@
     @endif
     @include('layouts::elements.alerts')
     <div class="app">
-        @stack('widgets')
         @yield('container')
     </div>
 </div>
@@ -73,7 +72,6 @@
 @endif
 
 @include('layouts::elements.balance-drawer')
-@include('layouts::elements.popover-user-profile')
 @include('layouts::elements.cookie')
 </body>
 

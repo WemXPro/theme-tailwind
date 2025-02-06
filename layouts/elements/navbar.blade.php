@@ -11,7 +11,7 @@
                     </span>
                 </a>
             </div>
-            @include('layouts::widgets.user-dropdown')
+            @include('layouts::elements.user-dropdown')
         </div>
     </nav>
 

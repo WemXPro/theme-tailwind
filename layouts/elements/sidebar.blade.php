@@ -71,7 +71,7 @@
 
         <!-- Користувацьке меню -->
         <div class="p-4 border-t border-gray-200 dark:border-gray-700">
-            @include('layouts::widgets.user-dropdown')
+            @include('layouts::elements.user-dropdown')
         </div>
     </div>
 </aside>
