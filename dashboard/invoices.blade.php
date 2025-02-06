@@ -7,7 +7,7 @@
 @section('container')
     <div class="flex flex-wrap">
         <div class="w-full pl-2 pr-2 sm:w-1/2 md:w-1/3 lg:w-1/3">
-            @include('layouts::widgets.user_balance')
+            @include('layouts::widgets.user_info')
         </div>
         <div class="w-full pl-2 pr-2 sm:w-1/2 md:w-2/3 lg:w-2/3">
             @include('layouts::widgets.service_stats')
