@@ -62,7 +62,7 @@
                     @foreach ($package->prices->where('is_active', true) as $price)
                         <li>
                             <input type="radio" id="price-radio-{{ $price->id }}" name="price_id" value="{{ $price->id }}"
-                                class="peer hidden" required @if ($price->id == request()->input('price', $package->prices->first()->id)) checked @endif>
+                                class="peer hidden" required @if ($price->id == request()->input('price', $package->prices->where('is_active', true)->first()->id)) checked @endif>
                             <label for="price-radio-{{ $price->id }}"
                                 class="dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
                                 <div class="block">
