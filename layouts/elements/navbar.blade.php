@@ -1,10 +1,9 @@
-{{-- header  --}}
 <header>
     <nav class="border-gray-200 bg-white px-4 py-2.5 dark:bg-gray-900 lg:px-6">
         <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between px-4 md:px-6">
             <div class="flex items-center justify-start">
                 <a href="/" class="mr-6 flex xl:mr-8">
-                    @if (Settings::has('logo'))
+                    @if (settings('logo', false))
                         <img src="@settings('logo')" class="mr-3 h-8 rounded" alt="@settings('app_name', 'WemX')"/>
                     @endif
                     <span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
@@ -12,7 +11,7 @@
                     </span>
                 </a>
             </div>
-            @include(Theme::path('layouts.widgets.user-dropdown'))
+            @include(Theme::path('layouts.elements.user-dropdown'))
         </div>
     </nav>
 
@@ -62,7 +61,7 @@
                 @endforeach
 
                 {{-- load module nav items  --}}
-                @foreach (enabledModules() as $module)
+                @foreach (enabledExtensions() as $module)
                     @if (config($module->getLowerName() . '.elements.main_menu'))
                         @foreach (config($module->getLowerName() . '.elements.main_menu') as $key => $menu)
                             <li class="mr-2">
@@ -82,4 +81,3 @@
         </div>
     </div>
 </header>
-{{-- end header --}}

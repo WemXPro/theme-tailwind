@@ -68,24 +68,24 @@
             </div>
 
             <!-- Navigation Selection Section -->
-{{--            <div class="form-group col-12">--}}
-{{--                <h5 class="form-label d-flex justify-content-center">Navigation Layout</h5>--}}
-{{--                <div class="row gutters-sm justify-content-center mt-4">--}}
-{{--                    @foreach($theme->navigation as $key => $nav)--}}
-{{--                        <div class="col-6 col-sm-3">--}}
-{{--                            <label class="imagecheck mb-4">--}}
-{{--                                <h6 class="text-dark">{{ $nav['name'] }}</h6>--}}
-{{--                                <input name="theme::default::navigation" type="radio" value="{{ $key }}"--}}
-{{--                                       class="imagecheck-input"--}}
-{{--                                       @if(settings('theme::default::navigation', 'navbar') == $key) checked @endif>--}}
-{{--                                <figure class="imagecheck-figure">--}}
-{{--                                    <img src="{{ $nav['image'] }}" alt="{{ $nav['name'] }}" class="imagecheck-image">--}}
-{{--                                </figure>--}}
-{{--                            </label>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="form-group col-12">
+                <h5 class="form-label d-flex justify-content-center">Navigation Layout</h5>
+                <div class="row gutters-sm justify-content-center mt-4">
+                    @foreach($theme->navigation as $key => $nav)
+                        <div class="col-6 col-sm-3">
+                            <label class="imagecheck mb-4">
+                                <h6 class="text-dark">{{ $nav['name'] }}</h6>
+                                <input name="theme::default::navigation" type="radio" value="{{ $key }}"
+                                       class="imagecheck-input"
+                                       @if(settings('theme::default::navigation', 'navbar') == $key) checked @endif>
+                                <figure class="imagecheck-figure">
+                                    <img src="{{ $nav['image'] }}" alt="{{ $nav['name'] }}" class="imagecheck-image">
+                                </figure>
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
             <!-- Category Structure Section -->
             <div class="form-group col-12">
@@ -150,25 +150,25 @@
             </div>
 
             <!-- Footer Settings Section -->
-{{--            <div class="form-group col-6">--}}
-{{--                <div class="mb-3">--}}
-{{--                    <label class="form-label" for="footer_enabled">Footer Enabled</label>--}}
-{{--                    <select class="form-control" name="footer::enabled" id="footer_enabled">--}}
-{{--                        <option value="1" @if(settings('footer::enabled', 1) == 1) selected @endif>Enabled</option>--}}
-{{--                        <option value="0" @if(settings('footer::enabled', 1) == 0) selected @endif>Disabled</option>--}}
-{{--                    </select>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="form-group col-6">--}}
-{{--                <label>Footer Type</label>--}}
-{{--                <select class="form-control" name="footer::type">--}}
-{{--                    @foreach ($theme->footer_types as $key)--}}
-{{--                        <option value="{{ $key }}" @if(settings('footer::type', 'default') == $key) selected @endif>--}}
-{{--                            {{ ucfirst($key) }}--}}
-{{--                        </option>--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
-{{--            </div>--}}
+            <div class="form-group col-6">
+                <div class="mb-3">
+                    <label class="form-label" for="footer_enabled">Footer Enabled</label>
+                    <select class="form-control" name="footer::enabled" id="footer_enabled">
+                        <option value="1" @if(settings('footer::enabled', 1) == 1) selected @endif>Enabled</option>
+                        <option value="0" @if(settings('footer::enabled', 1) == 0) selected @endif>Disabled</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label>Footer Type</label>
+                <select class="form-control" name="footer::type">
+                    @foreach ($theme->footer_types as $key)
+                        <option value="{{ $key }}" @if(settings('footer::type', 'default') == $key) selected @endif>
+                            {{ ucfirst($key) }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <!-- Card Footer -->
