@@ -27,7 +27,7 @@
         <div class="divide-y divide-gray-100 dark:divide-gray-800">
             <div class="-left-32 top-10 z-50 w-96 list-none rounded bg-white p-3 text-base shadow dark:bg-gray-800">
                 <div class="grid grid-cols-3 gap-2">
-                    @foreach(Theme::config('tailwind_colors') as $color)
+                    @foreach(Theme::active()->tailwind_colors as $color)
                         <button onclick="setColor('{{ $color }}')"
                                 class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
                                 class="mr-2 inline-block h-4 w-6 rounded bg-{{ $color }}-600 dark:bg-{{ $color }}-400"></span>{!! __('client.' . $color) !!}
