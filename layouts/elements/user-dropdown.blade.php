@@ -27,7 +27,7 @@
         <div class="divide-y divide-gray-100 dark:divide-gray-800">
             <div class="-left-32 top-10 z-50 w-96 list-none rounded bg-white p-3 text-base shadow dark:bg-gray-800">
                 <div class="grid grid-cols-3 gap-2">
-                    @foreach(Theme::configs('tailwind-colors') as $color)
+                    @foreach(Theme::config('tailwind_colors') as $color)
                         <button onclick="setColor('{{ $color }}')"
                                 class="flex items-center rounded p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"><span
                                 class="mr-2 inline-block h-4 w-6 rounded bg-{{ $color }}-600 dark:bg-{{ $color }}-400"></span>{!! __('client.' . $color) !!}
@@ -169,8 +169,9 @@
                 </a>
 
                 @foreach (enabledExtensions() as $module)
-                    @if ($module->config('elements.apps'))
-                        @foreach ($module->config('elements.apps') as $key => $menu)
+                    @php($items = config($module->getLowerName() . '.elements.apps'))
+                    @if ($items)
+                        @foreach ($items as $key => $menu)
                             <a href="{{ $menu['href'] }}"
                                class="group block rounded-lg p-4 text-center hover:bg-gray-100 dark:hover:bg-gray-600">
                                 <div
@@ -293,8 +294,9 @@
             <ul class="py-1 font-light text-gray-500 dark:text-gray-400" aria-labelledby="userMenuDropdownButton">
                 {{-- load module nav items  --}}
                 @foreach (enabledExtensions() as $module)
-                    @if ($module->config('elements.user_dropdown'))
-                        @foreach ($module->config('elements.user_dropdown') as $key => $menu)
+                    @php($items = config($module->getLowerName() . '.elements.user_dropdown'))
+                    @if ($items)
+                        @foreach ($items as $key => $menu)
                             <li>
                                 <a href="{{ $menu['href'] }}"
                                    class="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
