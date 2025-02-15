@@ -10,7 +10,7 @@
                         <h1 class="mb-6 text-xl font-bold text-gray-900 dark:text-white">{!! __('auth.two_factor_authentication') !!}</h1>
                     </div>
 
-                    @include(Theme::path('layouts.alerts'))
+                    @include(Theme::path('layouts.elements.alerts'))
 
                     <div>
 

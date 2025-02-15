@@ -42,7 +42,7 @@
         </ol>
 
         {{-- include alerts --}}
-        @include(Theme::path('layouts.alerts'))
+        @include(Theme::path('layouts.elements.alerts'))
 
         <h1 class="leding-tight mb-2 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">
             {!! __('auth.verify_email_address') !!}</h1>

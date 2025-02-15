@@ -71,7 +71,7 @@
                     </div> --}}
 
                     {{-- include alerts --}}
-                    @include(Theme::path('layouts.alerts'))
+                    @include(Theme::path('layouts.elements.alerts'))
 
                     <div>
 
