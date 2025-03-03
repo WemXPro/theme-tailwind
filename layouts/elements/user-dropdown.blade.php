@@ -300,7 +300,7 @@
                             <li>
                                 <a href="{{ $menu['href'] }}"
                                    class="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                    <span class="mr-2 text-xl text-gray-400">
+                                    <span class="mr-1 text-gray-400">
                                         {!! linkGetBxIcon($menu['icon']) !!}
                                     </span>
                                     {!! __($menu['name']) !!}
