@@ -89,7 +89,7 @@ return [
         ],
     ],
 
-    'socials' => ['discord', 'github', 'twitter'],
+    'socials' => ['discord', 'github', 'twitter', 'facebook', 'linkedin', 'youtube', 'instagram', 'tiktok', 'twitch'],
 
     'footer_types' => ['default', 'minimal'],
 
