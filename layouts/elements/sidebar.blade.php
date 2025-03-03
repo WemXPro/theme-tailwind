@@ -1,6 +1,5 @@
-{{-- Sidebar --}}
-<aside class="h-screen bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 w-64 fixed left-0 top-0 transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0"
-       id="sidebar">
+<!-- Sidebar -->
+<aside class="h-screen bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 w-64 fixed left-0 top-0 transform translate-x-0 transition-transform duration-300 ease-in-out z-50" id="sidebar">
     <div class="flex flex-col h-full">
         <!-- Logo -->
         <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
@@ -10,8 +9,8 @@
                 @endif
                 <span class="text-2xl font-semibold dark:text-white">@settings('app_name', 'WemX')</span>
             </a>
-            <!-- Closing button (for mobile version) -->
-            <button class="lg:hidden text-gray-500 dark:text-gray-400" onclick="toggleSidebar()">
+
+            <button class="text-gray-500 dark:text-gray-400" onclick="toggleSidebar()">
                 <i class="bx bx-x text-3xl"></i>
             </button>
         </div>
@@ -51,7 +50,6 @@
                     @endif
                 @endforeach
 
-                {{-- Loading the menu from modules --}}
                 @foreach (enabledExtensions() as $module)
                     @if (config($module->getLowerName() . '.elements.main_menu'))
                         @foreach (config($module->getLowerName() . '.elements.main_menu') as $key => $menu)
@@ -69,26 +67,35 @@
             </ul>
         </nav>
 
-        <!--Use menu -->
         <div class="p-4 border-t border-gray-200 dark:border-gray-700">
             @include(Theme::path('layouts.elements.user-dropdown'))
         </div>
     </div>
 </aside>
 
-<!-- Sidebar opening button (mobile version) -->
-<button class="lg:hidden fixed top-4 left-4 bg-gray-700 text-white p-2 rounded" onclick="toggleSidebar()">
+<button class="fixed top-4 left-4 bg-gray-700 text-white p-2 rounded" onclick="toggleSidebar()">
     <i class="bx bx-menu text-2xl"></i>
 </button>
 
-
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let sidebar = document.getElementById('sidebar');
+        let sidebarState = localStorage.getItem("sidebarState");
+        if (sidebarState === "hidden") {
+            sidebar.classList.add('-translate-x-full');
+        } else {
+            sidebar.classList.remove('-translate-x-full');
+        }
+    });
+
     function toggleSidebar() {
         let sidebar = document.getElementById('sidebar');
         if (sidebar.classList.contains('-translate-x-full')) {
             sidebar.classList.remove('-translate-x-full');
+            localStorage.setItem("sidebarState", "visible");
         } else {
             sidebar.classList.add('-translate-x-full');
+            localStorage.setItem("sidebarState", "hidden");
         }
     }
 </script>
